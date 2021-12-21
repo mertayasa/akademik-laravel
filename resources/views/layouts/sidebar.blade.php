@@ -39,6 +39,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('mapel') }}">
+                <a class="sidebar-link" href="{{ route('mapel.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Mata Pelajaran</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>

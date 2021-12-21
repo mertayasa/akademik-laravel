@@ -99,7 +99,7 @@ class KelasController extends Controller
             $update->kode = $request->kode;
             $update->jenjang = $request->jenjang;
             $update->status = $request->status;
-
+            // dd($update);
             $update->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());

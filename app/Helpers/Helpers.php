@@ -64,9 +64,9 @@ function getAge($date)
     return $birth_date->diffInYears($now);
 }
 
-function getGender($gender)
+function isLokal($gender)
 {
-    return $gender == 'laki' ? 'Laki-Laki' : 'Perempuan';
+    return $gender == 'true' ? 'Muatan Lokal' : 'Bukan Muatan Lokal';
 }
 
 function getStatus($status)

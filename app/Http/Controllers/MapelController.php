@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Mapel;
 use Illuminate\Http\Request;
+use App\DataTables\MapelDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class MapelController extends Controller
 {
@@ -14,7 +17,15 @@ class MapelController extends Controller
      */
     public function index()
     {
-        //
+        $mapel = Mapel::all();
+        // dd($mapel);
+        return view('mapel.index', compact('mapel'));
+    }
+
+    public function datatable()
+    {
+        $mapel = Mapel::all();
+        return MapelDataTable::set($mapel);
     }
 
     /**
@@ -24,7 +35,7 @@ class MapelController extends Controller
      */
     public function create()
     {
-        //
+        return view('mapel.create');
     }
 
     /**
@@ -35,7 +46,20 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $mapel = new Mapel;
+            $mapel->nama = $request->nama;
+            $mapel->is_lokal = $request->is_lokal;
+            $mapel->status = 'aktif';
+
+            // dd($mapel);
+            $mapel->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
+        }
+
+        return redirect('mapel')->with('success', 'Data Mata Pelajaran Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +81,7 @@ class MapelController extends Controller
      */
     public function edit(Mapel $mapel)
     {
-        //
+        return view('mapel.edit', compact('mapel'));
     }
 
     /**
@@ -67,9 +91,21 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = Mapel::find($id);
+            $update->nama = $request->nama;
+            $update->is_lokal = $request->is_lokal;
+            $update->status = $request->status;
+
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');
+        }
+
+        return redirect('mapel')->with('info', 'Data Mata Pelajaran Berhasil Diedit  ');
     }
 
     /**
@@ -80,6 +116,13 @@ class MapelController extends Controller
      */
     public function destroy(Mapel $mapel)
     {
-        //
+        try {
+            $mapel->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Mata Pelajaran']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Mata Pelajaran']);
     }
 }
