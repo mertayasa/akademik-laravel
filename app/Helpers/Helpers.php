@@ -41,7 +41,7 @@ function showFor($roles)
 
 function roleName($level = null)
 {
-    $role_name = ($level ?? Auth::user()->level) == User::$admin ? 'admin' : (($level ?? Auth::user()->level) == User::$role2 ? 'role2' : User::$role3);
+    $role_name = ($level ?? Auth::user()->level) == User::$admin ? 'admin' : (($level ?? Auth::user()->level) == User::$guru ? 'guru' : User::$ortu);
 
     return $role_name;
 }

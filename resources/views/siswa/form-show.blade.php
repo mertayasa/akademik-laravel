@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td>Tanggal Lahir</td>
-                <td>: {{$siswa->tgl_lahir}}</td>
+                <td>: {{indonesianDate($siswa->tgl_lahir)}}</td>
             </tr>
             <tr>
                 <td>Jenis Kelamin</td>

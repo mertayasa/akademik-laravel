@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use App\DataTables\KelasDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class KelasController extends Controller
 {
@@ -14,7 +17,16 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        $kelas = Kelas::all();
+        // dd($kelas);
+        return view('kelas.index', compact('kelas'));
+    }
+
+    public function datatable()
+    {
+        // Log::info($approval_status);
+        $kelas = Kelas::all();
+        return KelasDataTable::set($kelas);
     }
 
     /**
@@ -24,7 +36,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('kelas.create');
     }
 
     /**
@@ -35,7 +47,20 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $kelas = new Kelas;
+            $kelas->kode = $request->kode;
+            $kelas->jenjang = $request->jenjang;
+            $kelas->status = 'aktif';
+
+            // dd($kelas);
+            $kelas->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data kelasn Gagal Ditambahkan');
+        }
+
+        return redirect('kelas')->with('success', 'Data kelasn Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +82,7 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kelas)
     {
-        //
+        return view('kelas.edit', compact('kelas'));
     }
 
     /**
@@ -67,9 +92,21 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request,  $id)
     {
-        //
+        try {
+            $update = Kelas::find($id);
+            $update->kode = $request->kode;
+            $update->jenjang = $request->jenjang;
+            $update->status = $request->status;
+
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data kelas Gagal Di Edit');
+        }
+
+        return redirect('kelas')->with('info', 'Data kelas Berhasil Diedit  ');
     }
 
     /**
@@ -80,6 +117,13 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        //
+        try {
+            $kelas->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data kelas']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data kelas']);
     }
 }

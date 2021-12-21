@@ -111,7 +111,7 @@ class PengumumanController extends Controller
             return redirect()->back()->withInput()->with('error', 'Data Pengumuman Gagal Di Edit');
         }
 
-        return redirect('pengumuman')->with('info', 'Data Pengumuman Berhasil Diedit  & Menunggu Verifikasi');
+        return redirect('pengumuman')->with('info', 'Data Pengumuman Berhasil Diedit');
     }
 
     /**

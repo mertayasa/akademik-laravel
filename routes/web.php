@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,5 +61,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{siswa}', [SiswaController::class, 'update'])->name('update');
         Route::delete('destroy/{siswa}', [SiswaController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [SiswaController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'kelas', 'as' => 'kelas.'], function () {
+        Route::get('/', [KelasController::class, 'index'])->name('index');
+        Route::get('create', [KelasController::class, 'create'])->name('create');
+        Route::post('store', [KelasController::class, 'store'])->name('store');
+        Route::get('edit/{kelas}', [KelasController::class, 'edit'])->name('edit');
+        Route::patch('update/{kelas}', [KelasController::class, 'update'])->name('update');
+        Route::delete('destroy/{kelas}', [KelasController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [KelasController::class, 'datatable'])->name('datatable');
     });
 });

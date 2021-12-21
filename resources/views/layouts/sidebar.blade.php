@@ -33,8 +33,8 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ isActive('profile') }}">
-                <a class="sidebar-link" href="{{ route('profile.index') }}">
+            <li class="sidebar-item {{ isActive('kelas') }}">
+                <a class="sidebar-link" href="{{ route('kelas.index') }}">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Kelas</span>
                 </a>
             </li>

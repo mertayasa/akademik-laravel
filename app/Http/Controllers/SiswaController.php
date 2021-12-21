@@ -36,7 +36,7 @@ class SiswaController extends Controller
      */
     public function create(User $user)
     {
-        $user = User::pluck('nama', 'id');
+        $user = User::where('level', 'ortu')->pluck('nama', 'id');
         return view('siswa.create', compact('user'));
     }
 
@@ -90,7 +90,7 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa, User $user)
     {
-        $user = User::pluck('nama', 'id');
+        $user = User::where('level', 'ortu')->pluck('nama', 'id');
         return view('siswa.edit', compact('siswa', 'user'));
     }
 
@@ -121,7 +121,7 @@ class SiswaController extends Controller
             return redirect()->back()->withInput()->with('error', 'Data siswa Gagal Di Edit');
         }
 
-        return redirect('siswa')->with('info', 'Data siswa Berhasil Diedit  & Menunggu Verifikasi');
+        return redirect('siswa')->with('info', 'Data siswa Berhasil Diedit ');
     }
     /**
      * Remove the specified resource from storage.
