@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +49,16 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{pengumuman}', [PengumumanController::class, 'update'])->name('update');
         Route::delete('destroy/{pengumuman}', [PengumumanController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [PengumumanController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
+        Route::get('/', [SiswaController::class, 'index'])->name('index');
+        Route::get('create', [SiswaController::class, 'create'])->name('create');
+        Route::post('store', [SiswaController::class, 'store'])->name('store');
+        Route::get('show/{siswa}', [SiswaController::class, 'show'])->name('show');
+        Route::get('edit/{siswa}', [SiswaController::class, 'edit'])->name('edit');
+        Route::patch('update/{siswa}', [SiswaController::class, 'update'])->name('update');
+        Route::delete('destroy/{siswa}', [SiswaController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [SiswaController::class, 'datatable'])->name('datatable');
     });
 });

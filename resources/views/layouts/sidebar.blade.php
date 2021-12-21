@@ -21,8 +21,8 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ isActive('blank') }}">
-                <a class="sidebar-link" href="{{ route('blank.index') }}">
+            <li class="sidebar-item {{ isActive('siswa') }}">
+                <a class="sidebar-link" href="{{ route('siswa.index') }}">
                     <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Siswa </span>
                 </a>
             </li>
