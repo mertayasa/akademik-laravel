@@ -3,9 +3,11 @@
         <tr>
         <th>No</th>
         <th></th>
-        <th>Tanggal Publish</th>
-        <th>Perihal</th>
-        <th>Keterangan</th>
+        <th>Judul</th>
+        <th>Deskripsi</th>
+        <th>Konten</th>
+        <th>Lampiran</th>
+        <th>Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -35,7 +37,9 @@
                 },
                 {
                     data: 'updated_at', 
-                    name: 'updated_at'
+                    name: 'updated_at',
+                    visible: false,
+                    searchable: false
                 },
                 {
                     data: 'judul', 
@@ -52,9 +56,15 @@
                 {
                     data: 'lampiran', 
                     name: 'lampiran'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
                 }
             ],
-            order: [[ 1, "DESC" ]],
+            // order: [[ 1, "DESC" ]],
             columnDefs: [
                 // { width: 300, targets: 1 },
                 {

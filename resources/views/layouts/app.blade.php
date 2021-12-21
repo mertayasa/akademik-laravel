@@ -16,6 +16,7 @@
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href=" {{asset('plugin/datatables/datatables.min.css')}}">
 	@stack('styles')
 </head>
 
@@ -63,6 +64,7 @@
 	<script src="{{ asset('js/vendor.js') }}"></script>
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script src="{{ asset('admin/js/app.js') }}"></script>
+	<script src="{{asset('plugin/datatables/datatables.js')}}" ></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

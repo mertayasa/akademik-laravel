@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container-fluid p-0">
     <h1 class="h3 mb-3">Pengumuman</h1>
@@ -17,9 +18,6 @@
                     <div class="card-header d-flex justify-content-between">
                         @include('pengumuman.datatable')
                 </div>
-                @foreach ($pengumuman as $data)
-                    {{$data->konten}}
-                @endforeach
                 </div>
             </div>
         </div>
