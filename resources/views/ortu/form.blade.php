@@ -4,12 +4,6 @@
         {!! Form::text('nama', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
     </div>
 </div>
-<div class="row mt-3">
-    <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('announcetitle', 'NIP Guru', ['class' => 'mb-1']) !!}
-        {!! Form::number('nip', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
-    </div>
-</div>
 
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
@@ -41,12 +35,7 @@
         {!! Form::text('pekerjaan', null, ['class' => 'form-control', 'id' => 'description',]) !!}
     </div>
 </div>
-<div class="row mt-3">
-    <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('description', 'Status Guru', ['class' => 'mb-1']) !!}
-        {!! Form::select('status_guru', ['tetap' => 'Tetap', 'honorer' => 'Honorer'], null, ['class' => 'form-control', 'id' => 'description']) !!}
-    </div>
-</div>
+
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('description', 'Jenis Kelamin', ['class' => 'mb-1']) !!}
