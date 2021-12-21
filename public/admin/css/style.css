@@ -1,3 +1,84 @@
 .table th {
     text-align: center;
 }
+
+/* 3.4 Alert */
+.alert {
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+}
+
+.alert .alert-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.alert code {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+
+.alert p {
+    margin-bottom: 0;
+}
+
+.alert.alert-has-icon {
+    display: flex;
+}
+
+.alert.alert-has-icon .alert-icon {
+    margin-top: 4px;
+    width: 30px;
+}
+
+.alert.alert-has-icon .alert-icon .ion,
+.alert.alert-has-icon .alert-icon .fas,
+.alert.alert-has-icon .alert-icon .far,
+.alert.alert-has-icon .alert-icon .fab,
+.alert.alert-has-icon .alert-icon .fal {
+    font-size: 20px;
+}
+
+.alert.alert-has-icon .alert-body {
+    flex: 1;
+}
+
+.alert:not(.alert-light) a {
+    color: #fff;
+}
+
+.alert.alert-primary {
+    background-color: #142a4b;
+}
+
+.alert.alert-secondary {
+    background-color: #383d41;
+}
+
+.alert.alert-success {
+    background-color: #155724;
+}
+
+.alert.alert-info {
+    background-color: #0c5460;
+}
+
+.alert.alert-warning {
+    background-color: #856404;
+}
+
+.alert.alert-danger {
+    background-color: #721c24;
+}
+
+.alert.alert-light {
+    background-color: #e3eaef;
+    color: #191d21;
+}
+
+.alert.alert-dark {
+    background-color: #191d21;
+}

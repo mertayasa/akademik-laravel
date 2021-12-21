@@ -63,7 +63,7 @@ class PengumumanController extends Controller
             return redirect()->back()->withInput()->with('error', 'Data Pengumumann Gagal Ditambahkan');
         }
 
-        return redirect('pengumuman')->with('info', 'Data Pengumumann Berhasil Ditambahkan & Menunggu Verifikasi');
+        return redirect('pengumuman')->with('success', 'Data Pengumumann Berhasil Ditambahkan');
     }
 
     /**

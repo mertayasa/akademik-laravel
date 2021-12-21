@@ -11,8 +11,8 @@
                     <h5 class="card-title mb-0">Pengumuman Baru</h5>
                 </div>
                 <div class="card-body">
-                    {{-- @include('layouts.flash') --}}
-                        {{-- @include('layouts.error_message') --}}
+                    @include('layouts.flash')
+                        @include('layouts.error_message')
                         {!! Form::open(['route' => 'pengumuman.store']) !!}
                         @include('pengumuman.form')
                         <div class="row mt-3">
