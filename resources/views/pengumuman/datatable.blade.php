@@ -1,7 +1,7 @@
 <table class="table table-hover table-striped" width="100%" id="PengumumanDataTable">
     <thead>
         <tr>
-        <th>No</th>
+        <th style="width: 30px">No</th>
         <th></th>
         <th>Judul</th>
         <th>Deskripsi</th>
@@ -33,7 +33,8 @@
                     data: 'DT_RowIndex',
                     name: 'no',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className:"text-center align-middle"
                 },
                 {
                     data: 'updated_at', 
@@ -61,7 +62,9 @@
                     data: 'action',
                     name: 'action',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className:"text-center align-middle"
+
                 }
             ],
             // order: [[ 1, "DESC" ]],

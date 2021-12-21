@@ -16,6 +16,7 @@
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href=" {{asset('plugin/datatables/datatables.min.css')}}">
 	@stack('styles')
 </head>

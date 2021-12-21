@@ -99,9 +99,11 @@ class PengumumanController extends Controller
     {
         try {
             $update = Pengumuman::find($id);
-            $update->title = $request->title;
-            $update->description = $request->description;
-            $update->approval_status = 0;
+            $update->judul = $request->judul;
+            $update->deskripsi = $request->deskripsi;
+            $update->konten = $request->konten;
+            $update->lampiran = $request->lampiran;
+            $update->status = $request->status;
 
             $update->save();
         } catch (Exception $e) {
