@@ -7,6 +7,7 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\EkskulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,5 +83,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{mapel}', [MapelController::class, 'update'])->name('update');
         Route::delete('destroy/{mapel}', [MapelController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [MapelController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'ekskul', 'as' => 'ekskul.'], function () {
+        Route::get('/', [EkskulController::class, 'index'])->name('index');
+        Route::get('create', [EkskulController::class, 'create'])->name('create');
+        Route::post('store', [EkskulController::class, 'store'])->name('store');
+        Route::get('edit/{ekskul}', [EkskulController::class, 'edit'])->name('edit');
+        Route::patch('update/{ekskul}', [EkskulController::class, 'update'])->name('update');
+        Route::delete('destroy/{ekskul}', [EkskulController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [EkskulController::class, 'datatable'])->name('datatable');
     });
 });

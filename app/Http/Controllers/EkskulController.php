@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Ekskul;
 use Illuminate\Http\Request;
+use App\DataTables\EkskulDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class EkskulController extends Controller
 {
@@ -14,7 +17,16 @@ class EkskulController extends Controller
      */
     public function index()
     {
-        //
+        $ekskul = Ekskul::all();
+        // dd($ekskul);
+        return view('ekskul.index', compact('ekskul'));
+    }
+
+    public function datatable()
+    {
+        // Log::info($approval_status);
+        $ekskul = Ekskul::all();
+        return EkskulDataTable::set($ekskul);
     }
 
     /**
@@ -24,8 +36,9 @@ class EkskulController extends Controller
      */
     public function create()
     {
-        //
+        return view('ekskul.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +48,19 @@ class EkskulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $ekskul = new Ekskul;
+            $ekskul->nama = $request->nama;
+            $ekskul->status = 'aktif';
+
+            // dd($ekskul);
+            $ekskul->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data ekskuln Gagal Ditambahkan');
+        }
+
+        return redirect('ekskul')->with('success', 'Data ekskuln Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +82,7 @@ class EkskulController extends Controller
      */
     public function edit(Ekskul $ekskul)
     {
-        //
+        return view('ekskul.edit', compact('ekskul'));
     }
 
     /**
@@ -67,9 +92,20 @@ class EkskulController extends Controller
      * @param  \App\Models\Ekskul  $ekskul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ekskul $ekskul)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = Ekskul::find($id);
+            $update->nama = $request->nama;
+            $update->status = $request->status;
+            // dd($update);
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data ekskul Gagal Di Edit');
+        }
+
+        return redirect('ekskul')->with('info', 'Data ekskul Berhasil Diedit  ');
     }
 
     /**
@@ -80,6 +116,13 @@ class EkskulController extends Controller
      */
     public function destroy(Ekskul $ekskul)
     {
-        //
+        try {
+            $ekskul->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data ekskul']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data ekskul']);
     }
 }

@@ -1,10 +1,10 @@
-<table class="table table-hover table-striped" width="100%" id="MapelDataTable">
+<table class="table table-hover table-striped" width="100%" id="EkskulDataTable">
     <thead>
         <tr>
         <th style="width: 30px">No</th>
         <th></th>
-        <th>Nama Mata Pelajaran </th>
-        <th>Muatan Lokal</th>
+        <th>Nama Ekstrakulikuler </th>
+        <th>Status </th>
         <th>Aksi</th>
         </tr>
     </thead>
@@ -16,12 +16,12 @@
 <script>
 
     let table
-    let url = "{{ route('mapel.datatable') }}"
+    let url = "{{ route('ekskul.datatable') }}"
 
     datatable(url)
     function datatable (url){
 
-        table = $('#MapelDataTable').DataTable({
+        table = $('#EkskulDataTable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -45,9 +45,9 @@
                     name: 'nama',
                 },
                 {
-                    data: 'is_lokal', 
-                    name: 'is_lokal',
-                    className:"text-center align-middle"
+                    data: 'status', 
+                    name: 'status',
+                    className: "text-center"
                 },
                 {
                     data: 'action',

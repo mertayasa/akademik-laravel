@@ -45,6 +45,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('ekskul') }}">
+                <a class="sidebar-link" href="{{ route('ekskul.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Ekstrakulikuler</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>
