@@ -137,6 +137,67 @@
 			});
 		});
 	</script>
+	 <script>
+    function deleteModel(deleteUrl, tableId, additionalMethod = null){
+        Swal.fire({
+            title: "Warning",
+            text: "Yakin menghapus data?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#169b6b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url : deleteUrl,
+                    dataType : "Json",
+                    data : {"_token": "{{ csrf_token() }}"},
+                    method : "delete",
+                    success:function(data){
+                        // console.log(data)
+                        if(data.code == 1){
+                            Swal.fire(
+                                'Berhasil',
+                                data.message,
+                                'success'
+                            )
+
+                            if(additionalMethod != null){
+                              additionalMethod.apply(this, [data.args])
+                            }
+                            
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: data.message
+                            })
+                        }
+
+                        $('#'+tableId).DataTable().ajax.reload();
+                    }
+                })
+            }
+        })
+      }
+
+    $(document).ready(function() {
+        $('select').select2();
+    })
+
+    function showToast(code, text) {
+        if (code == 1) {
+            toastr.success(text)
+        }
+
+        if (code == 0) {
+            toastr.error(text)
+        }
+    }
+      
+  </script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Pie chart

@@ -67,7 +67,7 @@
 
                 }
             ],
-            // order: [[ 1, "DESC" ]],
+            order: [[ 1, "DESC" ]],
             columnDefs: [
                 // { width: 300, targets: 1 },
                 {

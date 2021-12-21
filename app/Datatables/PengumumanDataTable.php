@@ -13,7 +13,7 @@ class PengumumanDataTable
     {
         return Datatables::of($pengumuman)
             ->addColumn('action', function ($pengumuman) {
-                $deleteUrl = "'" . route('pengumuman.destroy', $pengumuman->id) . "', 'pengumumanDataTable'";
+                $deleteUrl = "'" . route('pengumuman.destroy', $pengumuman->id) . "', 'PengumumanDataTable'";
 
                 return
                     '<div class="btn-group">' .
