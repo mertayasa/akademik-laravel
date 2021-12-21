@@ -14,9 +14,14 @@
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ isActive('user') }}">
+                <a class="sidebar-link" href="{{ route('user.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data User</span>
+                </a>
+            </li>
 
-            <li class="sidebar-item {{ isActive('profile') }}">
-                <a class="sidebar-link" href="{{ route('profile.index') }}">
+            <li class="sidebar-item {{ isActive('guru') }}">
+                <a class="sidebar-link" href="{{ route('guru.index') }}">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Guru</span>
                 </a>
             </li>

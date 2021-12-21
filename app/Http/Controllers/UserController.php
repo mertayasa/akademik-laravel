@@ -4,83 +4,197 @@ namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
-class UserController extends Controller{
+class UserController extends Controller
+{
 
-    public function index(){
-        return view('user.index');
-    }
-
-    public function datatable(){
-        $users = User::all();
-
-        return UserDataTable::set($users);
-    }
-
-    public function create(){
-        $levels = [User::$staff => User::$staff, User::$admin => User::$admin, User::$kades => User::$kades];
-
-        return view('user.create', compact('levels'));
-    }
-
-    public function store(UserRequest $request){
-        try{
-            User::create($request->validated());
-        }catch(Exception $e){
-            Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pengguna');
+    public function index()
+    {
+        if (FacadesRequest::is('*guru*')) {
+            return view('guru.index');
         }
-
-        return redirect()->route('user.index')->with('success', 'Berhasil menambahkan data pengguna');
+        if (FacadesRequest::is('*ortu*')) {
+            return view('ortu.index');
+        }
     }
 
-    public function edit(User $user){
-        $levels = [User::$staff => User::$staff, User::$admin => User::$admin, User::$kades => User::$kades];
+    public function datatable($level)
+    {
 
-        return view('user.edit', compact('user', 'levels'));
+        if (FacadesRequest::is('*guru*')) {
+            $guru = User::where('level', 'guru')->get();
+            return UserDataTable::set($guru, 'guru');
+        }
+        if (FacadesRequest::is('*ortu*')) {
+            $ortu = User::where('level', 'ortu')->get();
+            return UserDataTable::set($ortu, 'ortu');
+        }
+        // switch ($level) {
+        //     case 1:
+        //         $guru = User::where('level', 'guru')->get();
+        //         return UserDataTable::set($guru, 'guru');
+        //         break;
+        //     case 2:
+        //         $ortu = User::where('level', 'ortu')->get();
+        //         return UserDataTable::set($ortu, 'ortu');
+        //         break;
+        // }
     }
 
-    public function update(UserRequest $request, User $user){
-        try{
-            $data = $request->all();
+    public function create()
+    {
+        if (FacadesRequest::is('*guru*')) {
+            return view('guru.create');
+        }
+        if (FacadesRequest::is('*ortu*')) {
+            return view('ortu.create');
+        }
+    }
 
-            if($data['password']){
-                $data['password'] = bcrypt($data['password']);
-            }else{
-                unset($data['password']);
+    public function store(Request $request)
+    {
+        try {
+            $user = new User;
+            $user->nama = $request->nama;
+            if (FacadesRequest::is('*guru*')) {
+                $user->nip = $request->nip;
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->nip = 0;
+            } else {
+                throw new Exception('Error 500');
+            }
+            $user->alamat = $request->alamat;
+            $user->tempat_lahir = $request->tempat_lahir;
+            $user->tgl_lahir = $request->tgl_lahir;
+            $user->no_tlp = $request->no_tlp;
+            $user->pekerjaan = $request->pekerjaan;
+            if (FacadesRequest::is('*guru*')) {
+                $user->status_guru = $request->status_guru;
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->status_guru = 'bukan_guru';
+            } else {
+                throw new Exception('Error 500');
             }
 
-            $user->update($data);
+            if (FacadesRequest::is('*guru*')) {
+                $user->level = 'guru';
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->level = 'ortu';
+            } else {
+                throw new Exception('Error 500');
+            }
+            $user->status = 'aktif';
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
 
-            // $base_64_foto = json_decode($request['foto'], true);
-            // $upload_image = uploadFile($base_64_foto);
-
-            // if($upload_image == 0){
-            //     return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
-            // }
-
-            // $data['foto'] = $upload_image;
-
-        }catch(Exception $e){
+            $user->save();
+        } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal mengubah profile pengguna');
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan ' . $this->getFeedback($user->level) . ' !');
         }
 
-        return redirect()->route('user.index')->with('success','Profile pengguna berhasil diubah!');
+        return redirect()->route($this->getFeedback($user->level, 'english') . '.index')->with('success', 'Berhasil menambahkan data ' . $this->getFeedback($user->level));
     }
 
-    public function destroy(User $user){
-        try{
+
+    public function edit(User $user)
+    {
+        if (FacadesRequest::is('*guru*')) {
+            return view('guru.edit', compact('user'));
+        }
+        if (FacadesRequest::is('*ortu*')) {
+            return view('ortu.edit', compact('user'));
+        }
+    }
+
+    public function update(Request $request,   $id)
+    {
+        try {
+            $user = User::find($id);
+            $user->nama = $request->nama;
+            if (FacadesRequest::is('*guru*')) {
+                $user->nip = $request->nip;
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->nip = 0;
+            } else {
+                throw new Exception('Error 500');
+            }
+            $user->alamat = $request->alamat;
+            $user->tempat_lahir = $request->tempat_lahir;
+            $user->tgl_lahir = $request->tgl_lahir;
+            $user->no_tlp = $request->no_tlp;
+            $user->pekerjaan = $request->pekerjaan;
+            if (FacadesRequest::is('*guru*')) {
+                $user->status_guru = $request->status_guru;
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->status_guru = 'bukan_guru';
+            } else {
+                throw new Exception('Error 500');
+            }
+
+            if (FacadesRequest::is('*guru*')) {
+                $user->level = 'guru';
+            } else if (FacadesRequest::is('*ortu*')) {
+                $user->level = 'ortu';
+            } else {
+                throw new Exception('Error 500');
+            }
+            $user->status = $request->status;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+
+            $user->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah ' . $this->getFeedback($user->level) . ' !');
+        }
+
+        return redirect()->route($this->getFeedback($user->level, 'english') . '.index')->with('success', 'Berhasil mengubah data ' . $this->getFeedback($user->level));
+    }
+
+    public function show(User $user)
+    {
+        if (FacadesRequest::is('*guru*')) {
+            return view('guru.show', compact('user'));
+        }
+        if (FacadesRequest::is('*ortu*')) {
+            return view('ortu.show', compact('user'));
+        }
+    }
+
+    public function destroy(User $user)
+    {
+        try {
             $user->delete();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal menghapus user']);
         }
 
         return response(['code' => 1, 'message' => 'Berhasil menghapus user']);
+    }
+
+    private function getFeedback($level, $lang = null)
+    {
+        if ($level == 'admin') {
+            return 'admin';
+        }
+
+        if ($level == 'guru') {
+            return 'guru';
+        }
+
+        if ($level == 'ortu') {
+            if ($lang == 'english') {
+                return 'ortu';
+            }
+            return 'ortu';
+        }
     }
 }

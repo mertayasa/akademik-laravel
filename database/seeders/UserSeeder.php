@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         $pekerjaan = ['guru mapel', 'wali'];
         $pekerjaan_ortu = ['pegawai', 'petani', 'wirausaha', 'wiraswasta'];
         $status_guru = ['tetap', 'honorer'];
+        $kelamin = ['Laki-laki', 'Perempuan'];
         $users = [
             [
                 'nama' => 'Admin',
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
                 'tgl_lahir' => $faker->dateTimeBetween(Carbon::now()->subYears(45), Carbon::now()->subYears(17)),
                 'no_tlp' => $faker->e164PhoneNumber(),
                 'pekerjaan' => 'admin',
+                'jenis_kelamin' => $kelamin[rand(0, 1)],
                 'status_guru' => 'bukan_guru',
                 'level' => 'admin',
                 'email_verified_at' => now(),
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
                 'tgl_lahir' => $faker->dateTimeBetween(Carbon::now()->subYears(45), Carbon::now()->subYears(17)),
                 'no_tlp' => $faker->e164PhoneNumber(),
                 'pekerjaan' => $pekerjaan[rand(0, 1)],
+                'jenis_kelamin' => $kelamin[rand(0, 1)],
                 'status_guru' => $status_guru[rand(0, 1)],
                 'email' => 'guru@demo.com',
                 'level' => 'guru',
@@ -50,12 +53,13 @@ class UserSeeder extends Seeder
             ],
             [
                 'nama' => 'Orang Tua',
-                'nip' => $faker->numberBetween(100000000, 200000000),
+                // 'nip' => $faker->numberBetween(100000000, 200000000),
                 'alamat' => $faker->address(),
                 'tempat_lahir' => $faker->address(),
                 'tgl_lahir' => $faker->dateTimeBetween(Carbon::now()->subYears(45), Carbon::now()->subYears(17)),
                 'no_tlp' => $faker->e164PhoneNumber(),
                 'pekerjaan' => $pekerjaan_ortu[rand(0, 3)],
+                'jenis_kelamin' => $kelamin[rand(0, 1)],
                 'status_guru' => 'bukan_guru',
                 'email' => 'ortu@demo.com',
                 'level' => 'ortu',

@@ -8,6 +8,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\EkskulController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +94,37 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{ekskul}', [EkskulController::class, 'update'])->name('update');
         Route::delete('destroy/{ekskul}', [EkskulController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [EkskulController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [UserController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'guru', 'as' => 'guru.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::get('show/{user}', [UserController::class, 'show'])->name('show');
+        Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('datatable/{level}', [UserController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'ortu', 'as' => 'ortu.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::get('show/{user}', [UserController::class, 'show'])->name('show');
+        Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('datatable/{level}', [UserController::class, 'datatable'])->name('datatable');
     });
 });
