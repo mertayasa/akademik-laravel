@@ -74,6 +74,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('jadwal') }}">
+                <a class="sidebar-link" href="{{ route('jadwal.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Jadwal</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>

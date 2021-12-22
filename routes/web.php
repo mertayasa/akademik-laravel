@@ -11,6 +11,7 @@ use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaliKelasController;
 use App\Http\Controllers\TahunAjarController;
+use App\Http\Controllers\JadwalController;
 
 
 /*
@@ -149,5 +150,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{tahun_ajar}', [TahunAjarController::class, 'update'])->name('update');
         Route::delete('destroy/{tahun_ajar}', [TahunAjarController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [TahunAjarController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'jadwal', 'as' => 'jadwal.'], function () {
+        Route::get('/', [JadwalController::class, 'index'])->name('index');
+        Route::get('create', [JadwalController::class, 'create'])->name('create');
+        Route::post('store', [JadwalController::class, 'store'])->name('store');
+        Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('edit');
+        Route::patch('update/{jadwal}', [JadwalController::class, 'update'])->name('update');
+        Route::delete('destroy/{jadwal}', [JadwalController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [JadwalController::class, 'datatable'])->name('datatable');
     });
 });
