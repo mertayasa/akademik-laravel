@@ -18,6 +18,7 @@ use App\Http\Controllers\NilaiEkskulController;
 use App\Http\Controllers\NilaiSikapController;
 use App\Http\Controllers\NilaiKesehatanController;
 use App\Http\Controllers\NilaiProporsiController;
+use App\Http\Controllers\PrestasiController;
 
 
 /*
@@ -226,5 +227,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{nilai_proporsi}', [NilaiProporsiController::class, 'update'])->name('update');
         Route::delete('destroy/{nilai_proporsi}', [NilaiProporsiController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [NilaiProporsiController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'prestasi', 'as' => 'prestasi.'], function () {
+        Route::get('/', [PrestasiController::class, 'index'])->name('index');
+        Route::get('create', [PrestasiController::class, 'create'])->name('create');
+        Route::post('store', [PrestasiController::class, 'store'])->name('store');
+        Route::get('edit/{prestasi}', [PrestasiController::class, 'edit'])->name('edit');
+        Route::patch('update/{prestasi}', [PrestasiController::class, 'update'])->name('update');
+        Route::delete('destroy/{prestasi}', [PrestasiController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [PrestasiController::class, 'datatable'])->name('datatable');
     });
 });

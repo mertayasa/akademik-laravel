@@ -114,6 +114,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('prestasi') }}">
+                <a class="sidebar-link" href="{{ route('prestasi.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Prestasi</span>
+                </a>
+            </li>
+
 
 
             <li class="sidebar-header">
