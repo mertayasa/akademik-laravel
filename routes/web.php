@@ -9,6 +9,9 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WaliKelasController;
+use App\Http\Controllers\TahunAjarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -126,5 +129,25 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
         Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
         Route::get('datatable/{level}', [UserController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'wali_kelas', 'as' => 'wali_kelas.'], function () {
+        Route::get('/', [WaliKelasController::class, 'index'])->name('index');
+        Route::get('create', [WaliKelasController::class, 'create'])->name('create');
+        Route::post('store', [WaliKelasController::class, 'store'])->name('store');
+        Route::get('edit/{wali_kelas}', [WaliKelasController::class, 'edit'])->name('edit');
+        Route::patch('update/{wali_kelas}', [WaliKelasController::class, 'update'])->name('update');
+        Route::delete('destroy/{wali_kelas}', [WaliKelasController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [WaliKelasController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'tahun_ajar', 'as' => 'tahun_ajar.'], function () {
+        Route::get('/', [TahunAjarController::class, 'index'])->name('index');
+        Route::get('create', [TahunAjarController::class, 'create'])->name('create');
+        Route::post('store', [TahunAjarController::class, 'store'])->name('store');
+        Route::get('edit/{tahun_ajar}', [TahunAjarController::class, 'edit'])->name('edit');
+        Route::patch('update/{tahun_ajar}', [TahunAjarController::class, 'update'])->name('update');
+        Route::delete('destroy/{tahun_ajar}', [TahunAjarController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [TahunAjarController::class, 'datatable'])->name('datatable');
     });
 });

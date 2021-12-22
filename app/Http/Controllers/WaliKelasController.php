@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\WaliKelas;
+use App\Models\Kelas;
+use App\Models\User;
+use App\Models\TahunAjar;
 use Illuminate\Http\Request;
+use App\DataTables\WaliKelasDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class WaliKelasController extends Controller
 {
@@ -14,7 +20,16 @@ class WaliKelasController extends Controller
      */
     public function index()
     {
-        //
+        $wali_kelas = WaliKelas::all();
+        // dd($wali_kelas);
+        return view('wali_kelas.index', compact('wali_kelas'));
+    }
+
+
+    public function datatable()
+    {
+        $wali_kelas = WaliKelas::all();
+        return WaliKelasDataTable::set($wali_kelas);
     }
 
     /**
@@ -24,7 +39,10 @@ class WaliKelasController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id');
+        $tahun_ajar = TahunAjar::where('status', 'aktif')->pluck('keterangan', 'id');
+        $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
+        return view('wali_kelas.create', compact('kelas', 'tahun_ajar', 'user'));
     }
 
     /**
@@ -35,8 +53,22 @@ class WaliKelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $wali_kelas = new WaliKelas;
+            $wali_kelas->id_kelas = $request->id_kelas;
+            $wali_kelas->id_tahun_ajar = $request->id_tahun_ajar;
+            $wali_kelas->id_user = $request->id_user;
+
+            // dd($wali_kelas);
+            $wali_kelas->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
+        }
+
+        return redirect('wali_kelas')->with('success', 'Data Mata Pelajaran Berhasil Ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -44,7 +76,7 @@ class WaliKelasController extends Controller
      * @param  \App\Models\WaliKelas  $waliKelas
      * @return \Illuminate\Http\Response
      */
-    public function show(WaliKelas $waliKelas)
+    public function show(WaliKelas $wali_kelas)
     {
         //
     }
@@ -55,9 +87,12 @@ class WaliKelasController extends Controller
      * @param  \App\Models\WaliKelas  $waliKelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(WaliKelas $waliKelas)
+    public function edit(WaliKelas $wali_kelas)
     {
-        //
+        $user = User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id');
+        $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
+        $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
+        return view('wali_kelas.edit', compact('kelas', 'tahun_ajar', 'user', 'wali_kelas'));
     }
 
     /**
@@ -67,9 +102,21 @@ class WaliKelasController extends Controller
      * @param  \App\Models\WaliKelas  $waliKelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WaliKelas $waliKelas)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = WaliKelas::find($id);
+            $update->id_kelas = $request->id_kelas;
+            $update->id_tahun_ajar = $request->id_tahun_ajar;
+            $update->id_user = $request->id_user;
+
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');
+        }
+
+        return redirect('wali_kelas')->with('info', 'Data Mata Pelajaran Berhasil Diedit  ');
     }
 
     /**
@@ -78,8 +125,15 @@ class WaliKelasController extends Controller
      * @param  \App\Models\WaliKelas  $waliKelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WaliKelas $waliKelas)
+    public function destroy(WaliKelas $wali_kelas)
     {
-        //
+        try {
+            $wali_kelas->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Mata Pelajaran']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Mata Pelajaran']);
     }
 }

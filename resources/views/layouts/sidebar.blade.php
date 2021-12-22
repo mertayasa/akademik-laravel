@@ -62,6 +62,18 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('wali_kelas') }}">
+                <a class="sidebar-link" href="{{ route('wali_kelas.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Wali Kelas</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {{ isActive('tahun_ajar') }}">
+                <a class="sidebar-link" href="{{ route('tahun_ajar.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Tahun Ajaran</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>

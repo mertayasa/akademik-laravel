@@ -77,7 +77,7 @@
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', [1 => 'Aktif', 0 => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+        {!! Form::select('status', ['aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
     </div>
 </div>
 @endif
