@@ -102,6 +102,11 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('nilai_kesehatan') }}">
+                <a class="sidebar-link" href="{{ route('nilai_kesehatan.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai Kesehatan</span>
+                </a>
+            </li>
             <li class="sidebar-header">
                 Multi Level
             </li>
