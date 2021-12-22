@@ -80,6 +80,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('anggota_kelas') }}">
+                <a class="sidebar-link" href="{{ route('anggota_kelas.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Anggota Kelas</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>
