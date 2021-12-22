@@ -24,13 +24,12 @@ class NilaiEkskulFactory extends Factory
     public function definition()
     {
         $semester = ['ganjil', 'genap'];
-        $keterangan = ['sosial', 'spiritual'];
         return [
             'id_anggota_kelas' => AnggotaKelas::inRandomOrder()->first()->id,
             'id_ekskul' => Ekskul::inRandomOrder()->first()->id,
             'semester' => $semester[rand(0, 1)],
-            'keterangan' => $keterangan[rand(0, 1)],
-            'nilai' => $this->faker->numberBetween(10, 100),
+            'keterangan' => $this->faker->text(50),
+            // 'nilai' => $this->faker->numberBetween(10, 100),
         ];
     }
 }

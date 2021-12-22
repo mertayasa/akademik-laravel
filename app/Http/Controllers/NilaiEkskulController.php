@@ -57,7 +57,7 @@ class NilaiEkskulController extends Controller
             $nilai_ekskul->id_ekskul = $request->id_ekskul;
             $nilai_ekskul->semester = $request->semester;
             $nilai_ekskul->keterangan = $request->keterangan;
-            $nilai_ekskul->nilai = $request->nilai;
+            // $nilai_ekskul->nilai = $request->nilai;
 
             // dd($nilai_ekskul);
             $nilai_ekskul->save();
@@ -89,7 +89,7 @@ class NilaiEkskulController extends Controller
     public function edit(NilaiEkskul $nilai_ekskul)
     {
         $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
         return view('nilai_ekskul.edit', compact('ekskul', 'anggota_kelas', 'nilai_ekskul'));
     }
 
@@ -108,7 +108,7 @@ class NilaiEkskulController extends Controller
             $update->id_ekskul = $request->id_ekskul;
             $update->semester = $request->semester;
             $update->keterangan = $request->keterangan;
-            $update->nilai = $request->nilai;
+            // $update->nilai = $request->nilai;
 
             $update->save();
         } catch (Exception $e) {

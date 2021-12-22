@@ -57,7 +57,7 @@ class NilaiSikapController extends Controller
             $nilai_sikap->semester = $request->semester;
             $nilai_sikap->jenis_sikap = $request->jenis_sikap;
             $nilai_sikap->keterangan = $request->keterangan;
-            $nilai_sikap->nilai = $request->nilai;
+            // $nilai_sikap->nilai = $request->nilai;
 
             // dd($nilai_sikap);
             $nilai_sikap->save();
@@ -88,7 +88,7 @@ class NilaiSikapController extends Controller
      */
     public function edit(NilaiSikap $nilai_sikap)
     {
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
         return view('nilai_sikap.edit', compact('anggota_kelas', 'nilai_sikap'));
     }
 
@@ -107,7 +107,7 @@ class NilaiSikapController extends Controller
             $update->semester = $request->semester;
             $update->jenis_sikap = $request->jenis_sikap;
             $update->keterangan = $request->keterangan;
-            $update->nilai = $request->nilai;
+            // $update->nilai = $request->nilai;
 
             $update->save();
         } catch (Exception $e) {

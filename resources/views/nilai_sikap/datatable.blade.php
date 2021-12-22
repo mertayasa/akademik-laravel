@@ -6,7 +6,7 @@
         <th>Nama Siswa</th>
         <th>Semester</th>
         <th>Jenis Sikap</th>
-        <th>Nilai</th>
+        {{-- <th>Nilai</th> --}}
         <th>Keterangan</th>
         <th>Aksi</th>
         </tr>
@@ -58,15 +58,15 @@
                     name: 'jenis_sikap',
                     className:"text-center align-middle"
                 },
-                {
-                    data: 'nilai', 
-                    name: 'nilai',
-                    className:"text-center align-middle"
-                },
+                // {
+                //     data: 'nilai', 
+                //     name: 'nilai',
+                //     className:"text-center align-middle"
+                // },
                 {
                     data: 'keterangan', 
                     name: 'keterangan',
-                    className:"text-center align-middle"
+                    // className:"text-center align-middle"
                 },
                 {
                     data: 'action',

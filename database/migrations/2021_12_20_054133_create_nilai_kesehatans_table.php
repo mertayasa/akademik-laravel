@@ -19,7 +19,7 @@ class CreateNilaiKesehatansTable extends Migration
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
             $table->enum('jenis_kesehatan', ['pendengaran', 'penglihatan', 'gigi', 'lain'])->default('pendengaran');
             $table->text('keterangan');
-            $table->integer('nilai');
+            // $table->integer('nilai');
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');

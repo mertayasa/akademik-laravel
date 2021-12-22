@@ -28,7 +28,7 @@ class NilaiProporsiFactory extends Factory
             'id_anggota_kelas' => AnggotaKelas::inRandomOrder()->first()->id,
             'semester' => $semester[rand(0, 1)],
             'jenis_proporsi' => $jenis_proporsi[rand(0, 1)],
-            'nilai' => $this->faker->numberBetween(10, 100),
+            // 'nilai' => $this->faker->numberBetween(10, 100),
             'keterangan' => $this->faker->text(50),
 
         ];

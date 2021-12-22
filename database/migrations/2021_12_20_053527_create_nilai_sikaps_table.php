@@ -19,7 +19,7 @@ class CreateNilaiSikapsTable extends Migration
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
             $table->enum('jenis_sikap', ['sosial', 'spiritual'])->default('sosial');
             $table->text('keterangan');
-            $table->integer('nilai');
+            // $table->integer('nilai');
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');

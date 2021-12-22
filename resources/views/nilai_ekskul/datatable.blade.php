@@ -6,7 +6,7 @@
         <th>Nama Siswa</th>
         <th>Semester</th>
         <th>Ekstrakulikuler</th>
-        <th>Nilai</th>
+        <th>Keterangan</th>
         <th>Aksi</th>
         </tr>
     </thead>
@@ -55,12 +55,12 @@
                 {
                     data: 'ekskul.nama', 
                     name: 'ekskul.nama',
-                    className:"text-center align-middle"
+                    // className:"text-center align-middle"
                 },
                 {
-                    data: 'nilai', 
-                    name: 'nilai',
-                    className:"text-center align-middle"
+                    data: 'keterangan', 
+                    name: 'keterangan',
+                    // className:"text-center align-middle"
                 },
                 {
                     data: 'action',

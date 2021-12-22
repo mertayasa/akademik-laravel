@@ -28,7 +28,7 @@ class NilaiKesehatanFactory extends Factory
             'id_anggota_kelas' => AnggotaKelas::inRandomOrder()->first()->id,
             'semester' => $semester[rand(0, 1)],
             'jenis_kesehatan' => $jenis_kesehatan[rand(0, 3)],
-            'nilai' => $this->faker->numberBetween(10, 100),
+            // 'nilai' => $this->faker->numberBetween(10, 100),
             'keterangan' => $this->faker->text(50),
 
         ];

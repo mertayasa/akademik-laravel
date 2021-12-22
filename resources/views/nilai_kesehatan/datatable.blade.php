@@ -53,8 +53,8 @@
                     className:"text-center align-middle"
                 },
                 {
-                    data: 'jenis_sikap', 
-                    name: 'jenis_sikap',
+                    data: 'jenis_kesehatan', 
+                    name: 'jenis_kesehatan',
                     className:"text-center align-middle"
                 },
                 {

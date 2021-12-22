@@ -87,7 +87,7 @@ class NilaiKesehatanController extends Controller
      */
     public function edit(NilaiKesehatan $nilai_kesehatan)
     {
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
         return view('nilai_kesehatan.edit', compact('anggota_kelas', 'nilai_kesehatan'));
     }
 
