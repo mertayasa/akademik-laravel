@@ -38,7 +38,7 @@ class NilaiEkskulController extends Controller
     public function create()
     {
         $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
-        $anggota_kelas = AnggotaKelas::pluck('id');
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
         return view('nilai_ekskul.create', compact('ekskul', 'anggota_kelas'));
     }
 
@@ -62,10 +62,10 @@ class NilaiEkskulController extends Controller
             $nilai_ekskul->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Ekskul Gagal Ditambahkan');
         }
 
-        return redirect('nilai_ekskul')->with('success', 'Data Mata Pelajaran Berhasil Ditambahkan');
+        return redirect('nilai_ekskul')->with('success', 'Data Nilai Ekskul Berhasil Ditambahkan');
     }
 
     /**
@@ -88,7 +88,7 @@ class NilaiEkskulController extends Controller
     public function edit(NilaiEkskul $nilai_ekskul)
     {
         $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
-        $anggota_kelas = AnggotaKelas::pluck('id');
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
         return view('nilai_ekskul.edit', compact('ekskul', 'anggota_kelas', 'nilai_ekskul'));
     }
 
@@ -112,10 +112,10 @@ class NilaiEkskulController extends Controller
             $update->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Ekskul Gagal Di Edit');
         }
 
-        return redirect('nilai_ekskul')->with('info', 'Data Mata Pelajaran Berhasil Diedit  ');
+        return redirect('nilai_ekskul')->with('info', 'Data Nilai Ekskul Berhasil Diedit  ');
     }
 
     /**
@@ -130,9 +130,9 @@ class NilaiEkskulController extends Controller
             $nilai_ekskul->delete();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return response(['code' => 0, 'message' => 'Gagal menghapus data Mata Pelajaran']);
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Nilai Ekskul']);
         }
 
-        return response(['code' => 1, 'message' => 'Berhasil menghapus data Mata Pelajaran']);
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Nilai Ekskul']);
     }
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\AnggotaKelasController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaiEkskulController;
+use App\Http\Controllers\NilaiSikapController;
 
 
 /*
@@ -193,5 +194,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{nilai_ekskul}', [NilaiEkskulController::class, 'update'])->name('update');
         Route::delete('destroy/{nilai_ekskul}', [NilaiEkskulController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [NilaiEkskulController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'nilai_sikap', 'as' => 'nilai_sikap.'], function () {
+        Route::get('/', [NilaiSikapController::class, 'index'])->name('index');
+        Route::get('create', [NilaiSikapController::class, 'create'])->name('create');
+        Route::post('store', [NilaiSikapController::class, 'store'])->name('store');
+        Route::get('edit/{nilai_sikap}', [NilaiSikapController::class, 'edit'])->name('edit');
+        Route::patch('update/{nilai_sikap}', [NilaiSikapController::class, 'update'])->name('update');
+        Route::delete('destroy/{nilai_sikap}', [NilaiSikapController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [NilaiSikapController::class, 'datatable'])->name('datatable');
     });
 });

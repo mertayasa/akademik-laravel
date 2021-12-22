@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\NilaiSikap;
+use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
+use App\DataTables\NilaiSikapDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class NilaiSikapController extends Controller
 {
@@ -14,7 +18,15 @@ class NilaiSikapController extends Controller
      */
     public function index()
     {
-        //
+        $nilai_sikap = NilaiSikap::all();
+        // dd($nilai_sikap);
+        return view('nilai_sikap.index', compact('nilai_sikap'));
+    }
+
+    public function datatable()
+    {
+        $nilai_sikap = NilaiSikap::all();
+        return NilaiSikapDataTable::set($nilai_sikap);
     }
 
     /**
@@ -24,7 +36,8 @@ class NilaiSikapController extends Controller
      */
     public function create()
     {
-        //
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        return view('nilai_sikap.create', compact('anggota_kelas'));
     }
 
     /**
@@ -35,16 +48,31 @@ class NilaiSikapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $nilai_sikap = new NilaiSikap;
+            $nilai_sikap->id_anggota_kelas = $request->id_anggota_kelas;
+            $nilai_sikap->semester = $request->semester;
+            $nilai_sikap->jenis_sikap = $request->jenis_sikap;
+            $nilai_sikap->keterangan = $request->keterangan;
+            $nilai_sikap->nilai = $request->nilai;
+
+            // dd($nilai_sikap);
+            $nilai_sikap->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Ditambahkan');
+        }
+
+        return redirect('nilai_sikap')->with('success', 'Data Nilai Sikap Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NilaiSikap  $nilaiSikap
+     * @param  \App\Models\NilaiSikap  $nilai_sikap
      * @return \Illuminate\Http\Response
      */
-    public function show(NilaiSikap $nilaiSikap)
+    public function show(NilaiSikap $nilai_sikap)
     {
         //
     }
@@ -52,34 +80,56 @@ class NilaiSikapController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NilaiSikap  $nilaiSikap
+     * @param  \App\Models\NilaiSikap  $nilai_sikap
      * @return \Illuminate\Http\Response
      */
-    public function edit(NilaiSikap $nilaiSikap)
+    public function edit(NilaiSikap $nilai_sikap)
     {
-        //
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        return view('nilai_sikap.edit', compact('anggota_kelas', 'nilai_sikap'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NilaiSikap  $nilaiSikap
+     * @param  \App\Models\NilaiSikap  $nilai_sikap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NilaiSikap $nilaiSikap)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = NilaiSikap::find($id);
+            $update->id_anggota_kelas = $request->id_anggota_kelas;
+            $update->semester = $request->semester;
+            $update->jenis_sikap = $request->jenis_sikap;
+            $update->keterangan = $request->keterangan;
+            $update->nilai = $request->nilai;
+
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Di Edit');
+        }
+
+        return redirect('nilai_sikap')->with('info', 'Data Nilai Sikap Berhasil Diedit  ');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NilaiSikap  $nilaiSikap
+     * @param  \App\Models\NilaiSikap  $nilai_sikap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NilaiSikap $nilaiSikap)
+    public function destroy(NilaiSikap $nilai_sikap)
     {
-        //
+        try {
+            $nilai_sikap->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Nilai Sikap']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Nilai Sikap']);
     }
 }

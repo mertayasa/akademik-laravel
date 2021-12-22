@@ -96,6 +96,11 @@
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai Ekskul</span>
                 </a>
             </li>
+             <li class="sidebar-item {{ isActive('nilai_sikap') }}">
+                <a class="sidebar-link" href="{{ route('nilai_sikap.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai Sikap</span>
+                </a>
+            </li>
 
             <li class="sidebar-header">
                 Multi Level

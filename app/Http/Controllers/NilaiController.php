@@ -39,7 +39,7 @@ class NilaiController extends Controller
     public function create()
     {
         $jadwal = Jadwal::pluck('id');
-        $anggota_kelas = AnggotaKelas::pluck('id');
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
         return view('nilai.create', compact('jadwal', 'anggota_kelas'));
     }
 
@@ -92,7 +92,7 @@ class NilaiController extends Controller
     public function edit(Nilai $nilai)
     {
         $jadwal = Jadwal::pluck('id');
-        $anggota_kelas = AnggotaKelas::pluck('id');
+        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
         return view('nilai.edit', compact('jadwal', 'nilai', 'anggota_kelas'));
     }
 
