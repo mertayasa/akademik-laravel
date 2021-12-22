@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\NilaiEkskul;
+use App\Models\Ekskul;
+use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
+use App\DataTables\NilaiEkskulDataTable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class NilaiEkskulController extends Controller
 {
@@ -14,7 +19,15 @@ class NilaiEkskulController extends Controller
      */
     public function index()
     {
-        //
+        $nilai_ekskul = NilaiEkskul::all();
+        // dd($nilai_ekskul);
+        return view('nilai_ekskul.index', compact('nilai_ekskul'));
+    }
+
+    public function datatable()
+    {
+        $nilai_ekskul = NilaiEkskul::all();
+        return NilaiEkskulDataTable::set($nilai_ekskul);
     }
 
     /**
@@ -24,7 +37,9 @@ class NilaiEkskulController extends Controller
      */
     public function create()
     {
-        //
+        $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
+        $anggota_kelas = AnggotaKelas::pluck('id');
+        return view('nilai_ekskul.create', compact('ekskul', 'anggota_kelas'));
     }
 
     /**
@@ -35,16 +50,31 @@ class NilaiEkskulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $nilai_ekskul = new NilaiEkskul;
+            $nilai_ekskul->id_anggota_kelas = $request->id_anggota_kelas;
+            $nilai_ekskul->id_ekskul = $request->id_ekskul;
+            $nilai_ekskul->semester = $request->semester;
+            $nilai_ekskul->keterangan = $request->keterangan;
+            $nilai_ekskul->nilai = $request->nilai;
+
+            // dd($nilai_ekskul);
+            $nilai_ekskul->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
+        }
+
+        return redirect('nilai_ekskul')->with('success', 'Data Mata Pelajaran Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NilaiEkskul  $nilaiEkskul
+     * @param  \App\Models\NilaiEkskul  $nilai_ekskul
      * @return \Illuminate\Http\Response
      */
-    public function show(NilaiEkskul $nilaiEkskul)
+    public function show(NilaiEkskul $nilai_ekskul)
     {
         //
     }
@@ -52,34 +82,57 @@ class NilaiEkskulController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NilaiEkskul  $nilaiEkskul
+     * @param  \App\Models\NilaiEkskul  $nilai_ekskul
      * @return \Illuminate\Http\Response
      */
-    public function edit(NilaiEkskul $nilaiEkskul)
+    public function edit(NilaiEkskul $nilai_ekskul)
     {
-        //
+        $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
+        $anggota_kelas = AnggotaKelas::pluck('id');
+        return view('nilai_ekskul.edit', compact('ekskul', 'anggota_kelas', 'nilai_ekskul'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NilaiEkskul  $nilaiEkskul
+     * @param  \App\Models\NilaiEkskul  $nilai_ekskul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NilaiEkskul $nilaiEkskul)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = NilaiEkskul::find($id);
+            $update->id_anggota_kelas = $request->id_anggota_kelas;
+            $update->id_ekskul = $request->id_ekskul;
+            $update->semester = $request->semester;
+            $update->keterangan = $request->keterangan;
+            $update->nilai = $request->nilai;
+
+            $update->save();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');
+        }
+
+        return redirect('nilai_ekskul')->with('info', 'Data Mata Pelajaran Berhasil Diedit  ');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NilaiEkskul  $nilaiEkskul
+     * @param  \App\Models\NilaiEkskul  $nilai_ekskul
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NilaiEkskul $nilaiEkskul)
+    public function destroy(NilaiEkskul $nilai_ekskul)
     {
-        //
+        try {
+            $nilai_ekskul->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Mata Pelajaran']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Mata Pelajaran']);
     }
 }

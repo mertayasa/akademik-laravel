@@ -14,6 +14,7 @@ use App\Http\Controllers\TahunAjarController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\AnggotaKelasController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\NilaiEkskulController;
 
 
 /*
@@ -182,5 +183,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
         Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'nilai_ekskul', 'as' => 'nilai_ekskul.'], function () {
+        Route::get('/', [NilaiEkskulController::class, 'index'])->name('index');
+        Route::get('create', [NilaiEkskulController::class, 'create'])->name('create');
+        Route::post('store', [NilaiEkskulController::class, 'store'])->name('store');
+        Route::get('edit/{nilai_ekskul}', [NilaiEkskulController::class, 'edit'])->name('edit');
+        Route::patch('update/{nilai_ekskul}', [NilaiEkskulController::class, 'update'])->name('update');
+        Route::delete('destroy/{nilai_ekskul}', [NilaiEkskulController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [NilaiEkskulController::class, 'datatable'])->name('datatable');
     });
 });
