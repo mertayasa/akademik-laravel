@@ -43,8 +43,8 @@
                     searchable: false
                 },
                 {
-                    data: 'anggota_kelas.id', 
-                    name: 'anggota_kelas.id',
+                    data: 'anggota_kelas.siswa.nama', 
+                    name: 'anggota_kelas.siswa.nama',
                     // className:"text-center align-middle"
                 },
                 {

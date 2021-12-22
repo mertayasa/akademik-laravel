@@ -92,7 +92,7 @@ class NilaiController extends Controller
     public function edit(Nilai $nilai)
     {
         $jadwal = Jadwal::pluck('id');
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
         return view('nilai.edit', compact('jadwal', 'nilai', 'anggota_kelas'));
     }
 

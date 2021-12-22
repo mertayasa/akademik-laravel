@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NilaiSikap;
+use App\Models\Siswa;
 use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
 use App\DataTables\NilaiSikapDataTable;
@@ -37,6 +38,8 @@ class NilaiSikapController extends Controller
     public function create()
     {
         $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
         return view('nilai_sikap.create', compact('anggota_kelas'));
     }
 

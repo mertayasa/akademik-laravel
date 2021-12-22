@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NilaiEkskul;
 use App\Models\Ekskul;
+use App\Models\Siswa;
 use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
 use App\DataTables\NilaiEkskulDataTable;
@@ -38,7 +39,9 @@ class NilaiEkskulController extends Controller
     public function create()
     {
         $ekskul = Ekskul::where('status', 'aktif')->pluck('nama', 'id');
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        // $anggota_kelas = AnggotaKelas::pluck('id_siswa', 'id',);
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
+        // $anggota_kelas = AnggotaKelas::with(['siswa',])->pluck('nama', 'id');
         return view('nilai_ekskul.create', compact('ekskul', 'anggota_kelas'));
     }
 
