@@ -18,7 +18,7 @@
 <script>
 
     let table
-    let url = "{{ route('nilai_kesehatan.datatable') }}"
+    let url = "{{ route('nilai_proporsi.datatable') }}"
 
     datatable(url)
     function datatable (url){
@@ -53,8 +53,8 @@
                     className:"text-center align-middle"
                 },
                 {
-                    data: 'jenis_kesehatan', 
-                    name: 'jenis_kesehatan',
+                    data: 'jenis_proporsi', 
+                    name: 'jenis_proporsi',
                     className:"text-center align-middle"
                 },
                 {

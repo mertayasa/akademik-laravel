@@ -61,10 +61,10 @@ class NilaiKesehatanController extends Controller
             $nilai_kesehatan->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Ditambahkan');
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Kesehatan Gagal Ditambahkan');
         }
 
-        return redirect('nilai_kesehatan')->with('success', 'Data Nilai Sikap Berhasil Ditambahkan');
+        return redirect('nilai_kesehatan')->with('success', 'Data Nilai Kesehatan Berhasil Ditambahkan');
     }
 
 
@@ -110,10 +110,10 @@ class NilaiKesehatanController extends Controller
             $update->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Di Edit');
+            return redirect()->back()->withInput()->with('error', 'Data Nilai Kesehatan Gagal Di Edit');
         }
 
-        return redirect('nilai_kesehatan')->with('info', 'Data Nilai Sikap Berhasil Diedit  ');
+        return redirect('nilai_kesehatan')->with('info', 'Data Nilai Kesehatan Berhasil Diedit  ');
     }
 
     /**
@@ -128,9 +128,9 @@ class NilaiKesehatanController extends Controller
             $nilai_kesehatan->delete();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return response(['code' => 0, 'message' => 'Gagal menghapus data Nilai Sikap']);
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Nilai Kesehatan']);
         }
 
-        return response(['code' => 1, 'message' => 'Berhasil menghapus data Nilai Sikap']);
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Nilai Kesehatan']);
     }
 }

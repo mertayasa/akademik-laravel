@@ -107,6 +107,15 @@
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai Kesehatan</span>
                 </a>
             </li>
+
+            <li class="sidebar-item {{ isActive('nilai_proporsi') }}">
+                <a class="sidebar-link" href="{{ route('nilai_proporsi.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai Proporsi</span>
+                </a>
+            </li>
+
+
+
             <li class="sidebar-header">
                 Multi Level
             </li>
