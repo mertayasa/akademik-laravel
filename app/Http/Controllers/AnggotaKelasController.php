@@ -59,7 +59,7 @@ class AnggotaKelasController extends Controller
             $anggota_kelas->id_siswa = $request->id_siswa;
             $anggota_kelas->id_tahun_ajar = $request->id_tahun_ajar;
             $anggota_kelas->status = 'aktif';
-            $anggota_kelas->saran = $request->saran;
+            // $anggota_kelas->saran = $request->saran;
 
             // dd($anggota_kelas);
             $anggota_kelas->save();
@@ -111,7 +111,7 @@ class AnggotaKelasController extends Controller
             $update->id_siswa = $request->id_siswa;
             $update->id_tahun_ajar = $request->id_tahun_ajar;
             $update->status = $request->status;
-            $update->saran = $request->saran;
+            // $update->saran = $request->saran;
             // dd($update);
             $update->save();
         } catch (Exception $e) {

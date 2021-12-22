@@ -28,7 +28,7 @@ class AnggotaKelasFactory extends Factory
             'id_kelas' => Kelas::inRandomOrder()->first()->id,
             'id_siswa' => Siswa::inRandomOrder()->first()->id,
             'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            'saran' => $this->faker->text(50),
+            // 'saran' => $this->faker->text(50),
         ];
     }
 }

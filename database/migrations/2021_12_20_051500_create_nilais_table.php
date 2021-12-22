@@ -22,6 +22,7 @@ class CreateNilaisTable extends Migration
             $table->integer('uas');
             $table->text('desk_pengetahuan');
             $table->text('desk_keterampilan');
+            $table->text('saran');
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');

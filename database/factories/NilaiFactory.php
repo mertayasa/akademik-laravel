@@ -31,6 +31,7 @@ class NilaiFactory extends Factory
             'uas' => $this->faker->numberBetween(10, 100),
             'desk_pengetahuan' => $this->faker->text(50),
             'desk_keterampilan' => $this->faker->text(50),
+            'saran' => $this->faker->text(50),
 
         ];
     }

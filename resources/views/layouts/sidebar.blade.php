@@ -86,6 +86,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('nilai') }}">
+                <a class="sidebar-link" href="{{ route('nilai.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai</span>
+                </a>
+            </li>
+
             <li class="sidebar-header">
                 Multi Level
             </li>

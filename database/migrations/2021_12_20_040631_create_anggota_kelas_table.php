@@ -19,7 +19,7 @@ class CreateAnggotaKelasTable extends Migration
             $table->unsignedBigInteger('id_siswa');
             $table->unsignedBigInteger('id_tahun_ajar');
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
-            $table->text('saran');
+            // $table->text('saran');
             $table->timestamps();
 
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
