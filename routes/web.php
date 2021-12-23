@@ -20,6 +20,8 @@ use App\Http\Controllers\NilaiKesehatanController;
 use App\Http\Controllers\NilaiProporsiController;
 use App\Http\Controllers\PrestasiController;
 
+use App\Http\Controllers\AkademikController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,14 +69,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-        Route::get('/', [SiswaController::class, 'index'])->name('index');
+        Route::get('index/{id_kelas?}', [SiswaController::class, 'index'])->name('index');
         Route::get('create', [SiswaController::class, 'create'])->name('create');
         Route::post('store', [SiswaController::class, 'store'])->name('store');
         Route::get('show/{siswa}', [SiswaController::class, 'show'])->name('show');
         Route::get('edit/{siswa}', [SiswaController::class, 'edit'])->name('edit');
         Route::patch('update/{siswa}', [SiswaController::class, 'update'])->name('update');
         Route::delete('destroy/{siswa}', [SiswaController::class, 'destroy'])->name('destroy');
-        Route::get('datatable', [SiswaController::class, 'datatable'])->name('datatable');
+        Route::get('datatable/{id_kelas?}', [SiswaController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'kelas', 'as' => 'kelas.'], function () {
@@ -237,5 +239,15 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{prestasi}', [PrestasiController::class, 'update'])->name('update');
         Route::delete('destroy/{prestasi}', [PrestasiController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [PrestasiController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'akademik', 'as' => 'akademik.'], function () {
+        Route::get('/', [AkademikController::class, 'index'])->name('index');
+        Route::get('create', [AkademikController::class, 'create'])->name('create');
+        Route::post('store', [AkademikController::class, 'store'])->name('store');
+        Route::get('edit/{akademik}', [AkademikController::class, 'edit'])->name('edit');
+        Route::patch('update/{akademik}', [AkademikController::class, 'update'])->name('update');
+        Route::delete('destroy/{akademik}', [AkademikController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [AkademikController::class, 'datatable'])->name('datatable');
     });
 });

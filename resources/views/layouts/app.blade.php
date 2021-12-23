@@ -67,7 +67,7 @@
 	<script src="{{ asset('admin/js/app.js') }}"></script>
 	<script src="{{asset('plugin/datatables/datatables.js')}}" ></script>
 
-	<script>
+	{{-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
@@ -136,7 +136,7 @@
 				}
 			});
 		});
-	</script>
+	</script> --}}
 	 <script>
     function deleteModel(deleteUrl, tableId, additionalMethod = null){
         Swal.fire({

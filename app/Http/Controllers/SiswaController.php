@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\AnggotaKelas;
 use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\DataTables\SiswaDataTable;
 use Exception;
@@ -16,17 +18,23 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_kelas = null)
     {
-        $siswa = Siswa::all();
+        // $siswa = Siswa::all();
+        // $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $id_kelas)->get();
+        $siswa = $id_kelas;
         // dd($siswa);
         return view('siswa.index', compact('siswa'));
     }
 
-    public function datatable()
+    public function datatable($kelas = null)
     {
-        // Log::info($approval_status);
         $siswa = Siswa::all();
+        $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $kelas)->get();
+
+        // $anggota_kelas = AnggotaKelas::with('siswa')->whereHas('siswa', function ($siswa) use ($id_kelas) {
+        //     $siswa->where('id_kelas', $id_kelas == null ? 1 : $id_kelas);
+        // })->get();
         return SiswaDataTable::set($siswa);
     }
     /**

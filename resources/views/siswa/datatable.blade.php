@@ -17,7 +17,7 @@
 <script>
 
     let table
-    let url = "{{ route('siswa.datatable') }}"
+    let url = "{{ route('siswa.datatable', $siswa) }}"
 
     datatable(url)
     function datatable (url){
@@ -42,17 +42,17 @@
                     searchable: false
                 },
                 {
-                    data: 'nama', 
-                    name: 'nama'
+                    data: 'siswa.nama', 
+                    name: 'siswa.nama'
                 },
                 {
-                    data: 'nis', 
-                    name: 'nis',
+                    data: 'siswa.nis', 
+                    name: 'siswa.nis',
                     className:"text-center align-middle"
                 },
                 {
-                    data: 'jenis_kelamin', 
-                    name: 'jenis_kelamin',
+                    data: 'siswa.jenis_kelamin', 
+                    name: 'siswa.jenis_kelamin',
                     className:"text-center align-middle"
                 },
                 {

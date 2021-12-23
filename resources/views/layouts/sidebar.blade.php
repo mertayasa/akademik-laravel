@@ -120,6 +120,12 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('akademik') }}">
+                <a class="sidebar-link" href="{{ route('akademik.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Akademik</span>
+                </a>
+            </li>
+
 
 
             <li class="sidebar-header">
