@@ -15,7 +15,7 @@
                         @include('anggota_kelas.form-show')
                         <div class="row mt-3">
                             <div class="col-12">
-                                <a href="{{ route('anggota_kelas.index', $anggota_kelas->id) }}" class="btn btn-danger">Kembali</a>
+                                <a href="{{ route('anggota_kelas.index', $anggota_kelas->id_kelas) }}" class="btn btn-danger">Kembali</a>
                                 <button class="btn btn-primary ml-3" type="submit">Simpan</button>
                             </div>
                         </div>

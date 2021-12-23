@@ -13,11 +13,11 @@
                 <div class="card-body">
                     @include('layouts.flash')
                         @include('layouts.error_message')
-                        {!! Form::open(['route' => 'anggota_kelas.store']) !!}
+                        {!! Form::open(['route' => ['anggota_kelas.store', $anggota_kelas->id]]) !!}
                         @include('anggota_kelas.form')
                         <div class="row mt-3">
                             <div class="col-12">
-                                <a href="{{ route('anggota_kelas.index') }}" class="btn btn-danger">Kembali</a>
+                                <a href="{{ route('anggota_kelas.index', $anggota_kelas->id ) }}" class="btn btn-danger">Kembali</a>
                                 <button class="btn btn-primary ml-3" type="submit">Simpan</button>
                             </div>
                         </div>

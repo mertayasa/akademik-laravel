@@ -19,10 +19,10 @@ class AnggotaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_kelas = null)
+    public function index($id_kelas = null, AnggotaKelas $anggota_kelas)
     {
         $siswa = $id_kelas;
-        return view('anggota_kelas.index', compact('siswa'));
+        return view('anggota_kelas.index', compact('siswa', 'anggota_kelas'));
     }
 
     public function datatable($kelas = null)
@@ -41,12 +41,13 @@ class AnggotaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(AnggotaKelas $anggota_kelas, $id_kelas)
     {
         $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
-        $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
+        $kelas = $id_kelas;
+        // dd($kelas);
         $siswa = Siswa::where('status', 'aktif')->pluck('nama', 'id');
-        return view('anggota_kelas.create', compact('kelas', 'tahun_ajar',  'siswa'));
+        return view('anggota_kelas.create', compact('tahun_ajar', 'id_kelas', 'siswa', 'anggota_kelas'));
     }
 
     /**
@@ -57,6 +58,7 @@ class AnggotaKelasController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
             $anggota_kelas = new AnggotaKelas;
             $anggota_kelas->id_kelas = $request->id_kelas;
@@ -72,7 +74,7 @@ class AnggotaKelasController extends Controller
             return redirect()->back()->withInput()->with('error', 'Data anggota_kelasn Gagal Ditambahkan');
         }
 
-        return redirect('anggota_kelas')->with('success', 'Data anggota_kelasn Berhasil Ditambahkan');
+        return redirect()->route('anggota_kelas.index', $request->id_kelas)->with('success', 'Data anggota_kelasn Berhasil Ditambahkan');
     }
 
     /**
@@ -93,12 +95,13 @@ class AnggotaKelasController extends Controller
      * @param  \App\Models\AnggotaKelas  $anggota_kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(AnggotaKelas $anggota_kelas)
+    public function edit(AnggotaKelas $anggota_kelas, $id_kelas)
     {
         $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
-        $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
+        // $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
+        $kelas = $id_kelas;
         $siswa = Siswa::where('status', 'aktif')->pluck('nama', 'id');
-        return view('anggota_kelas.edit', compact('kelas', 'tahun_ajar', 'anggota_kelas', 'siswa'));
+        return view('anggota_kelas.edit', compact('kelas', 'id_kelas', 'tahun_ajar', 'anggota_kelas', 'siswa'));
     }
 
     /**

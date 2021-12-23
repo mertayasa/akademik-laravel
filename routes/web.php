@@ -173,10 +173,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {
         Route::get('index/{id_kelas?}', [AnggotaKelasController::class, 'index'])->name('index');
-        Route::get('create', [AnggotaKelasController::class, 'create'])->name('create');
-        Route::post('store', [AnggotaKelasController::class, 'store'])->name('store');
+        Route::get('create/{id_kelas?}', [AnggotaKelasController::class, 'create'])->name('create');
+        Route::post('store/{id_kelas?}', [AnggotaKelasController::class, 'store'])->name('store');
         Route::get('show/{anggota_kelas}', [AnggotaKelasController::class, 'show'])->name('show');
-        Route::get('edit/{anggota_kelas}', [AnggotaKelasController::class, 'edit'])->name('edit');
+        Route::get('edit/{anggota_kelas/{id_kelas?}', [AnggotaKelasController::class, 'edit'])->name('edit');
         Route::patch('update/{anggota_kelas}', [AnggotaKelasController::class, 'update'])->name('update');
         Route::delete('destroy/{anggota_kelas}', [AnggotaKelasController::class, 'destroy'])->name('destroy');
         Route::get('datatable/{id_kelas?}', [AnggotaKelasController::class, 'datatable'])->name('datatable');

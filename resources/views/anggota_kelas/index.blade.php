@@ -2,18 +2,16 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <h1 class=" mb-3">Anggota Kelas</h1>
-
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class=" mb-0 ">Data Anggota Kelas</h4>
+                    <h2 class=" mb-0 ">Data Anggota Siswa Kelas {{$siswa}}</h2>
                 </div>
                 @include('layouts.flash')
                 @include('layouts.error_message')
                 <div class="card-header d-flex justify-content-end">
-                    <a href="{{ route('anggota_kelas.create') }}" class="btn btn-primary add" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah anggota_kelas"> <i class="fas fa-folder-plus"></i> anggota_kelas Baru</a>
+                    <a href="{{ route('anggota_kelas.create', $siswa) }}" class="btn btn-primary add" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah anggota_kelas"> <i class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
                 </div>
                 <div class="card-body">
                     <div class="bs-example">
@@ -46,6 +44,7 @@
                                 </div>
                             </div>
                         </div>
+                        <a href="{{ route('akademik.index') }}" class="btn btn-danger">Kembali</a>
                 </div>
             </div>
         </div>
