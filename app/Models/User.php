@@ -50,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Siswa', 'id_user');
     }
+
+
+    public function anggota_kelas()
+    {
+        return $this->hasManyThrough(AnggotaKelas::class, Siswa::class, 'id_user', 'id_siswa');
+    }
 }

@@ -17,9 +17,9 @@
                 </div>
                 <div class="card-body">
                     <div class=" ">
-                        {{-- @include('siswa.datatable') --}}
+                      @include('siswa.datatable')
 
-                        <div class="bs-example">
+                        {{-- <div class="bs-example">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a href="#siswa" class="nav-link active" data-toggle="tab">Terverifikasi</a>
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

@@ -18,23 +18,16 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_kelas = null)
+    public function index()
     {
-        // $siswa = Siswa::all();
-        // $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $id_kelas)->get();
-        $siswa = $id_kelas;
-        // dd($siswa);
+        $siswa = Siswa::all();
         return view('siswa.index', compact('siswa'));
     }
 
     public function datatable($kelas = null)
     {
         $siswa = Siswa::all();
-        $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $kelas)->get();
 
-        // $anggota_kelas = AnggotaKelas::with('siswa')->whereHas('siswa', function ($siswa) use ($id_kelas) {
-        //     $siswa->where('id_kelas', $id_kelas == null ? 1 : $id_kelas);
-        // })->get();
         return SiswaDataTable::set($siswa);
     }
     /**

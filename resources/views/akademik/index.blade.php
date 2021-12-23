@@ -21,7 +21,7 @@
                                 </div>
                                     <p> Total Anggota :  </p>
                                     <p> Wali Kelas :  </p>
-                                    <a href="{{ route('siswa.index', $data->id) }}" class="btn btn-primary stretched-link">Lihat Kelas</a>
+                                    <a href="{{ route('anggota_kelas.index', $data->id) }}" class="btn btn-primary stretched-link">Lihat Kelas</a>
                                 </div>
                             </div>
                         </div>

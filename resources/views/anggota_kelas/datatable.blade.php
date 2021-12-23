@@ -3,8 +3,9 @@
         <tr>
         <th style="width: 30px">No</th>
         <th></th>
-        <th>Kode Kelas</th>
         <th>Nama Siswa</th>
+        <th>Nis</th>
+        <th>Jenis Kelamin</th>
         <th>Aksi</th>
         </tr>
     </thead>
@@ -16,7 +17,7 @@
 <script>
 
     let table
-    let url = "{{ route('anggota_kelas.datatable') }}"
+    let url = "{{ route('anggota_kelas.datatable', $siswa) }}"
 
     datatable(url)
     function datatable (url){
@@ -41,13 +42,18 @@
                     searchable: false
                 },
                 {
-                    data: 'kelas.kode', 
-                    name: 'kelas.kode',
+                    data: 'siswa.nama', 
+                    name: 'siswa.nama',
+                    // className:"text-center align-middle"
+                },
+                {
+                    data: 'siswa.nis', 
+                    name: 'siswa.nis',
                     className:"text-center align-middle"
                 },
                 {
-                    data: 'siswa.nama', 
-                    name: 'siswa.nama',
+                    data: 'siswa.jenis_kelamin', 
+                    name: 'siswa.jenis_kelamin',
                     className:"text-center align-middle"
                 },
                 {

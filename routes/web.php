@@ -69,14 +69,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
-        Route::get('index/{id_kelas?}', [SiswaController::class, 'index'])->name('index');
+        Route::get('/', [SiswaController::class, 'index'])->name('index');
         Route::get('create', [SiswaController::class, 'create'])->name('create');
         Route::post('store', [SiswaController::class, 'store'])->name('store');
         Route::get('show/{siswa}', [SiswaController::class, 'show'])->name('show');
         Route::get('edit/{siswa}', [SiswaController::class, 'edit'])->name('edit');
         Route::patch('update/{siswa}', [SiswaController::class, 'update'])->name('update');
         Route::delete('destroy/{siswa}', [SiswaController::class, 'destroy'])->name('destroy');
-        Route::get('datatable/{id_kelas?}', [SiswaController::class, 'datatable'])->name('datatable');
+        Route::get('datatable', [SiswaController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'kelas', 'as' => 'kelas.'], function () {
@@ -172,13 +172,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {
-        Route::get('/', [AnggotaKelasController::class, 'index'])->name('index');
+        Route::get('index/{id_kelas?}', [AnggotaKelasController::class, 'index'])->name('index');
         Route::get('create', [AnggotaKelasController::class, 'create'])->name('create');
         Route::post('store', [AnggotaKelasController::class, 'store'])->name('store');
+        Route::get('show/{anggota_kelas}', [AnggotaKelasController::class, 'show'])->name('show');
         Route::get('edit/{anggota_kelas}', [AnggotaKelasController::class, 'edit'])->name('edit');
         Route::patch('update/{anggota_kelas}', [AnggotaKelasController::class, 'update'])->name('update');
         Route::delete('destroy/{anggota_kelas}', [AnggotaKelasController::class, 'destroy'])->name('destroy');
-        Route::get('datatable', [AnggotaKelasController::class, 'datatable'])->name('datatable');
+        Route::get('datatable/{id_kelas?}', [AnggotaKelasController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'nilai', 'as' => 'nilai.'], function () {

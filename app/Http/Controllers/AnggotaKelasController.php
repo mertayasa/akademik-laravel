@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AnggotaKelas;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use App\Models\TahunAjar;
 use Illuminate\Http\Request;
 use App\DataTables\AnggotaKelasDataTable;
@@ -18,18 +19,21 @@ class AnggotaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_kelas = null)
     {
-        $anggota_kelas = AnggotaKelas::all();
-        // dd($anggota_kelas);
-        return view('anggota_kelas.index', compact('anggota_kelas'));
+        $siswa = $id_kelas;
+        return view('anggota_kelas.index', compact('siswa'));
     }
 
-    public function datatable()
+    public function datatable($kelas = null)
     {
-        // Log::info($approval_status);
-        $anggota_kelas = AnggotaKelas::all();
-        return AnggotaKelasDataTable::set($anggota_kelas);
+        $siswa = Siswa::all();
+        $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $kelas)->get();
+
+        // $anggota_kelas = AnggotaKelas::with('siswa')->whereHas('siswa', function ($siswa) use ($id_kelas) {
+        //     $siswa->where('id_kelas', $id_kelas == null ? 1 : $id_kelas);
+        // })->get();
+        return AnggotaKelasDataTable::set($siswa);
     }
 
     /**
@@ -77,9 +81,10 @@ class AnggotaKelasController extends Controller
      * @param  \App\Models\AnggotaKelas  $anggota_kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(AnggotaKelas $anggota_kelas)
+    public function show(AnggotaKelas $anggota_kelas, Siswa $siswa, User $user)
     {
-        //
+        // $user = User::all();
+        return view('anggota_kelas.show', compact('anggota_kelas', 'siswa', 'user'));
     }
 
     /**

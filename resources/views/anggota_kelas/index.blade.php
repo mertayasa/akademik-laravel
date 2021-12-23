@@ -16,9 +16,36 @@
                     <a href="{{ route('anggota_kelas.create') }}" class="btn btn-primary add" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah anggota_kelas"> <i class="fas fa-folder-plus"></i> anggota_kelas Baru</a>
                 </div>
                 <div class="card-body">
-                    <div class=" d-flex justify-content-between">
-                        @include('anggota_kelas.datatable')
-                </div>
+                    <div class="bs-example">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a href="#siswa" class="nav-link active" data-toggle="tab">Terverifikasi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#jadwal" class="nav-link" data-toggle="tab">Proses Verifikasi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#wali" class="nav-link" data-toggle="tab">Ditolak</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="siswa">
+                                    <div class="card-body px-0">
+                                        @include('anggota_kelas.datatable')
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="jadwal">
+                                    <div class="card-body px-0">
+                                        @include('wali_kelas.datatable')
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="wali">
+                                    <div class="card-body px-0">
+                                        @include('jadwal.datatable')
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
