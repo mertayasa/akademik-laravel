@@ -47,42 +47,5 @@
             });
         });
     </script>
-<script>
-    function updateTable(){
-      const filterStatus = document.getElementById('filterStatus').value
-      $('#card').datatable().ajax.url(url + `/${filterStatus}`).load();
-    }
-
-     function getFloorPlan(merchantSelect){
-      const merchantName = merchantSelect.options[merchantSelect.selectedIndex].text
-      const merchantId = merchantSelect.options[merchantSelect.selectedIndex].value
-      const merchantNameElement = document.getElementById('merchantName')
-
-      merchantNameElement.innerHTML = merchantId.length > 0 ? merchantName : '-'
-      sumAmountElement.innerHTML = 'Rp. 0'
-      clearFloorPlan()
-
-      if(merchantId.length > 0){
-        $.ajax({
-          url: "{{url('payment/get-merchant')}}" + '/' + merchantId,
-          method: "GET",
-          data:{"_token": "{{ csrf_token() }}"},
-          dataType:'json',
-          beforeSend:function(){
-
-              // console.log('begin update')
-          },
-          success:function(data){
-            noMerchantInfo.classList.add('d-none')
-            appendFloorPlan(data)
-            updateSumAmount(data.sum_amount)
-          }
-        })
-      }else{
-        noMerchantInfo.classList.remove('d-none')
-      }
-    }
-
-  </script>
 
 @endpush

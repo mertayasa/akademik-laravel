@@ -17,13 +17,13 @@
                     <div class="bs-example">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a href="#siswa" class="nav-link active" data-toggle="tab">Terverifikasi</a>
+                                    <a href="#siswa" class="nav-link active" data-toggle="tab">Data Siswa</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#jadwal" class="nav-link" data-toggle="tab">Proses Verifikasi</a>
+                                    <a href="#jadwal" class="nav-link" data-toggle="tab">Jadwal Pelajaran</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#wali" class="nav-link" data-toggle="tab">Ditolak</a>
+                                    <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
                                 </li>
                             </ul>
                             <div class="tab-content">

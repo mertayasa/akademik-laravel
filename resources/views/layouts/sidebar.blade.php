@@ -14,27 +14,29 @@
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ isActive('user') }}">
-                <a class="sidebar-link" href="{{ route('user.index') }}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data User</span>
+            <li class="sidebar-item {{ isActive('akademik') }}">
+                <a class="sidebar-link" href="{{ route('akademik.index') }}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Akademik</span>
                 </a>
             </li>
-
-            <li class="sidebar-item {{ isActive('guru') }}">
-                <a class="sidebar-link" href="{{ route('guru.index') }}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Guru</span>
+            <li class="sidebar-item">
+                <a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+                    <i class="fas fa-users"  class="align-middle" ></i> <span class="align-middle"> Data User</span>
                 </a>
-            </li>
+                <ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <li class="sidebar-item {{ isActive('guru') }}">
+                        <a class="sidebar-link" href="{{ route('guru.index') }}"> <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Guru</span></a>
+                    </li>
 
-             <li class="sidebar-item {{ isActive('ortu') }}">
-                <a class="sidebar-link" href="{{ route('ortu.index') }}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Orang Tua</span>
-                </a>
+                    <li class="sidebar-item {{ isActive('ortu') }}">
+                        <a class="sidebar-link" href="{{ route('ortu.index') }}"><i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Orang Tua</span> </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="sidebar-item {{ isActive('siswa') }}">
                 <a class="sidebar-link" href="{{ route('siswa.index') }}">
-                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Siswa </span>
+                    <i class="fas fa-user-graduate"  class="align-middle"></i>  <span class="align-middle">Data Siswa </span>
                 </a>
             </li>
 
@@ -80,12 +82,6 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ isActive('anggota_kelas') }}">
-                <a class="sidebar-link" href="{{ route('anggota_kelas.index') }}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Anggota Kelas</span>
-                </a>
-            </li>
-
             <li class="sidebar-item {{ isActive('nilai') }}">
                 <a class="sidebar-link" href="{{ route('nilai.index') }}">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Nilai</span>
@@ -120,14 +116,8 @@
                 </a>
             </li>
 
-            <li class="sidebar-item {{ isActive('akademik') }}">
-                <a class="sidebar-link" href="{{ route('akademik.index') }}">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Akademik</span>
-                </a>
-            </li>
 
-
-
+            
             <li class="sidebar-header">
                 Multi Level
             </li>
