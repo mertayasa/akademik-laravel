@@ -21,6 +21,7 @@ class WaliKelasController extends Controller
     public function index()
     {
         $wali_kelas = WaliKelas::all();
+        // $wali_kelas = WaliKelas::with('kelas')->get();
         // dd($wali_kelas);
         return view('wali_kelas.index', compact('wali_kelas'));
     }
@@ -29,6 +30,7 @@ class WaliKelasController extends Controller
     public function datatable()
     {
         $wali_kelas = WaliKelas::all();
+        // $wali_kelas = WaliKelas::with('kelas')->get();
         return WaliKelasDataTable::set($wali_kelas);
     }
 

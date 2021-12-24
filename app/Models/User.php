@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(AnggotaKelas::class, Siswa::class, 'id_user', 'id_siswa');
     }
+
+    public function kelas()
+    {
+        return $this->hasManyThrough(Kelas::class, WaliKelas::class, 'id_user', 'id_user');
+    }
 }

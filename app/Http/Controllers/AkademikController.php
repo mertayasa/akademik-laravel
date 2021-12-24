@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Akademik;
 use App\Models\Kelas;
+use App\Models\AnggotaKelas;
+use App\Models\Siswa;
+use App\Models\WaliKelas;
 use Illuminate\Http\Request;
 
 class AkademikController extends Controller
@@ -15,7 +18,13 @@ class AkademikController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::all();
+        // $kelas = Kelas::all();
+        // $kelas = Kelas::with('wali_kelas')->get();
+
+        $kelas = WaliKelas::with('kelas')->get();
+        // $kelas = AnggotaKelas::with('kelas')->selectRaw('DISTINCT id_kelas')->get();
+
+
         return view('akademik.index', compact('kelas'));
     }
 

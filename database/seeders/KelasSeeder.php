@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Kelas;
+use App\Models\WaliKelas;
 
 class KelasSeeder extends Seeder
 {
@@ -17,32 +18,39 @@ class KelasSeeder extends Seeder
         $kelas = [
             [
                 'kode' => 'Kelas I',
-                'jenjang' => '1'
+                'jenjang' => '1',
+                // WaliKelas::inRandomOrder()->first()->id,
 
             ],
             [
                 'kode' => 'Kelas II',
-                'jenjang' => '2'
+                'jenjang' => '2',
+                // WaliKelas::inRandomOrder()->first()->id,
 
             ],
             [
                 'kode' => 'Kelas III',
-                'jenjang' => '3'
+                'jenjang' => '3',
+                // WaliKelas::inRandomOrder()->first()->id,
 
             ],
             [
                 'kode' => 'Kelas IV',
-                'jenjang' => '4'
+                'jenjang' => '4',
+                // WaliKelas::inRandomOrder()->first()->id,
 
             ],
             [
                 'kode' => 'Kelas V',
-                'jenjang' => '5'
+                'jenjang' => '5',
+                // WaliKelas::inRandomOrder()->first()->id,
 
             ],
             [
                 'kode' => 'Kelas VI',
-                'jenjang' => '6'
+                'jenjang' => '6',
+                // WaliKelas::inRandomOrder()->first()->id,
+
 
             ],
         ];
