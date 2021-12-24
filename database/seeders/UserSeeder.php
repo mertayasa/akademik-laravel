@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
             [
-                'nama' => 'Guru',
+                'nama' => 'Guru 1',
                 'nip' => $faker->numberBetween(100000000, 200000000),
                 'alamat' => $faker->address(),
                 'tempat_lahir' => $faker->address(),
@@ -45,7 +45,23 @@ class UserSeeder extends Seeder
                 'pekerjaan' => $pekerjaan[rand(0, 1)],
                 'jenis_kelamin' => $kelamin[rand(0, 1)],
                 'status_guru' => $status_guru[rand(0, 1)],
-                'email' => 'guru@demo.com',
+                'email' => 'guru1@demo.com',
+                'level' => 'guru',
+                'email_verified_at' => now(),
+                'password' => bcrypt('asdasdasd'), // password
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'nama' => 'Guru 2',
+                'nip' => $faker->numberBetween(100000000, 200000000),
+                'alamat' => $faker->address(),
+                'tempat_lahir' => $faker->address(),
+                'tgl_lahir' => $faker->dateTimeBetween(Carbon::now()->subYears(45), Carbon::now()->subYears(17)),
+                'no_tlp' => $faker->e164PhoneNumber(),
+                'pekerjaan' => $pekerjaan[rand(0, 1)],
+                'jenis_kelamin' => $kelamin[rand(0, 1)],
+                'status_guru' => $status_guru[rand(0, 1)],
+                'email' => 'guru2@demo.com',
                 'level' => 'guru',
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password

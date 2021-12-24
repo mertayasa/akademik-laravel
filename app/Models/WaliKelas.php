@@ -26,4 +26,11 @@ class WaliKelas extends Model
     {
         return $this->belongsTo('App\Models\TahunAjar', 'id_tahun_ajar');
     }
+
+    public function getJumlahSiswaAttribute()
+    {
+        $jumlah = AnggotaKelas::where('id_kelas', $this->id_kelas)->where('id_tahun_ajar', $this->tahun_ajar)->count();
+
+        return $jumlah;
+    }
 }

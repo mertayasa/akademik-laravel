@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Akademik;
 use App\Models\Kelas;
 use App\Models\AnggotaKelas;
+use App\Models\TahunAjar;
 use App\Models\Siswa;
 use App\Models\WaliKelas;
 use Illuminate\Http\Request;
@@ -16,17 +17,27 @@ class AkademikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($status = null)
     {
         // $kelas = Kelas::all();
         // $kelas = Kelas::with('wali_kelas')->get();
+        $tahun_ajar = TahunAjar::where('status', 'aktif')->pluck('keterangan', 'id');
 
-        $kelas = WaliKelas::with('kelas')->get();
-        // $kelas = AnggotaKelas::with('kelas')->selectRaw('DISTINCT id_kelas')->get();
+        // $jumlahk = AnggotaKelas::groupBy('id_kelas');
+        // dd($jumlahk);
+        // $jumlah = $jumlah;
+
+        if ($status != null) {
+            $kelas = WaliKelas::with('kelas')->where('id_tahun_ajar', $status)->get();
+        } else {
+            $kelas = WaliKelas::with('kelas')->orderBy('id_kelas', 'asc')->get();
+        }
 
 
-        return view('akademik.index', compact('kelas'));
+        return view('akademik.index', compact('kelas', 'tahun_ajar'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
