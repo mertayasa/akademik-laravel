@@ -19,15 +19,15 @@
                                     <h5 class="card-title mb-4"> Jenjang Kelas </h5>
                                     <div class="card-box ">
                                 <div class="inner">
-                                    <h1 class="mt-1 "> {{$data->kelas->kode}}</h1>
+                                    <h1 class="mt-1 "> {{$data->kode}}</h1>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-user-graduate"></i>
                                 </div>
                                 </div>
                                     <p> Total Anggota :  </p>
-                                    <p> Wali Kelas : {{$data->user->nama}}  </p>
-                                    <a href="{{ route('anggota_kelas.index', $data->id_kelas) }}" class="btn btn-primary stretched-link">Lihat Kelas</a>
+                                    <p> Wali Kelas : {{$data->nama}}  </p>
+                                    <a href="{{ route('anggota_kelas.index', $data->id) }}" class="btn btn-primary stretched-link">Lihat Kelas</a>
                                 </div>
                             </div>
                         </div>

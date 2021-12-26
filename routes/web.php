@@ -44,6 +44,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('pengumuman', [DashboardController::class, 'pengumuman'])->name('pengumuman');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {

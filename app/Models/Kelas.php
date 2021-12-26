@@ -12,10 +12,10 @@ class Kelas extends Model
     //     'kelas',
     // ];
 
-    // public function wali_kelas()
-    // {
-    //     return $this->hasMany('App\Models\WaliKelas', 'id_kelas');
-    // }
+    public function wali_kelas()
+    {
+        return $this->hasMany('App\Models\WaliKelas', 'id_kelas');
+    }
 
     // public function kelas()
     // {

@@ -34,7 +34,8 @@
                                 </div>
                                 <div class="tab-pane fade" id="jadwal">
                                     <div class="card-body px-0">
-                                        @include('wali_kelas.datatable')
+                                        {{-- @include('wali_kelas.datatable') --}}
+                                          @include('anggota_kelas.datatable')
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="wali">

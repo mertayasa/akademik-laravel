@@ -144,3 +144,8 @@
 .card-box:hover .card-box-footer {
     background: rgba(0, 0, 0, 0.3);
 }
+
+.detail a {
+    color: white;
+    float: right;
+}

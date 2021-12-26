@@ -19,19 +19,25 @@ class AkademikController extends Controller
      */
     public function index($status = null)
     {
-        // $kelas = Kelas::all();
+        $kelas = Kelas::all();
         // $kelas = Kelas::with('wali_kelas')->get();
+
         $tahun_ajar = TahunAjar::where('status', 'aktif')->pluck('keterangan', 'id');
+
+        // dd($kelas);
 
         // $jumlahk = AnggotaKelas::groupBy('id_kelas');
         // dd($jumlahk);
         // $jumlah = $jumlah;
 
-        if ($status != null) {
-            $kelas = WaliKelas::with('kelas')->where('id_tahun_ajar', $status)->get();
-        } else {
-            $kelas = WaliKelas::with('kelas')->orderBy('id_kelas', 'asc')->get();
-        }
+        // if ($status != null) {
+        //     $kelas = Kelas::with('wali_kelas')->where('id_tahun_ajar', $status)->get();
+        // } else {
+        //     $kelas = Kelas::with('wali_kelas')->orderBy('id_kelas', 'asc')->get();
+        // }
+
+        // $kelas = Kelas::with('wali_kelas')->get()->pluck('wali_kelas.id_tahun_ajar', '2021/2022');
+        // dd($kelas);
 
 
         return view('akademik.index', compact('kelas', 'tahun_ajar'));

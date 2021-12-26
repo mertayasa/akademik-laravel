@@ -22,49 +22,49 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6 col-xxl-5 d-flex">
+            <div class="col-xl-12 col-xxl-5 d-flex">
                 <div class="w-100">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Sales</h5>
-                                    <h1 class="mt-1 mb-3">2.382</h1>
-                                    <div class="mb-1">
-                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                                        <span class="text-muted">Since last week</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-4">Visitors</h5>
-                                    <h1 class="mt-1 mb-3">14.212</h1>
-                                    <div class="mb-1">
-                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                        <span class="text-muted">Since last week</span>
+                        <div class="col-sm-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body ">
+                                    <h5 class="card-title text-white mb-4">Total Siswa</h5>
+                                    <h1 class="mt-1 mb-3 text-white" >{{ $dashboard_data['siswa_count'] }} </h1>
+                                    <div class="mb-1 detail justify-content-end">
+                                        <a href="{{route('siswa.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="card">
+                        <div class="col-sm-3">
+                            <div class="card bg-danger text-white">
                                 <div class="card-body">
-                                    <h5 class="card-title mb-4">Earnings</h5>
-                                    <h1 class="mt-1 mb-3">$21.300</h1>
-                                    <div class="mb-1">
-                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                                        <span class="text-muted">Since last week</span>
+                                    <h5 class="card-title  text-white mb-4">Total Guru</h5>
+                                    <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['guru_count'] }}</h1>
+                                    <div class="mb-1 detail justify-content-end">
+                                        <a href="{{route('guru.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card bg-warning text-white">
                                 <div class="card-body">
-                                    <h5 class="card-title mb-4">Orders</h5>
-                                    <h1 class="mt-1 mb-3">64</h1>
-                                    <div class="mb-1">
-                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                                        <span class="text-muted">Since last week</span>
+                                    <h5 class="card-title  text-white mb-4">Total Orang Tua</h5>
+                                    <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['ortu_count'] }}</h1>
+                                    <div class="mb-1 detail justify-content-end">
+                                        <a href="{{route('ortu.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title  text-white mb-4">Total Mata Pelajaran</h5>
+                                    <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['mapel_count'] }}</h1>
+                                    <div class="mb-1 detail justify-content-end">
+                                        <a href="{{route('mapel.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -73,22 +73,17 @@
                 </div>
             </div>
 
-            <div class="col-xl-6 col-xxl-7">
-                <div class="card flex-fill w-100">
-                    <div class="card-header">
-
-                        <h5 class="card-title mb-0">Recent Movement</h5>
-                    </div>
-                    <div class="card-body py-3">
-                        <div class="chart chart-sm">
-                            <canvas id="chartjs-dashboard-line"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="row">
+        
+    <div class="row">
+
+      @include('dashboard.pengumuman')
+
+    </div>
+
+
+        {{-- <div class="row">
             <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
                 <div class="card flex-fill w-100">
                     <div class="card-header">
@@ -242,7 +237,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 
