@@ -51,7 +51,7 @@ class TahunAjarController extends Controller
             $tahun_ajar->keterangan = $request->keterangan;
             $tahun_ajar->tahun_mulai = $request->tahun_mulai;
             $tahun_ajar->tahun_selesai = $request->tahun_selesai;
-            $tahun_ajar->status = 'aktif';
+            $tahun_ajar->status = 'nonaktif';
 
             // dd($tahun_ajar);
             $tahun_ajar->save();
