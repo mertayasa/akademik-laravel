@@ -8,17 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
-    // public $with = [
-    //     'kelas',
-    // ];
+
+
+    public function anggota_kelas()
+    {
+        return $this->hasMany('App\Models\AnggotaKelas', 'id_kelas');
+    }
 
     public function wali_kelas()
     {
         return $this->hasMany('App\Models\WaliKelas', 'id_kelas');
     }
 
-    // public function kelas()
-    // {
-    //     return $this->hasOne('App\Models\WaliKelas', 'id');
-    // }
+    public function getWaliKelas($id_tahun_ajar)
+    {
+        return $this->wali_kelas()->where('id_kelas', $this->id)->where('id_tahun_ajar', $id_tahun_ajar)->get();
+    }
+
+    public function getAnggotaKelas($id_tahun_ajar)
+    {
+        return  $this->anggota_kelas()->where('id_kelas',  $this->id)->where('id_tahun_ajar', $id_tahun_ajar)->get();
+    }
 }

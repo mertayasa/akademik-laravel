@@ -14,9 +14,8 @@
             <div class="col-auto ml-auto text-right mt-n1">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-                        <li class="breadcrumb-item"><a href="#">AdminKit</a></li>
+                        <li class="breadcrumb-item"><a href="#">Sistem Informasi Akademik</a></li>
                         <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Analytics</li>
                     </ol>
                 </nav>
             </div>
@@ -59,12 +58,23 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="card bg-success text-white">
+                            <div class="card bg-info text-white">
                                 <div class="card-body">
                                     <h5 class="card-title  text-white mb-4">Total Mata Pelajaran</h5>
                                     <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['mapel_count'] }}</h1>
                                     <div class="mb-1 detail justify-content-end">
                                         <a href="{{route('mapel.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-sm-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title  text-white mb-4">Total Ekstrakulikuler</h5>
+                                    <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['ekskul_count'] }}</h1>
+                                    <div class="mb-1 detail justify-content-end">
+                                        <a href="{{route('ekskul.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>

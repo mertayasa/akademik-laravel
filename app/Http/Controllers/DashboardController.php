@@ -6,6 +6,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Mapel;
 use App\Models\Pengumuman;
+use App\Models\Ekskul;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -23,6 +24,7 @@ class DashboardController extends Controller
         $guru_count = User::where('status', 'aktif')->where('level', 'guru')->count();
         $ortu_count = User::where('status', 'aktif')->where('level', 'ortu')->count();
         $mapel_count = Mapel::where('status', 'aktif')->count();
+        $ekskul_count = Ekskul::where('status', 'aktif')->count();
         $pengumuman = Pengumuman::where('status', 'aktif')->get();
 
 
@@ -31,7 +33,8 @@ class DashboardController extends Controller
             'guru_count' => $guru_count,
             'ortu_count' => $ortu_count,
             'mapel_count' => $mapel_count,
-            'pengumuman' => $pengumuman
+            'pengumuman' => $pengumuman,
+            'ekskul_count' => $ekskul_count
 
         ];
 

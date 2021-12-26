@@ -6,6 +6,7 @@ use App\Models\AnggotaKelas;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\User;
+use App\Models\WaliKelas;
 use App\Models\TahunAjar;
 use Illuminate\Http\Request;
 use App\DataTables\AnggotaKelasDataTable;
@@ -19,20 +20,22 @@ class AnggotaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_kelas = null, AnggotaKelas $anggota_kelas)
+    public function index($id_kelas, $id_tahun_ajar)
     {
-        $siswa = $id_kelas;
-        return view('anggota_kelas.index', compact('siswa', 'anggota_kelas'));
+        $data = [
+            'id_kelas' => $id_kelas,
+            'id_tahun_ajar' => $id_tahun_ajar,
+            'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first()
+        ];
+        // dd($data);
+        return view('anggota_kelas.index', $data);
     }
 
-    public function datatable($kelas = null)
+    public function datatable(Kelas $kelas, $id_tahun_ajar)
     {
-        $siswa = Siswa::all();
-        $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $kelas)->get();
+        // $siswa = AnggotaKelas::with('siswa')->where('id_kelas', $kelas)->get();
+        $siswa = $kelas->getAnggotaKelas($id_tahun_ajar);
 
-        // $anggota_kelas = AnggotaKelas::with('siswa')->whereHas('siswa', function ($siswa) use ($id_kelas) {
-        //     $siswa->where('id_kelas', $id_kelas == null ? 1 : $id_kelas);
-        // })->get();
         return AnggotaKelasDataTable::set($siswa);
     }
 

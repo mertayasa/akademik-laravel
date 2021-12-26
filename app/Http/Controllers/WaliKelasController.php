@@ -80,7 +80,8 @@ class WaliKelasController extends Controller
      */
     public function show(WaliKelas $wali_kelas)
     {
-        //
+         $wali_kelas = WaliKelas::all();
+        return view('wali_kelas.show', compact('wali_kelas'));
     }
 
     /**

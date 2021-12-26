@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNilaisTable extends Migration
+class CreateSaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreateNilaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function (Blueprint $table) {
+        Schema::create('sarans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
-            $table->unsignedBigInteger('id_mapel');
-            $table->integer('tugas');
-            $table->integer('uts');
-            $table->integer('uas');
-            $table->text('desk_pengetahuan');
-            $table->text('desk_keterampilan');
+            $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
+            $table->text('keterangan');
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_mapel')->references('id')->on('mapels')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -36,6 +31,6 @@ class CreateNilaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilais');
+        Schema::dropIfExists('sarans');
     }
 }

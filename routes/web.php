@@ -147,6 +147,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('create', [WaliKelasController::class, 'create'])->name('create');
         Route::post('store', [WaliKelasController::class, 'store'])->name('store');
         Route::get('edit/{wali_kelas}', [WaliKelasController::class, 'edit'])->name('edit');
+        Route::get('show/{wali_kelas}', [WaliKelasController::class, 'show'])->name('show');
         Route::patch('update/{wali_kelas}', [WaliKelasController::class, 'update'])->name('update');
         Route::delete('destroy/{wali_kelas}', [WaliKelasController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [WaliKelasController::class, 'datatable'])->name('datatable');
@@ -173,14 +174,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {
-        Route::get('index/{id_kelas?}', [AnggotaKelasController::class, 'index'])->name('index');
-        Route::get('create/{id_kelas?}', [AnggotaKelasController::class, 'create'])->name('create');
-        Route::post('store/{id_kelas?}', [AnggotaKelasController::class, 'store'])->name('store');
-        Route::get('show/{anggota_kelas}', [AnggotaKelasController::class, 'show'])->name('show');
-        Route::get('edit/{anggota_kelas/{id_kelas?}', [AnggotaKelasController::class, 'edit'])->name('edit');
-        Route::patch('update/{anggota_kelas}', [AnggotaKelasController::class, 'update'])->name('update');
+        Route::get('index/{id_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'index'])->name('index');
+        Route::get('create/{id_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'create'])->name('create');
+        Route::post('store', [AnggotaKelasController::class, 'store'])->name('store');
+        Route::get('edit/{anggota_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'edit'])->name('edit');
+        Route::patch('update/{anggota_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'update'])->name('update');
         Route::delete('destroy/{anggota_kelas}', [AnggotaKelasController::class, 'destroy'])->name('destroy');
-        Route::get('datatable/{id_kelas?}', [AnggotaKelasController::class, 'datatable'])->name('datatable');
+        Route::get('datatable/{kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'nilai', 'as' => 'nilai.'], function () {

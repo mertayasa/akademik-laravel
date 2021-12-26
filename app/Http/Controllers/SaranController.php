@@ -2,39 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Akademik;
-use App\Models\Kelas;
-use App\Models\AnggotaKelas;
-use App\Models\TahunAjar;
-use App\Models\Siswa;
-use App\Models\WaliKelas;
+use App\Models\Saran;
 use Illuminate\Http\Request;
 
-class AkademikController extends Controller
+class SaranController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $kelas = Kelas::all();
-
-        $id_tahun_ajar = $request->get('id_tahun_ajar');
-        $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
-        $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
-
-        $data  =  [
-            'id_tahun_ajar' => $id_tahun_ajar ?? $tahun_ajar_active->id,
-            'tahun_ajar' => $tahun_ajar,
-            'kelas' => $kelas
-        ];
-
-        return view('akademik.index', $data);
+        //
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -60,10 +41,10 @@ class AkademikController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Akademik  $akademik
+     * @param  \App\Models\Saran  $saran
      * @return \Illuminate\Http\Response
      */
-    public function show(Akademik $akademik)
+    public function show(Saran $saran)
     {
         //
     }
@@ -71,10 +52,10 @@ class AkademikController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Akademik  $akademik
+     * @param  \App\Models\Saran  $saran
      * @return \Illuminate\Http\Response
      */
-    public function edit(Akademik $akademik)
+    public function edit(Saran $saran)
     {
         //
     }
@@ -83,10 +64,10 @@ class AkademikController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Akademik  $akademik
+     * @param  \App\Models\Saran  $saran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Akademik $akademik)
+    public function update(Request $request, Saran $saran)
     {
         //
     }
@@ -94,10 +75,10 @@ class AkademikController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Akademik  $akademik
+     * @param  \App\Models\Saran  $saran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Akademik $akademik)
+    public function destroy(Saran $saran)
     {
         //
     }
