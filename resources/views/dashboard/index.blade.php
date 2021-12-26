@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="plugin/datatables/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
 @endpush
 
 @section('content')
@@ -28,9 +28,10 @@
                             <div class="card bg-primary text-white">
                                 <div class="card-body ">
                                     <h5 class="card-title text-white mb-4">Total Siswa</h5>
-                                    <h1 class="mt-1 mb-3 text-white" >{{ $dashboard_data['siswa_count'] }} </h1>
+                                    <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['siswa_count'] }} </h1>
                                     <div class="mb-1 detail justify-content-end">
-                                        <a href="{{route('siswa.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                        <a href="{{ route('siswa.index') }}">Lihat Detail <i
+                                                class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +42,8 @@
                                     <h5 class="card-title  text-white mb-4">Total Guru</h5>
                                     <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['guru_count'] }}</h1>
                                     <div class="mb-1 detail justify-content-end">
-                                        <a href="{{route('guru.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                        <a href="{{ route('guru.index') }}">Lihat Detail <i
+                                                class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +54,8 @@
                                     <h5 class="card-title  text-white mb-4">Total Orang Tua</h5>
                                     <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['ortu_count'] }}</h1>
                                     <div class="mb-1 detail justify-content-end">
-                                        <a href="{{route('ortu.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                        <a href="{{ route('ortu.index') }}">Lihat Detail <i
+                                                class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -63,18 +66,20 @@
                                     <h5 class="card-title  text-white mb-4">Total Mata Pelajaran</h5>
                                     <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['mapel_count'] }}</h1>
                                     <div class="mb-1 detail justify-content-end">
-                                        <a href="{{route('mapel.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                        <a href="{{ route('mapel.index') }}">Lihat Detail <i
+                                                class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                         <div class="col-sm-3">
+                        <div class="col-sm-3">
                             <div class="card bg-success text-white">
                                 <div class="card-body">
                                     <h5 class="card-title  text-white mb-4">Total Ekstrakulikuler</h5>
                                     <h1 class="mt-1 mb-3 text-white">{{ $dashboard_data['ekskul_count'] }}</h1>
                                     <div class="mb-1 detail justify-content-end">
-                                        <a href="{{route('ekskul.index')}}" >Lihat Detail <i class="fas fa-angle-double-right"></i></a>
+                                        <a href="{{ route('ekskul.index') }}">Lihat Detail <i
+                                                class="fas fa-angle-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -85,12 +90,12 @@
 
         </div>
 
-        
-    <div class="row">
 
-      @include('dashboard.pengumuman')
+        <div class="row">
 
-    </div>
+            @include('dashboard.pengumuman')
+
+        </div>
 
 
         {{-- <div class="row">
@@ -251,10 +256,10 @@
     </div>
 @endsection
 
-@push('scripts') 
-    <script type="text/javascript" src="plugin/datatables/datatables.min.js"></script>
+@push('scripts')
+    <script type="text/javascript" src="datatables/datatables.min.js"></script>
     <script>
-        $(function () {
+        $(function() {
             $('#sampleTable').DataTable({
                 processing: true,
                 serverSide: false

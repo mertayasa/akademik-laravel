@@ -40,7 +40,7 @@
     @endsection
 
     @push('scripts')
-        <script type="text/javascript" src="plugin/datatables/datatables.min.js"></script>
+        <script type="text/javascript" src="datatables/datatables.min.js"></script>
         <script>
             $(function() {
                 $('#sampleTable').DataTable({
