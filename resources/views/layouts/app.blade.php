@@ -23,6 +23,13 @@
 		.select2{
 			width: 100% !important;
 		}
+
+        .toast-error{
+            background-color: red !important;
+        }
+        .toast-success{
+            background-color: green !important;
+        }
 	</style>
     @stack('styles')
 </head>

@@ -73,8 +73,8 @@
                         <div class="col-12 pb-3 pb-md-0 mb-2">
                             {!! Form::label('idSiswa', 'Nama Siswa', ['class' => 'mb-1']) !!}
                             {!! Form::select('id_siswa', $siswa, null, ['class' => 'form-control', 'id' => 'idSiswa']) !!}
-                        </div>
-                        <div class="invalid-feedback">
+                            <div class="invalid-feedback">
+                            </div>
                         </div>
                         <small> <i>Silahkan pilih siswa yang ingin ditambahkan di kelas</i> </small>
                     </div>
@@ -110,13 +110,15 @@
                     body: new FormData(formAdd)
                 })
                 .then(response => {
+                    const data = response.json()
                     if(response.status == 400){
                         data.then((res) => {
                             const error = res.errors
                             Object.keys(error).forEach(function(key) {
                                 let errorSpan = document.querySelectorAll(`[name="${key}"]`)
                                 errorSpan[0].classList.add('is-invalid')
-                                errorSpan[0].nextElementSibling.innerHTML = error[key][0]
+                                errorSpan[0].querySelectorAll('.invalid-feedback')
+                                // errorSpan[0].nextElementSibling.innerHTML = error[key][0]
                             });
                         });
                     }

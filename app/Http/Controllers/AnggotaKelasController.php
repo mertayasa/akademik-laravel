@@ -10,6 +10,7 @@ use App\Models\WaliKelas;
 use App\Models\TahunAjar;
 use Illuminate\Http\Request;
 use App\DataTables\AnggotaKelasDataTable;
+use App\Http\Requests\AddAnggotaKelasReq;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -61,7 +62,7 @@ class AnggotaKelasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddAnggotaKelasReq $request)
     {
         return response(['code' => 1, 'data' => $request->all()]);
         try {

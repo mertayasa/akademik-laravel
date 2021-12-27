@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Response;
 
 class AddAnggotaKelasReq extends FormRequest
 {
@@ -26,7 +27,7 @@ class AddAnggotaKelasReq extends FormRequest
     public function rules()
     {
         return [
-            'id_siswa' => 'required|exists:siswa',
+            'id_siswa' => 'required|exists:siswa,id',
             'id_kelas' => 'required',
             'id_tahun_ajar' => 'required',
         ];
@@ -38,11 +39,10 @@ class AddAnggotaKelasReq extends FormRequest
 
             response()->json([
 
-                'message' => $validator->errors()
+                'errors' => $validator->errors()
 
             ],400)
 
         );
-
     }
 }
