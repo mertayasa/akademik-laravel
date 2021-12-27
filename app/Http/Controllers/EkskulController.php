@@ -49,12 +49,7 @@ class EkskulController extends Controller
     public function store(Request $request)
     {
         try {
-            $ekskul = new Ekskul;
-            $ekskul->nama = $request->nama;
-            $ekskul->status = 'aktif';
-
-            // dd($ekskul);
-            $ekskul->save();
+            Ekskul::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data ekskuln Gagal Ditambahkan');
@@ -92,14 +87,10 @@ class EkskulController extends Controller
      * @param  \App\Models\Ekskul  $ekskul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Ekskul $ekskul)
     {
         try {
-            $update = Ekskul::find($id);
-            $update->nama = $request->nama;
-            $update->status = $request->status;
-            // dd($update);
-            $update->save();
+            $ekskul->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data ekskul Gagal Di Edit');

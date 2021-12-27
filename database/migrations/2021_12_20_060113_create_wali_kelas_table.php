@@ -20,7 +20,7 @@ class CreateWaliKelasTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->timestamps();
 
-            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajars')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajar')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

@@ -23,8 +23,8 @@ class CreateAnggotaKelasTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_siswa')->references('id')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajars')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_siswa')->references('id')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajar')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

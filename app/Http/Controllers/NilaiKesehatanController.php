@@ -51,14 +51,7 @@ class NilaiKesehatanController extends Controller
     public function store(Request $request)
     {
         try {
-            $nilai_kesehatan = new NilaiKesehatan;
-            $nilai_kesehatan->id_anggota_kelas = $request->id_anggota_kelas;
-            $nilai_kesehatan->semester = $request->semester;
-            $nilai_kesehatan->jenis_kesehatan = $request->jenis_kesehatan;
-            $nilai_kesehatan->keterangan = $request->keterangan;
-
-            // dd($nilai_kesehatan);
-            $nilai_kesehatan->save();
+            NilaiKesehatan::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Kesehatan Gagal Ditambahkan');
@@ -98,16 +91,10 @@ class NilaiKesehatanController extends Controller
      * @param  \App\Models\NilaiKesehatan  $nilai_kesehatan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NilaiKesehatan $nilai_kesehatan)
     {
         try {
-            $update = NilaiKesehatan::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->semester = $request->semester;
-            $update->jenis_kesehatan = $request->jenis_kesehatan;
-            $update->keterangan = $request->keterangan;
-
-            $update->save();
+            $nilai_kesehatan->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Kesehatan Gagal Di Edit');

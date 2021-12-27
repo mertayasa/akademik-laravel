@@ -56,13 +56,7 @@ class WaliKelasController extends Controller
     public function store(Request $request)
     {
         try {
-            $wali_kelas = new WaliKelas;
-            $wali_kelas->id_kelas = $request->id_kelas;
-            $wali_kelas->id_tahun_ajar = $request->id_tahun_ajar;
-            $wali_kelas->id_user = $request->id_user;
-
-            // dd($wali_kelas);
-            $wali_kelas->save();
+            WaliKelas::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
@@ -105,15 +99,10 @@ class WaliKelasController extends Controller
      * @param  \App\Models\WaliKelas  $waliKelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, WaliKelas $wali_kelas)
     {
         try {
-            $update = WaliKelas::find($id);
-            $update->id_kelas = $request->id_kelas;
-            $update->id_tahun_ajar = $request->id_tahun_ajar;
-            $update->id_user = $request->id_user;
-
-            $update->save();
+            $wali_kelas->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');

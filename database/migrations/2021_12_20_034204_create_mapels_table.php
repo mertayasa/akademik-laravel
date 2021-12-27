@@ -13,7 +13,7 @@ class CreateMapelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mapels', function (Blueprint $table) {
+        Schema::create('mapel', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 20);
             $table->enum('is_lokal', ['true', 'false']);

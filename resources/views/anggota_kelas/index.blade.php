@@ -10,11 +10,6 @@
                     </div>
                     @include('layouts.flash')
                     @include('layouts.error_message')
-                    {{-- <div class="card-header d-flex justify-content-end">
-                        <a href="{{ route('anggota_kelas.create', [$id_kelas, $id_tahun_ajar]) }}"
-                            class="btn btn-primary add" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            title="Tambah anggota_kelas"> <i class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
-                    </div> --}}
                     <div class="card-body">
                         <div class="bs-example">
                             <ul class="nav nav-tabs">
@@ -31,8 +26,8 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="siswa">
                                     <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end">
-                                            <a href="{{ route('anggota_kelas.create', [$id_kelas, $id_tahun_ajar]) }}"
+                                        <div class="card-header d-flex justify-content-end px-0">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#studentModal"
                                                 class="btn btn-primary add" data-bs-toggle="tooltip"
                                                 data-bs-placement="bottom" title="Tambah anggota_kelas"> <i
                                                     class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
@@ -42,7 +37,6 @@
                                 </div>
                                 <div class="tab-pane fade" id="jadwal">
                                     <div class="card-body px-0">
-                                        {{-- @include('wali_kelas.datatable') --}}
                                         @include('jadwal.datatable')
                                     </div>
                                 </div>
@@ -60,6 +54,79 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentModalLabel">Anggota Kelas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['route' => 'anggota_kelas.store', 'id' => 'formAddStudent']) !!}
+                    <div class="row">
+                        {!! Form::hidden('id_kelas', $id_kelas, []) !!}
+                        {!! Form::hidden('id_tahun_ajar', $id_tahun_ajar, []) !!}
+                        <div class="col-12 pb-3 pb-md-0 mb-2">
+                            {!! Form::label('idSiswa', 'Nama Siswa', ['class' => 'mb-1']) !!}
+                            {!! Form::select('id_siswa', $siswa, null, ['class' => 'form-control', 'id' => 'idSiswa']) !!}
+                        </div>
+                        <div class="invalid-feedback">
+                        </div>
+                        <small> <i>Silahkan pilih siswa yang ingin ditambahkan di kelas</i> </small>
+                    </div>
+                {{ Form::close() }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" id="btnStoreStudent">Simpan</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('select').select2({
+                    dropdownParent: $("#studentModal") 
+                });
+            })
+
+            const btnStoreStudent = document.getElementById('btnStoreStudent')
+            
+            btnStoreStudent.addEventListener('click', event => {
+                const formAdd = document.getElementById('formAddStudent')
+                const actionUrl = formAdd.getAttribute('action')
+                
+                fetch(actionUrl, {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    method: 'POST',
+                    body: new FormData(formAdd)
+                })
+                .then(response => {
+                    if(response.status == 400){
+                        data.then((res) => {
+                            const error = res.errors
+                            Object.keys(error).forEach(function(key) {
+                                let errorSpan = document.querySelectorAll(`[name="${key}"]`)
+                                errorSpan[0].classList.add('is-invalid')
+                                errorSpan[0].nextElementSibling.innerHTML = error[key][0]
+                            });
+                        });
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    showToast(0, 'Gagal menambahkan data anggota kelas')
+                })
+            })
+
+        </script>
+    @endpush
 @endsection

@@ -8,10 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class NilaiEkskul extends Model
 {
     use HasFactory;
+    public $table = 'nilai_ekskul';
+
     public $with = [
         'anggota_kelas', 'ekskul'
     ];
 
+    protected $fillable = [
+        'id_anggota_kelas',
+        'id_ekskul',
+        'semester',
+        'keterangan',
+    ];
 
     public function anggota_kelas()
     {

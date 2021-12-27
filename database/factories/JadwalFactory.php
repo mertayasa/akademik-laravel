@@ -27,6 +27,8 @@ class JadwalFactory extends Factory
     public function definition()
     {
         $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        $random_hari = rand(0,6);
+
         return [
             'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
             'id_kelas' => Kelas::inRandomOrder()->first()->id,
@@ -34,7 +36,8 @@ class JadwalFactory extends Factory
             'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
             'jam_mulai' => $this->faker->time(),
             'jam_selesai' => $this->faker->time(),
-            'hari' => $hari[rand(0, 5)],
+            'hari' => $hari[$random_hari],
+            'kode_hari' => ($random_hari+1),
         ];
     }
 }

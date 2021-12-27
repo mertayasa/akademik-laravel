@@ -22,12 +22,14 @@ class AnggotaKelasController extends Controller
      */
     public function index($id_kelas, $id_tahun_ajar)
     {
+        // dd(Kelas::find($id_kelas));
+
         $data = [
+            'siswa' => Siswa::pluck('nama', 'id'),
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
             'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first()
         ];
-        // dd($data);
         return view('anggota_kelas.index', $data);
     }
 
@@ -61,17 +63,9 @@ class AnggotaKelasController extends Controller
      */
     public function store(Request $request)
     {
-
+        return response(['code' => 1, 'data' => $request->all()]);
         try {
-            $anggota_kelas = new AnggotaKelas;
-            $anggota_kelas->id_kelas = $request->id_kelas;
-            $anggota_kelas->id_siswa = $request->id_siswa;
-            $anggota_kelas->id_tahun_ajar = $request->id_tahun_ajar;
-            $anggota_kelas->status = 'aktif';
-            // $anggota_kelas->saran = $request->saran;
-
-            // dd($anggota_kelas);
-            $anggota_kelas->save();
+            AnggotaKelas::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data anggota_kelasn Gagal Ditambahkan');

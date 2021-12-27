@@ -8,6 +8,8 @@ use App\DataTables\MapelDataTable;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
+use function GuzzleHttp\Promise\all;
+
 class MapelController extends Controller
 {
     /**
@@ -47,13 +49,7 @@ class MapelController extends Controller
     public function store(Request $request)
     {
         try {
-            $mapel = new Mapel;
-            $mapel->nama = $request->nama;
-            $mapel->is_lokal = $request->is_lokal;
-            $mapel->status = 'aktif';
-
-            // dd($mapel);
-            $mapel->save();
+            Mapel::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
@@ -91,15 +87,10 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Mapel $mapel)
     {
         try {
-            $update = Mapel::find($id);
-            $update->nama = $request->nama;
-            $update->is_lokal = $request->is_lokal;
-            $update->status = $request->status;
-
-            $update->save();
+            $mapel->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');

@@ -13,7 +13,7 @@ class CreateNilaiEkskulsTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_ekskuls', function (Blueprint $table) {
+        Schema::create('nilai_ekskul', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->unsignedBigInteger('id_ekskul');
@@ -23,7 +23,7 @@ class CreateNilaiEkskulsTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_ekskul')->references('id')->on('ekskuls')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_ekskul')->references('id')->on('ekskul')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

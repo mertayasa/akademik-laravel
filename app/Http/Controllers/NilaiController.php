@@ -52,18 +52,7 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         try {
-            $nilai = new Nilai;
-            $nilai->id_anggota_kelas = $request->id_anggota_kelas;
-            $nilai->id_jadwal = $request->id_jadwal;
-            $nilai->tugas = $request->tugas;
-            $nilai->uts = $request->uts;
-            $nilai->uas = $request->uas;
-            $nilai->desk_pengetahuan = $request->desk_pengetahuan;
-            $nilai->desk_keterampilan = $request->desk_keterampilan;
-            $nilai->saran = $request->saran;
-
-            // dd($nilai);
-            $nilai->save();
+            Nilai::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data nilain Gagal Ditambahkan');
@@ -103,20 +92,10 @@ class NilaiController extends Controller
      * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Nilai $nilai)
     {
         try {
-            $update = Nilai::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->id_jadwal = $request->id_jadwal;
-            $update->tugas = $request->tugas;
-            $update->uts = $request->uts;
-            $update->uas = $request->uas;
-            $update->desk_pengetahuan = $request->desk_pengetahuan;
-            $update->desk_keterampilan = $request->desk_keterampilan;
-            $update->saran = $request->saran;
-            // dd($update);
-            $update->save();
+            $nilai->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data nilai Gagal Di Edit');

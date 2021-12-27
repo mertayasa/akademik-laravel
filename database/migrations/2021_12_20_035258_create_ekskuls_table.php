@@ -13,7 +13,7 @@ class CreateEkskulsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ekskuls', function (Blueprint $table) {
+        Schema::create('ekskul', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 20);
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');

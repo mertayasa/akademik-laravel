@@ -13,7 +13,7 @@ class CreateJadwalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jadwals', function (Blueprint $table) {
+        Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_kelas');
@@ -21,14 +21,15 @@ class CreateJadwalsTable extends Migration
             $table->unsignedBigInteger('id_tahun_ajar');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
+            $table->integer('kode_hari');
             $table->string('hari', 10);
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_mapel')->references('id')->on('mapels')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajars')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_mapel')->references('id')->on('mapel')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajar')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

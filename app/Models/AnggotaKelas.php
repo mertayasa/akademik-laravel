@@ -9,6 +9,13 @@ class AnggotaKelas extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_kelas',
+        'id_siswa',
+        'id_tahun_ajar',
+        'status'
+    ];
+
     use HasFactory;
     public $with = [
         'kelas', 'tahun_ajar', 'siswa'

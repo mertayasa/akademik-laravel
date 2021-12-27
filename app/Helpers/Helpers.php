@@ -97,3 +97,30 @@ function uploadFile($base_64_foto, $folder)
 
     return $folder . '/' . $safeName;
 }
+
+function getDayCode($day)
+{
+    switch(strtolower($day)){
+        case 'senin':
+            return 1;
+        break;
+        case 'selasa':
+            return 2;
+        break;
+        case 'rabu':
+            return 3;
+        break;
+        case 'kamis':
+            return 4;
+        break;
+        case 'jumat':
+            return 5;
+        break;
+        case 'sabtu':
+            return 6;
+        break;
+        case 'minggu':
+            return 7;
+        break;
+    }
+}

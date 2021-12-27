@@ -9,6 +9,12 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    public $table = 'kelas';
+    protected $fillable = [
+        'kode',
+        'jenjang',
+        'status',
+    ];
 
     public function anggota_kelas()
     {

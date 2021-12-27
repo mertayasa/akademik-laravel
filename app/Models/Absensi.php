@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Absensi extends Model
 {
     use HasFactory;
+
+    public $table = 'absensi';
+
+    protected $fillable = [
+        'id_anggota_kelas',
+        'tgl_absensi',
+        'kehadiran',
+    ];
 }

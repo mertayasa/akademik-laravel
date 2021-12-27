@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     use HasFactory;
+    public $table = 'jadwal';
+    protected $fillable = [
+        'id_user',
+        'id_kelas',
+        'id_mapel',
+        'id_tahun_ajar',
+        'jam_mulai',
+        'jam_selesai',
+        'hari',
+        'kode_hari',
+        'status',
+    ];
+
     public $with = [
         'user', 'kelas', 'tahun_ajar', 'mapel'
     ];

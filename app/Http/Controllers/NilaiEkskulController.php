@@ -52,15 +52,7 @@ class NilaiEkskulController extends Controller
     public function store(Request $request)
     {
         try {
-            $nilai_ekskul = new NilaiEkskul;
-            $nilai_ekskul->id_anggota_kelas = $request->id_anggota_kelas;
-            $nilai_ekskul->id_ekskul = $request->id_ekskul;
-            $nilai_ekskul->semester = $request->semester;
-            $nilai_ekskul->keterangan = $request->keterangan;
-            // $nilai_ekskul->nilai = $request->nilai;
-
-            // dd($nilai_ekskul);
-            $nilai_ekskul->save();
+            NilaiEkskul::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Ekskul Gagal Ditambahkan');
@@ -100,17 +92,10 @@ class NilaiEkskulController extends Controller
      * @param  \App\Models\NilaiEkskul  $nilai_ekskul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NilaiEkskul $nilai_ekskul)
     {
         try {
-            $update = NilaiEkskul::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->id_ekskul = $request->id_ekskul;
-            $update->semester = $request->semester;
-            $update->keterangan = $request->keterangan;
-            // $update->nilai = $request->nilai;
-
-            $update->save();
+            $nilai_ekskul->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Ekskul Gagal Di Edit');

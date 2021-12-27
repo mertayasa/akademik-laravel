@@ -49,15 +49,7 @@ class PengumumanController extends Controller
     public function store(Request $request)
     {
         try {
-            $pengumuman = new Pengumuman;
-            $pengumuman->judul = $request->judul;
-            $pengumuman->deskripsi = $request->deskripsi;
-            $pengumuman->konten = $request->konten;
-            $pengumuman->lampiran = $request->lampiran;
-            $pengumuman->status = 'aktif';
-
-            // dd($pengumuman);
-            $pengumuman->save();
+            Pengumuman::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Pengumumann Gagal Ditambahkan');
@@ -95,17 +87,10 @@ class PengumumanController extends Controller
      * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pengumuman $pengumuman)
     {
         try {
-            $update = Pengumuman::find($id);
-            $update->judul = $request->judul;
-            $update->deskripsi = $request->deskripsi;
-            $update->konten = $request->konten;
-            $update->lampiran = $request->lampiran;
-            $update->status = $request->status;
-
-            $update->save();
+            $pengumuman->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Pengumuman Gagal Di Edit');

@@ -51,15 +51,7 @@ class PrestasiController extends Controller
     public function store(Request $request)
     {
         try {
-            $prestasi = new Prestasi;
-            $prestasi->id_anggota_kelas = $request->id_anggota_kelas;
-            $prestasi->semester = $request->semester;
-            $prestasi->nama = $request->nama;
-            $prestasi->keterangan = $request->keterangan;
-            // $prestasi->nilai = $request->nilai;
-
-            // dd($prestasi);
-            $prestasi->save();
+            Prestasi::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Prestasi Gagal Ditambahkan');
@@ -98,17 +90,10 @@ class PrestasiController extends Controller
      * @param  \App\Models\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Prestasi $prestasi)
     {
         try {
-            $update = Prestasi::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->semester = $request->semester;
-            $update->nama = $request->nama;
-            $update->keterangan = $request->keterangan;
-            // $update->nilai = $request->nilai;
-
-            $update->save();
+            $prestasi->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Prestasi Gagal Di Edit');

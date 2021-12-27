@@ -8,10 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Prestasi extends Model
 {
     use HasFactory;
+    public $table = 'prestasi';
+
     public $with = [
         'anggota_kelas'
     ];
 
+    protected $fillable = [
+        'id_anggota_kelas',
+        'semester',
+        'nama',
+        'keterangan',	
+    ];
 
     public function anggota_kelas()
     {

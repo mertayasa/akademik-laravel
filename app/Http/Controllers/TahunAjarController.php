@@ -47,14 +47,7 @@ class TahunAjarController extends Controller
     public function store(Request $request)
     {
         try {
-            $tahun_ajar = new TahunAjar;
-            $tahun_ajar->keterangan = $request->keterangan;
-            $tahun_ajar->tahun_mulai = $request->tahun_mulai;
-            $tahun_ajar->tahun_selesai = $request->tahun_selesai;
-            $tahun_ajar->status = 'nonaktif';
-
-            // dd($tahun_ajar);
-            $tahun_ajar->save();
+            TahunAjar::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
@@ -92,16 +85,10 @@ class TahunAjarController extends Controller
      * @param  \App\Models\TahunAjar  $tahun_ajar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TahunAjar $tahun_ajar)
     {
         try {
-            $update = TahunAjar::find($id);
-            $update->keterangan = $request->keterangan;
-            $update->tahun_mulai = $request->tahun_mulai;
-            $update->tahun_selesai = $request->tahun_selesai;
-            $update->status = $request->status;
-
-            $update->save();
+            $tahun_ajar->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');

@@ -51,19 +51,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         try {
-            $siswa = new Siswa;
-            $siswa->nama = $request->nama;
-            $siswa->nis = $request->nis;
-            $siswa->email = $request->email;
-            $siswa->alamat = $request->alamat;
-            $siswa->tempat_lahir = $request->tempat_lahir;
-            $siswa->tgl_lahir = $request->tgl_lahir;
-            $siswa->jenis_kelamin = $request->jenis_kelamin;
-            $siswa->id_user = $request->id_user;
-            $siswa->status = 'aktif';
-
-            // dd($siswa);
-            $siswa->save();
+            Siswa::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data siswan Gagal Ditambahkan');
@@ -102,21 +90,10 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa $siswa)
     {
         try {
-            $update = Siswa::find($id);
-            $update->nama = $request->nama;
-            $update->nis = $request->nis;
-            $update->email = $request->email;
-            $update->alamat = $request->alamat;
-            $update->tempat_lahir = $request->tempat_lahir;
-            $update->tgl_lahir = $request->tgl_lahir;
-            $update->jenis_kelamin = $request->jenis_kelamin;
-            $update->id_user = $request->id_user;
-            $update->status = $request->status;
-
-            $update->save();
+            $siswa->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data siswa Gagal Di Edit');

@@ -13,7 +13,7 @@ class CreateNilaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function (Blueprint $table) {
+        Schema::create('nilai', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->unsignedBigInteger('id_mapel');
@@ -25,7 +25,7 @@ class CreateNilaisTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_mapel')->references('id')->on('mapels')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_mapel')->references('id')->on('mapel')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

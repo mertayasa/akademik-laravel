@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Pengumuman extends Model
 {
     use HasFactory;
+    public $table = 'pengumuman';
+
+    protected $fillable = [
+        'judul',
+        'deskripsi',
+        'konten',
+        'lampiran',
+        'status',
+    ];
+
 }

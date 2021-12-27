@@ -35,16 +35,6 @@ class UserController extends Controller
             $ortu = User::where('level', 'ortu')->get();
             return UserDataTable::set($ortu, 'ortu');
         }
-        // switch ($level) {
-        //     case 1:
-        //         $guru = User::where('level', 'guru')->get();
-        //         return UserDataTable::set($guru, 'guru');
-        //         break;
-        //     case 2:
-        //         $ortu = User::where('level', 'ortu')->get();
-        //         return UserDataTable::set($ortu, 'ortu');
-        //         break;
-        // }
     }
 
     public function create()

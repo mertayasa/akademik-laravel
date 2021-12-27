@@ -17,7 +17,6 @@ class CreateKelasTable extends Migration
             $table->id();
             $table->string('kode', 10);
             $table->integer('jenjang');
-            // $table->unsignedBigInteger('id_wali_kelas');
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
 

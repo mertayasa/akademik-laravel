@@ -51,15 +51,7 @@ class NilaiProporsiController extends Controller
     public function store(Request $request)
     {
         try {
-            $nilai_proporsi = new NilaiProporsi;
-            $nilai_proporsi->id_anggota_kelas = $request->id_anggota_kelas;
-            $nilai_proporsi->semester = $request->semester;
-            $nilai_proporsi->jenis_proporsi = $request->jenis_proporsi;
-            $nilai_proporsi->keterangan = $request->keterangan;
-            // $nilai_proporsi->nilai = $request->nilai;
-
-            // dd($nilai_proporsi);
-            $nilai_proporsi->save();
+            NilaiProporsi::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Proporsi Gagal Ditambahkan');
@@ -98,17 +90,10 @@ class NilaiProporsiController extends Controller
      * @param  \App\Models\NilaiProporsi  $nilai_proporsi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NilaiProporsi $nilai_proporsi)
     {
         try {
-            $update = NilaiProporsi::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->semester = $request->semester;
-            $update->jenis_proporsi = $request->jenis_proporsi;
-            $update->keterangan = $request->keterangan;
-            // $update->nilai = $request->nilai;
-
-            $update->save();
+            $nilai_proporsi->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Proporsi Gagal Di Edit');

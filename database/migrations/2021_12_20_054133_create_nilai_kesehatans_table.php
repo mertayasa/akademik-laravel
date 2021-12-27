@@ -13,7 +13,7 @@ class CreateNilaiKesehatansTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_kesehatans', function (Blueprint $table) {
+        Schema::create('nilai_kesehatan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');

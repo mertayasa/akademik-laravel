@@ -18,13 +18,11 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
-        // dd($kelas);
         return view('kelas.index', compact('kelas'));
     }
 
     public function datatable()
     {
-        // Log::info($approval_status);
         $kelas = Kelas::all();
         return KelasDataTable::set($kelas);
     }
@@ -48,13 +46,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         try {
-            $kelas = new Kelas;
-            $kelas->kode = $request->kode;
-            $kelas->jenjang = $request->jenjang;
-            $kelas->status = 'aktif';
-
-            // dd($kelas);
-            $kelas->save();
+            Kelas::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data kelasn Gagal Ditambahkan');
@@ -92,15 +84,10 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, Kelas $kelas)
     {
         try {
-            $update = Kelas::find($id);
-            $update->kode = $request->kode;
-            $update->jenjang = $request->jenjang;
-            $update->status = $request->status;
-            // dd($update);
-            $update->save();
+            $kelas->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data kelas Gagal Di Edit');

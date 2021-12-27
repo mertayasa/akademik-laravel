@@ -13,7 +13,7 @@ class CreateTahunAjarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tahun_ajars', function (Blueprint $table) {
+        Schema::create('tahun_ajar', function (Blueprint $table) {
             $table->id();
             $table->string('keterangan', 50);
             $table->integer('tahun_mulai');

@@ -52,15 +52,7 @@ class NilaiSikapController extends Controller
     public function store(Request $request)
     {
         try {
-            $nilai_sikap = new NilaiSikap;
-            $nilai_sikap->id_anggota_kelas = $request->id_anggota_kelas;
-            $nilai_sikap->semester = $request->semester;
-            $nilai_sikap->jenis_sikap = $request->jenis_sikap;
-            $nilai_sikap->keterangan = $request->keterangan;
-            // $nilai_sikap->nilai = $request->nilai;
-
-            // dd($nilai_sikap);
-            $nilai_sikap->save();
+            NilaiSikap::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Ditambahkan');
@@ -99,17 +91,10 @@ class NilaiSikapController extends Controller
      * @param  \App\Models\NilaiSikap  $nilai_sikap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NilaiSikap $nilai_sikap)
     {
         try {
-            $update = NilaiSikap::find($id);
-            $update->id_anggota_kelas = $request->id_anggota_kelas;
-            $update->semester = $request->semester;
-            $update->jenis_sikap = $request->jenis_sikap;
-            $update->keterangan = $request->keterangan;
-            // $update->nilai = $request->nilai;
-
-            $update->save();
+            $nilai_sikap->update($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Nilai Sikap Gagal Di Edit');

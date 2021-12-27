@@ -3,11 +3,17 @@
 
 @section('content')
     <div class="container-fluid p-0">
-        <div class="card-header d-flex justify-content-between mb-5" style="align-self: flex-start; width: 40%;">
+        <div class="card-header mb-3">
             {!! Form::open(['method' => 'get']) !!}
-            {!! Form::label('user', 'Tahun Ajaran ', ['class' => 'mb-1']) !!}
-            {!! Form::select('id_tahun_ajar', $tahun_ajar, $id_tahun_ajar, ['class' => 'form-control', 'id' => 'filterStatus', 'onchange' => 'updateTable()']) !!}
-            <button class="btn btn-primary" type="submit">Filter</button>
+            <div class="row align-items-end">
+                <div class="col-12 col-md-3 pb-3 pb-md-0">
+                    {!! Form::label('user', 'Tahun Ajaran ', ['class' => 'mb-1']) !!}
+                    {!! Form::select('id_tahun_ajar', $tahun_ajar, $id_tahun_ajar, ['class' => 'form-control', 'id' => 'filterStatus']) !!}
+                </div>
+                <div class="col-12 col-md-3 pb-3 pb-md-0">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
             {!! Form::close() !!}
         </div>
 

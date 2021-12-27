@@ -13,15 +13,14 @@ class CreateAbsensisTable extends Migration
      */
     public function up()
     {
-        Schema::create('absensis', function (Blueprint $table) {
+        Schema::create('absensi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
-            $table->unsignedBigInteger('id_jadwal');
+            $table->date('tgl_absensi');
             $table->enum('kehadiran', ['hadir', 'sakit', 'ijin', 'alpa'])->default('hadir');
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_jadwal')->references('id')->on('jadwals')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

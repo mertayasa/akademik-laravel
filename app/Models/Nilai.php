@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Nilai extends Model
 {
     use HasFactory;
+    public $table = 'nilai';
+
+    protected $fillable = [
+        'id_anggota_kelas',
+        'id_mapel',
+        'tugas',
+        'uts',
+        'uas',
+        'desk_pengetahuan',
+        'desk_keterampilan',
+    ];
 
     public $with = [
         'anggota_kelas', 'jadwal'

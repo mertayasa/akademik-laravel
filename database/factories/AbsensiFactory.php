@@ -25,8 +25,7 @@ class AbsensiFactory extends Factory
     {
         $kehadiran = ['hadir', 'sakit', 'ijin', 'alpa'];
         return [
-            'id_anggota_kelas' => AnggotaKelas::inRandomOrder()->first()->id,
-            'id_jadwal' => Jadwal::inRandomOrder()->first()->id,
+            'id_anggota_kelas' => AnggotaKelas::inRandomOrder()->first()->id, 
             'kehadiran' => $kehadiran[rand(0, 3)],
         ];
     }

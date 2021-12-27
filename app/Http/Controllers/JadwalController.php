@@ -56,18 +56,9 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         try {
-            $jadwal = new Jadwal;
-            $jadwal->id_user = $request->id_user;
-            $jadwal->id_kelas = $request->id_kelas;
-            $jadwal->id_mapel = $request->id_mapel;
-            $jadwal->id_tahun_ajar = $request->id_tahun_ajar;
-            $jadwal->jam_mulai = $request->jam_mulai;
-            $jadwal->jam_selesai = $request->jam_selesai;
-            $jadwal->hari = $request->hari;
-            $jadwal->status = 'aktif';
-
-            // dd($jadwal);
-            $jadwal->save();
+            $data = $request->all();
+            $data['kode_hari'] = getDayCode($request->hari);
+            Jadwal::create($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data jadwaln Gagal Ditambahkan');
@@ -109,20 +100,12 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Jadwal $jadwal)
     {
         try {
-            $update = Jadwal::find($id);
-            $update->id_user = $request->id_user;
-            $update->id_kelas = $request->id_kelas;
-            $update->id_mapel = $request->id_mapel;
-            $update->id_tahun_ajar = $request->id_tahun_ajar;
-            $update->jam_mulai = $request->jam_mulai;
-            $update->jam_selesai = $request->jam_selesai;
-            $update->hari = $request->hari;
-            $update->status = $request->status;
-            // dd($update);
-            $update->save();
+            $data = $request->all();
+            $data['kode_hari'] = getDayCode($request->hari);
+            $jadwal->update($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data jadwal Gagal Di Edit');
