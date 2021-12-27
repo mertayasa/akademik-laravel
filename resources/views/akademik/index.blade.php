@@ -44,16 +44,3 @@
 
         </div>
     @endsection
-
-    @push('scripts')
-        <script type="text/javascript" src="datatables/datatables.min.js"></script>
-        <script>
-            $(function() {
-                $('#sampleTable').DataTable({
-                    processing: true,
-                    serverSide: false
-                });
-            });
-        </script>
-
-    @endpush

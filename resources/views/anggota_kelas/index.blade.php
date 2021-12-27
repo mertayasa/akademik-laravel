@@ -8,8 +8,10 @@
                     <div class="card-header">
                         <h2 class=" mb-0 ">Data Anggota Siswa Kelas {{ $id_kelas }}</h2>
                     </div>
-                    @include('layouts.flash')
-                    @include('layouts.error_message')
+                    <div class="px-3">
+                        @include('layouts.flash')
+                        @include('layouts.error_message')
+                    </div>
                     <div class="card-body">
                         <div class="bs-example">
                             <ul class="nav nav-tabs">

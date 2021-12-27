@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class=" mb-0 ">Data Nilai Proporsi</h4>
-                </div>
-                @include('layouts.flash')
-                @include('layouts.error_message')
-                <div class="card-header d-flex justify-content-end">
                     <a href="{{ route('nilai_proporsi.create') }}" class="btn btn-primary add" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah nilai_proporsi"> <i class="fas fa-folder-plus"></i> nilai_proporsi Baru</a>
+                </div>
+                <div class="px-3">
+                    @include('layouts.flash')
+                    @include('layouts.error_message')
                 </div>
                 <div class="card-body">
                     <div class=" d-flex justify-content-between">

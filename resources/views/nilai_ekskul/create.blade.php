@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">Nilai Ekstrakulikuler Baru</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-0">
                     @include('layouts.flash')
                         @include('layouts.error_message')
                         {!! Form::open(['route' => 'nilai_ekskul.store']) !!}

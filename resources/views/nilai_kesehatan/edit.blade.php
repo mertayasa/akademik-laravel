@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <h4 class=" mb-0 ">Edit Nilai Kesehatan</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-0">
                     @include('layouts.flash')
                         @include('layouts.error_message')
                         {!! Form::model($nilai_kesehatan, ['route' => ['nilai_kesehatan.update', $nilai_kesehatan->id], 'method' => 'patch']) !!}
