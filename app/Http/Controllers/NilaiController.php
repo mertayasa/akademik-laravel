@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\DataTables\NilaiDataTable;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
@@ -17,11 +18,20 @@ class NilaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $id_anggota_kelas = $request->get('id_anggota_kelas');
+        $anggota_kelas = AnggotaKelas::with('siswa')->get()->where('siswa.id_user', Auth::id())->pluck('siswa.nama', 'id');
+        // dd($anggota_kelas);
         $nilai = nilai::all();
-        // dd($nilai);
-        return view('nilai.index', compact('nilai'));
+
+        $data  =  [
+            'id_anggota_kelas' => $id_anggota_kelas,
+            'anggota_kelas' => $anggota_kelas,
+            'nilai' => $nilai
+        ];
+
+        return view('nilai.index', $data);
     }
 
     public function datatable()

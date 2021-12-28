@@ -21,34 +21,37 @@
             </li>
             <li class="sidebar-item">
                 <a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="fas fa-users" ></i> <span class="align-middle"> Data User</span>
+                    <i class="fas fa-users"></i> <span class="align-middle"> Data User</span>
                 </a>
                 <ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item {{ isActive('guru') }}">
-                        <a class="sidebar-link" href="{{ route('guru.index') }}">  <span class="align-middle">Data Guru</span></a>
+                        <a class="sidebar-link" href="{{ route('guru.index') }}"> <span class="align-middle">Data
+                                Guru</span></a>
                     </li>
 
                     <li class="sidebar-item {{ isActive('ortu') }}">
-                        <a class="sidebar-link" href="{{ route('ortu.index') }}"> <span class="align-middle">Data Orang Tua</span> </a>
+                        <a class="sidebar-link" href="{{ route('ortu.index') }}"> <span class="align-middle">Data
+                                Orang Tua</span> </a>
                     </li>
                 </ul>
             </li>
 
             <li class="sidebar-item {{ isActive('siswa') }}">
                 <a class="sidebar-link" href="{{ route('siswa.index') }}">
-                    <i class="fas fa-user-graduate"  class="align-middle"></i>  <span class="align-middle  pl-1">Data Siswa </span>
+                    <i class="fas fa-user-graduate" class="align-middle"></i> <span class="align-middle  pl-1">Data
+                        Siswa </span>
                 </a>
             </li>
 
             <li class="sidebar-item {{ isActive('pengumuman') }}">
                 <a class="sidebar-link" href="{{ route('pengumuman.index') }}">
-                  <i class="fas fa-bullhorn"></i><span class="align-middle pl-1">Pengumuman</span>
+                    <i class="fas fa-bullhorn"></i><span class="align-middle pl-1">Pengumuman</span>
                 </a>
             </li>
 
             <li class="sidebar-item {{ isActive('kelas') }}">
                 <a class="sidebar-link" href="{{ route('kelas.index') }}">
-                   <i class="fas fa-grip-horizontal"></i> <span class="align-middle pl-1">Data Kelas</span>
+                    <i class="fas fa-grip-horizontal"></i> <span class="align-middle pl-1">Data Kelas</span>
                 </a>
             </li>
 
@@ -78,7 +81,7 @@
 
             <li class="sidebar-item {{ isActive('jadwal') }}">
                 <a class="sidebar-link" href="{{ route('jadwal.index') }}">
-                   <i class="fas fa-calendar-alt"></i> <span class="align-middle pl-1">Data Jadwal</span>
+                    <i class="fas fa-calendar-alt"></i> <span class="align-middle pl-1">Data Jadwal</span>
                 </a>
             </li>
 
@@ -88,9 +91,15 @@
                 </a>
             </li>
 
+            <li class="sidebar-item {{ isActive('nilai') }}">
+                <a class="sidebar-link" href="{{ route('nilai.index') }}">
+                    <i class="fas fa-list-ol"></i> <span class="align-middle pl-1">Data Nilai</span>
+                </a>
+            </li>
+
             <li class="sidebar-item">
                 <a data-target="#nilai" data-toggle="collapse" class="sidebar-link collapsed">
-                    <i class="fas fa-list-ol"></i>  <span class="align-middle pl-1">Data Nilai</span>
+                    <i class="fas fa-list-ol"></i> <span class="align-middle pl-1">Data Nilai</span>
                 </a>
                 <ul id="nilai" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
                     <li class="sidebar-item {{ isActive('nilai') }}">
@@ -121,7 +130,7 @@
                 </ul>
             </li>
 
-    
+
             {{-- <li class="sidebar-header">
                 Multi Level
             </li>

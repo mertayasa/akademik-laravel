@@ -46,6 +46,8 @@
                                     <div class="card-body px-0">
                                         @if (isset($wali_kelas))
                                             @include('wali_kelas.form-show')
+                                        @else
+                                            <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
                                         @endif
                                     </div>
                                 </div>
@@ -61,12 +63,12 @@
     <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="studentModalLabel">Anggota Kelas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {!! Form::open(['route' => 'anggota_kelas.store', 'id' => 'formAddStudent']) !!}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentModalLabel">Anggota Kelas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['route' => 'anggota_kelas.store', 'id' => 'formAddStudent']) !!}
                     <div class="row">
                         {!! Form::hidden('id_kelas', $id_kelas, []) !!}
                         {!! Form::hidden('id_tahun_ajar', $id_tahun_ajar, []) !!}
@@ -78,12 +80,12 @@
                         </div>
                         <small> <i>Silahkan pilih siswa yang ingin ditambahkan di kelas</i> </small>
                     </div>
-                {{ Form::close() }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" id="btnStoreStudent">Simpan</button>
-            </div>
+                    {{ Form::close() }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary" id="btnStoreStudent">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
@@ -92,45 +94,44 @@
         <script>
             $(document).ready(function() {
                 $('select').select2({
-                    dropdownParent: $("#studentModal") 
+                    dropdownParent: $("#studentModal")
                 });
             })
 
             const btnStoreStudent = document.getElementById('btnStoreStudent')
-            
+
             btnStoreStudent.addEventListener('click', event => {
                 const formAdd = document.getElementById('formAddStudent')
                 const actionUrl = formAdd.getAttribute('action')
-                
-                fetch(actionUrl, {
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    method: 'POST',
-                    body: new FormData(formAdd)
-                })
-                .then(response => {
-                    const data = response.json()
-                    if(response.status == 400){
-                        data.then((res) => {
-                            const error = res.errors
-                            Object.keys(error).forEach(function(key) {
-                                let errorSpan = document.querySelectorAll(`[name="${key}"]`)
-                                errorSpan[0].classList.add('is-invalid')
-                                errorSpan[0].querySelectorAll('.invalid-feedback')
-                                // errorSpan[0].nextElementSibling.innerHTML = error[key][0]
-                            });
-                        });
-                    }
-                })
-                .then(data => {
-                    console.log(data);
-                })
-                .catch((error) => {
-                    showToast(0, 'Gagal menambahkan data anggota kelas')
-                })
-            })
 
+                fetch(actionUrl, {
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        method: 'POST',
+                        body: new FormData(formAdd)
+                    })
+                    .then(response => {
+                        const data = response.json()
+                        if (response.status == 400) {
+                            data.then((res) => {
+                                const error = res.errors
+                                Object.keys(error).forEach(function(key) {
+                                    let errorSpan = document.querySelectorAll(`[name="${key}"]`)
+                                    errorSpan[0].classList.add('is-invalid')
+                                    errorSpan[0].querySelectorAll('.invalid-feedback')
+                                    // errorSpan[0].nextElementSibling.innerHTML = error[key][0]
+                                });
+                            });
+                        }
+                    })
+                    .then(data => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        showToast(0, 'Gagal menambahkan data anggota kelas')
+                    })
+            })
         </script>
     @endpush
 @endsection
