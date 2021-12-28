@@ -47,10 +47,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pengumuman', [DashboardController::class, 'pengumuman'])->name('pengumuman');
     });
 
-    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/', function () {
-            return view('sample.profile.index');
-        })->name('index');
+     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+        Route::get('edit/{user}', [Usercontroller::class, 'editProfile'])->name('edit');
+        Route::patch('update/{user}', [Usercontroller::class, 'updateProfile'])->name('update');
     });
 
     Route::group(['prefix' => 'blank', 'as' => 'blank.'], function () {

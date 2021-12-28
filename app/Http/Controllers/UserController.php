@@ -187,4 +187,43 @@ class UserController extends Controller
             return 'ortu';
         }
     }
+
+       public function editProfile(User $user)
+    {
+        return view('profile.edit', compact('user'));
+    }
+
+    public function updateProfile(User $user, Request $request)
+    {
+        if (Auth::id() != $user->id) {
+            abort(403);
+        }
+
+        try {
+            $data = $request->all();
+            $user->nama = $request->nama;
+            if ($data['password']) {
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                unset($data['password']);
+            }
+
+            unset($data['level']);
+
+            $user->update($data);
+
+            // if($user->level == 2){
+            //     Farmer::updateOrCreate(['id_user' => $user->id], $data);
+            // }
+
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah profil ' . $user->name);
+        }
+
+        return redirect()->back()->with('success', 'Berhasil mengubah profil ' . $user->name);
+    }
+
+
+
 }
