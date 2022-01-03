@@ -18,7 +18,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href=" {{ asset('datatables/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href=" {{ asset('datatables/datatables.css') }}">
 	<style>
 		.select2{
 			width: 100% !important;
@@ -79,6 +79,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('admin/js/app.js') }}"></script>
     <script src="{{ asset('datatables/datatables.js') }}"></script>
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css"> --}}
     <script>
         function deleteModel(deleteUrl, tableId, additionalMethod = null) {
             Swal.fire({
@@ -127,7 +128,9 @@
         }
 
         $(document).ready(function() {
-            $('select').select2();
+            $('select:not(.custom-select)').select2({
+                theme: 'bootstrap4',
+            });
         })
 
         function showToast(code, text) {
