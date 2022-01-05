@@ -169,7 +169,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{jadwal}', [JadwalController::class, 'edit'])->name('edit');
         Route::patch('update/{jadwal}', [JadwalController::class, 'update'])->name('update');
         Route::delete('destroy/{jadwal}', [JadwalController::class, 'destroy'])->name('destroy');
-        Route::get('datatable', [JadwalController::class, 'datatable'])->name('datatable');
+        Route::get('datatable/{kelas}/{id_tahun_ajar}', [JadwalController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {

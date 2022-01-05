@@ -15,7 +15,7 @@ class CreateJadwalsTable extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_guru');
             $table->unsignedBigInteger('id_kelas');
             $table->unsignedBigInteger('id_mapel');
             $table->unsignedBigInteger('id_tahun_ajar');
@@ -26,7 +26,7 @@ class CreateJadwalsTable extends Migration
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_guru')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_mapel')->references('id')->on('mapel')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_tahun_ajar')->references('id')->on('tahun_ajar')->onDelete('cascade')->onUpdate('cascade');

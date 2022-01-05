@@ -86,7 +86,8 @@
 
     <script>
         $(document).ready(function() {
-            $('select:not(.custom-select)').select2({
+            // $('select:not(.custom-select)').select2({
+            $('.select2Student').select2({
                 theme: 'bootstrap4',
                 dropdownParent: $("#studentModal")
             });
@@ -100,6 +101,7 @@
 
             fetch(actionUrl, {
                 headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 method: 'POST',

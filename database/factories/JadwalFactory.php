@@ -26,11 +26,11 @@ class JadwalFactory extends Factory
      */
     public function definition()
     {
-        $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         $random_hari = rand(0,6);
 
         return [
-            'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
+            'id_guru' => User::where('level', 'guru')->inRandomOrder()->first()->id,
             'id_kelas' => Kelas::inRandomOrder()->first()->id,
             'id_mapel' => Mapel::inRandomOrder()->first()->id,
             'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,

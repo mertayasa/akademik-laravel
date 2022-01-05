@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,7 @@ class Jadwal extends Model
     use HasFactory;
     public $table = 'jadwal';
     protected $fillable = [
-        'id_user',
+        'id_guru',
         'id_kelas',
         'id_mapel',
         'id_tahun_ajar',
@@ -22,13 +23,22 @@ class Jadwal extends Model
     ];
 
     public $with = [
-        'user', 'kelas', 'tahun_ajar', 'mapel'
+        'guru', 'kelas', 'tahun_ajar', 'mapel'
     ];
 
-
-    public function user()
+    public function getJamMulaiAttribute()
     {
-        return $this->belongsTo('App\Models\User', 'id_user');
+        return Carbon::parse($this->attributes['jam_mulai'])->format('H:i');
+    }
+
+    public function getJamSelesaiAttribute()
+    {
+        return Carbon::parse($this->attributes['jam_selesai'])->format('H:i');
+    }
+
+    public function guru()
+    {
+        return $this->belongsTo('App\Models\User', 'id_guru');
     }
     public function kelas()
     {

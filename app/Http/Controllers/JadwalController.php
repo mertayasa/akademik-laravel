@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\TahunAjar;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadeRequest;
 use App\DataTables\JadwalDataTable;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -26,10 +27,9 @@ class JadwalController extends Controller
         return view('jadwal.index', compact('jadwal'));
     }
 
-    public function datatable()
+    public function datatable($id_kelas, $id_tahun_ajar)
     {
-        // Log::info($approval_status);
-        $jadwal = Jadwal::all();
+        $jadwal = Jadwal::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->get();
         return JadwalDataTable::set($jadwal);
     }
 
@@ -55,13 +55,21 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         try {
             $data = $request->all();
             $data['kode_hari'] = getDayCode($request->hari);
             Jadwal::create($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
+            if($request->ajax()){
+                return response(['code' => 0, 'message' => 'Gagal menambahkan data anggota kelas']);
+            }
             return redirect()->back()->withInput()->with('error', 'Data jadwaln Gagal Ditambahkan');
+        }
+
+        if($request->ajax()){
+            return response(['code' => 1, 'message' => 'Berhasil menambahkan data anggota kelas']);
         }
 
         return redirect('jadwal')->with('success', 'Data jadwaln Berhasil Ditambahkan');

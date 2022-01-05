@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\DataTables\AnggotaKelasDataTable;
 use App\Http\Requests\AddAnggotaKelasReq;
 use App\Models\Jadwal;
+use App\Models\Mapel;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -24,12 +25,12 @@ class AnggotaKelasController extends Controller
      */
     public function index($id_kelas, $id_tahun_ajar)
     {
-        $jadwal = Jadwal::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->orderBy('kode_hari', 'ASC')->get();
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
-            'jadwal_kelas' => $jadwal,
+            'mapel' => Mapel::where('status', 'aktif')->pluck('nama', 'id'),
+            'guru' => User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id'),
             'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first()
         ];
         return view('anggota_kelas.index', $data);
