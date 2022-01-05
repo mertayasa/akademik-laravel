@@ -13,6 +13,7 @@ class Nilai extends Model
     protected $fillable = [
         'id_anggota_kelas',
         'id_mapel',
+        'semester',
         'tugas',
         'uts',
         'uas',

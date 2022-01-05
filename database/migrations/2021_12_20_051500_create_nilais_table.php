@@ -17,11 +17,12 @@ class CreateNilaisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->unsignedBigInteger('id_mapel');
-            $table->integer('tugas');
-            $table->integer('uts');
-            $table->integer('uas');
-            $table->text('desk_pengetahuan');
-            $table->text('desk_keterampilan');
+            $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
+            $table->integer('tugas')->default(0);
+            $table->integer('uts')->default(0);
+            $table->integer('uas')->default(0);
+            $table->text('desk_pengetahuan')->nullable();
+            $table->text('desk_keterampilan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_anggota_kelas')->references('id')->on('anggota_kelas')->onDelete('cascade')->onUpdate('cascade');

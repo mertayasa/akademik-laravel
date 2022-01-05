@@ -14,6 +14,6 @@ class NilaiSeeder extends Seeder
      */
     public function run()
     {
-        Nilai::factory()->count(20)->create();
+        // Nilai::factory()->count(20)->create();
     }
 }

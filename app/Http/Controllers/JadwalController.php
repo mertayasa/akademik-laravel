@@ -10,7 +10,10 @@ use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use App\DataTables\JadwalDataTable;
+use App\Models\AnggotaKelas;
+use App\Models\Nilai;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class JadwalController extends Controller
@@ -59,7 +62,30 @@ class JadwalController extends Controller
         try {
             $data = $request->all();
             $data['kode_hari'] = getDayCode($request->hari);
-            Jadwal::create($data);
+            DB::transaction(function() use($data) {
+                Jadwal::create($data);
+                $anggota_kelas = AnggotaKelas::where('id_kelas', $data['id_kelas'])->where('id_tahun_ajar', $data['id_tahun_ajar'])->get();
+                foreach($anggota_kelas as $anggota){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                        'semester' => 'ganjil'
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                    ]);
+
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                        'semester' => 'genap'
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                    ]);
+                }
+                
+            }, 5);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             if($request->ajax()){
@@ -73,17 +99,6 @@ class JadwalController extends Controller
         }
 
         return redirect('jadwal')->with('success', 'Data jadwaln Berhasil Ditambahkan');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Jadwal  $jadwal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Jadwal $jadwal)
-    {
-        //
     }
 
     /**
