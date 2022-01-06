@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-12 col-xxl-5 d-flex">
+            <div class="col-12 d-flex">
                 <div class="w-100">
                     <div class="row">
                         <div class="col-sm-3">
