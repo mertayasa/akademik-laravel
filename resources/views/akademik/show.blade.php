@@ -76,20 +76,18 @@
                     </div>
                 </div>
 
-                @if (roleName() == 'admin')
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
-                                    <ul class="mb-0">
-                                        <li>Tiap jadwal yang dibuat baru atau diubah akan mempengaruhi mata pelajaran pada data nilai.</li> 
-                                    </ul>
-                                </div>
+                <div class="row d-none" data-id="jadwal">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
+                                <ul class="mb-0">
+                                    <li>Tiap jadwal yang dibuat baru atau diubah akan mempengaruhi mata pelajaran pada data nilai.</li> 
+                                </ul>
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
 
             </div>
         </div>
@@ -98,3 +96,16 @@
     @include('akademik.modal.anggota')
     @include('akademik.modal.jadwal')
 @endsection
+
+@push('scripts')
+    <script>
+        $('.nav-tabs a').click(function(){
+            const rawHrefValue = $(this).attr('href')
+            const hrefValue = rawHrefValue.replace('#', '')
+            const hintElement = $(`[data-id="${hrefValue}"]`)
+            if(hintElement != undefined){
+                hintElement.removeClass('d-none')
+            }
+        })
+    </script>
+@endpush
