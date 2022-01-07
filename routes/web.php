@@ -157,6 +157,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('create', [TahunAjarController::class, 'create'])->name('create');
         Route::post('store', [TahunAjarController::class, 'store'])->name('store');
         Route::get('edit/{tahun_ajar}', [TahunAjarController::class, 'edit'])->name('edit');
+        Route::get('set-aktif/{tahun_ajar}', [TahunAjarController::class, 'setActive'])->name('set_aktif');
         Route::patch('update/{tahun_ajar}', [TahunAjarController::class, 'update'])->name('update');
         Route::delete('destroy/{tahun_ajar}', [TahunAjarController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [TahunAjarController::class, 'datatable'])->name('datatable');
@@ -173,7 +174,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {
-        Route::get('index/{id_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'index'])->name('index');
         Route::get('create/{id_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'create'])->name('create');
         Route::post('store', [AnggotaKelasController::class, 'store'])->name('store');
         Route::get('edit/{anggota_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'edit'])->name('edit');
@@ -244,6 +244,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'akademik', 'as' => 'akademik.'], function () {
         Route::get('/', [AkademikController::class, 'index'])->name('index');
+        Route::get('show/{id_kelas}/{id_tahun_ajar}', [AkademikController::class, 'show'])->name('show');
         Route::get('create', [AkademikController::class, 'create'])->name('create');
         Route::post('store', [AkademikController::class, 'store'])->name('store');
         Route::get('edit/{akademik}', [AkademikController::class, 'edit'])->name('edit');

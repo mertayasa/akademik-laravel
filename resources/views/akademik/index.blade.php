@@ -34,7 +34,7 @@
                                 </div>
                                 <p> Total Anggota : {{ count($data->getAnggotaKelas($id_tahun_ajar)) }}</p>
                                 <p> Wali Kelas : {{ $data->getWaliKelas($id_tahun_ajar)[0]->user->nama ?? '-' }} </p>
-                                <a href="{{ route('anggota_kelas.index', [$data->id, $id_tahun_ajar]) }}"
+                                <a href="{{ route('akademik.show', [$data->id, $id_tahun_ajar]) }}"
                                     class="btn btn-primary stretched-link">Lihat Kelas</a>
                             </div>
                         </div>

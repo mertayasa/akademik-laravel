@@ -5,18 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Akademik;
 use App\Models\Kelas;
 use App\Models\AnggotaKelas;
+use App\Models\Mapel;
 use App\Models\TahunAjar;
 use App\Models\Siswa;
+use App\Models\User;
 use App\Models\WaliKelas;
 use Illuminate\Http\Request;
 
 class AkademikController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $kelas = Kelas::all();
@@ -34,71 +31,16 @@ class AkademikController extends Controller
         return view('akademik.index', $data);
     }
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($id_kelas, $id_tahun_ajar)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Akademik  $akademik
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Akademik $akademik)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Akademik  $akademik
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Akademik $akademik)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Akademik  $akademik
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Akademik $akademik)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Akademik  $akademik
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Akademik $akademik)
-    {
-        //
+        $data = [
+            'siswa' => Siswa::pluck('nama', 'id'),
+            'id_kelas' => $id_kelas,
+            'id_tahun_ajar' => $id_tahun_ajar,
+            'mapel' => Mapel::where('status', 'aktif')->pluck('nama', 'id'),
+            'guru' => User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id'),
+            'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first()
+        ];
+        return view('akademik.show', $data);
     }
 }

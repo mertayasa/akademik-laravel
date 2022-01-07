@@ -6,6 +6,7 @@ use App\Models\TahunAjar;
 use Illuminate\Http\Request;
 use App\DataTables\TahunAjarDataTable;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TahunAjarController extends Controller
@@ -76,6 +77,28 @@ class TahunAjarController extends Controller
     public function edit(TahunAjar $tahun_ajar)
     {
         return view('tahun_ajar.edit', compact('tahun_ajar'));
+    }
+
+    public function setActive(TahunAjar $tahun_ajar)
+    {
+        try{
+            $rest_tahun_ajar = TahunAjar::whereNotIn('id', [$tahun_ajar->id])->get();
+            DB::transaction(function() use($tahun_ajar, $rest_tahun_ajar){
+                foreach($rest_tahun_ajar as $tahun){
+                    $tahun->update([
+                        'status' => TahunAjar::$nonaktif
+                    ]);
+                }
+                $tahun_ajar->update([
+                    'status' => TahunAjar::$aktif
+                ]);
+            }, 5);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mengaktifkan tahun ajar']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil mengaktifkan tahun ajar']);
     }
 
     /**

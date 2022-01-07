@@ -10,6 +10,7 @@ use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use App\DataTables\JadwalDataTable;
+use App\Http\Requests\JadwalReq;
 use App\Models\AnggotaKelas;
 use App\Models\Nilai;
 use Exception;
@@ -26,7 +27,6 @@ class JadwalController extends Controller
     public function index()
     {
         $jadwal = jadwal::all();
-        // dd($jadwal);
         return view('jadwal.index', compact('jadwal'));
     }
 
@@ -56,9 +56,8 @@ class JadwalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JadwalReq $request)
     {
-        // return $request->all();
         try {
             $data = $request->all();
             $data['kode_hari'] = getDayCode($request->hari);
@@ -89,16 +88,16 @@ class JadwalController extends Controller
         } catch (Exception $e) {
             Log::info($e->getMessage());
             if($request->ajax()){
-                return response(['code' => 0, 'message' => 'Gagal menambahkan data anggota kelas']);
+                return response(['code' => 0, 'message' => 'Gagal menambahkan data jadwal']);
             }
             return redirect()->back()->withInput()->with('error', 'Data jadwaln Gagal Ditambahkan');
         }
 
         if($request->ajax()){
-            return response(['code' => 1, 'message' => 'Berhasil menambahkan data anggota kelas']);
+            return response(['code' => 1, 'message' => 'Berhasil menambahkan data jadwal']);
         }
 
-        return redirect('jadwal')->with('success', 'Data jadwaln Berhasil Ditambahkan');
+        return redirect('jadwal')->with('success', 'Data jadwal Berhasil Ditambahkan');
     }
 
     /**
@@ -123,20 +122,50 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jadwal $jadwal)
+    public function update(JadwalReq $request, Jadwal $jadwal)
     {
         try {
             $data = $request->all();
             $data['kode_hari'] = getDayCode($request->hari);
-            $jadwal->update($data);
+            DB::transaction(function() use($data, $request, $jadwal) {
+                $anggota_kelas = AnggotaKelas::where('id_kelas', $data['id_kelas'])->where('id_tahun_ajar', $data['id_tahun_ajar'])->get();
+                foreach($anggota_kelas as $anggota){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                        'semester' => 'ganjil'
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                    ]);
+
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                        'semester' => 'genap'
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $data['id_mapel'],
+                    ]);
+                }
+
+                $jadwal->update($request->validated());
+                
+            }, 5);
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data jadwal Gagal Di Edit');
+            if($request->ajax()){
+                return response(['code' => 0, 'message' => 'Gagal mengubah data jadwal']);
+            }
+            return redirect()->back()->withInput()->with('error', 'Data jadwaln Gagal Ditambahkan');
         }
 
-        return redirect('jadwal')->with('info', 'Data jadwal Berhasil Diedit  ');
-    }
+        if($request->ajax()){
+            return response(['code' => 1, 'message' => 'Berhasil mengubah data jadwal']);
+        }
 
+        return redirect('jadwal')->with('success', 'Data jadwal Berhasil Diubah');
+    }
 
     /**
      * Remove the specified resource from storage.

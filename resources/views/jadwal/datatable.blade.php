@@ -20,7 +20,7 @@
     </thead>
     <tbody></tbody>
 </table>
-
+<hr>
 @push('scripts')
     <script>
         let jadwalTable
@@ -111,60 +111,5 @@
                 },
             });
         }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('.select2Jadwal').select2({
-                theme: 'bootstrap4',
-                dropdownParent: $("#jadwalModal")
-            });
-        })
-
-        const btnStoreJadwal = document.getElementById('btnStoreJadwal')
-
-        btnStoreJadwal.addEventListener('click', event => {
-            const formAdd = document.getElementById('formAddJadwal')
-            const actionUrl = formAdd.getAttribute('action')
-
-            fetch(actionUrl, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                method: 'POST',
-                body: new FormData(formAdd)
-            })
-            .then(response => {
-                const data = response.json()
-                if (response.status == 400) {
-                    data.then((res) => {
-                        const error = res.errors
-                        Object.keys(error).forEach(function(key) {
-                            let errorSpan = document.querySelectorAll(`[error-name="${key}"]`)
-                            let errorInput = document.querySelectorAll(`[name="${key}"]`)
-                            errorInput[0].classList.add('is-invalid')
-                            if(errorSpan){
-                                errorSpan[0].innerHTML = error[key][0]
-                            }
-                        })
-                    })
-                }
-
-                return data
-            })
-            .then(data => {
-                console.log(data)
-                if(data.code == 1){
-                    $('#jadwalModal').modal('hide')
-                    $('#jadwalDataTable').DataTable().ajax.reload();
-                }
-
-                showToast(data.code, data.message)
-            })
-            .catch((error) => {
-                showToast(0, 'Gagal menambahkan data jadwal')
-            })
-        })
     </script>
 @endpush

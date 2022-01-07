@@ -89,6 +89,48 @@
         });
     }
 
+    function setActive(element){
+        Swal.fire({
+                title: "Warning",
+                text: "Yakin mengaktifkan tahun ajaran? tahun ajaran lain akan otomatis nonaktif",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#169b6b',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: element.getAttribute('data-url'),
+                        dataType: "Json",
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        method: "get",
+                        success: function(data) {
+                            if (data.code == 1) {
+                                Swal.fire(
+                                    'Berhasil',
+                                    data.message,
+                                    'success'
+                                )
+
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: data.message
+                                })
+                            }
+
+                            $('#TahunAjarDataTable').DataTable().ajax.reload();
+                        }
+                    })
+                }
+            })
+    }
+
 </script>
 
 @endpush
