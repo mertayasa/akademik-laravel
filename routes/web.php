@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -161,6 +162,14 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{tahun_ajar}', [TahunAjarController::class, 'update'])->name('update');
         Route::delete('destroy/{tahun_ajar}', [TahunAjarController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [TahunAjarController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'absensi', 'as' => 'absensi.'], function () {
+        Route::get('/', [AbsensiController::class, 'index'])->name('index');
+        Route::get('generate-form/{id_kelas}/{id_tahun_ajar}/{tgl?}', [AbsensiController::class, 'generateForm'])->name('generate_form');
+        Route::post('store', [AbsensiController::class, 'store'])->name('store');
+        Route::patch('update/{absensi}', [AbsensiController::class, 'update'])->name('update');
+        Route::delete('destroy/{absensi}', [AbsensiController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix' => 'jadwal', 'as' => 'jadwal.'], function () {

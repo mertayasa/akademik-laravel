@@ -6,7 +6,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class=" mb-0 ">Data Anggota Siswa Kelas {{ $id_kelas }}</h2>
+                        <h2 class=" mb-0 ">Data Anggota Siswa Kelas {{ $id_kelas }} Tahun Ajaran
+                            {{ $tahun_ajar->tahun_mulai }} - {{ $tahun_ajar->tahun_selesai }}</h2>
                     </div>
                     <div class="px-3">
                         @include('layouts.flash')
@@ -22,17 +23,17 @@
                                     <a href="#jadwal" class="nav-link" data-toggle="tab">Jadwal Pelajaran</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="#absensi" class="nav-link" data-toggle="tab">Absensi</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
+                                </li>
                             </ul>
-                            
+
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="siswa">
                                     <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end px-0">
+                                        <div class="card-header d-flex justify-content-end px-0 pt-0">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#studentModal"
                                                 class="btn btn-primary add" data-bs-toggle="tooltip"
                                                 data-bs-placement="bottom" title="Tambah Anggota Kelas"> <i
@@ -43,7 +44,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="jadwal">
                                     <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end px-0">
+                                        <div class="card-header d-flex justify-content-end px-0 pt-0">
                                             <a href="#" onclick="createJadwal(this)" data-bs-toggle="modal"
                                                 data-bs-target="#jadwalModal" class="btn btn-primary add"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Jadwal">
@@ -52,16 +53,23 @@
                                         @include('jadwal.datatable')
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="wali">
+                                <div class="tab-pane fade" id="absensi">
                                     <div class="card-body px-0">
-                                        @if (isset($wali_kelas))
-                                            @include('wali_kelas.form-show')
+                                        <div class="card-header d-flex justify-content-end px-0 pt-0">
+                                            <button onclick="showAbsensiForm(this)" class="btn btn-primary add"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                title="Management Absensi">
+                                                <i class="fas fa-folder-plus"></i> Management Absensi</button>
+                                        </div>
+
+                                        @if ($count_anggota > 0)
+                                            @include('absensi.table')
                                         @else
-                                            <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
+                                            <i>Kelas ini belum memiliki anggota</i>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="absensi">
+                                <div class="tab-pane fade" id="wali">
                                     <div class="card-body px-0">
                                         @if (isset($wali_kelas))
                                             @include('wali_kelas.form-show')
@@ -76,13 +84,46 @@
                     </div>
                 </div>
 
-                <div class="row d-none" data-id="jadwal">
+                @include('absensi.crud')
+
+                <div class="row bottom-hint" data-href="#siswa">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
                                 <ul class="mb-0">
-                                    <li>Tiap jadwal yang dibuat baru atau diubah akan mempengaruhi mata pelajaran pada data nilai.</li> 
+                                    <li>Siswa yang sudah ada di kelas dan tahun ajar ini tidak dapat ditambahkan lagi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-none bottom-hint" data-href="#jadwal">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
+                                <ul class="mb-0">
+                                    <li>Tiap jadwal yang dibuat baru atau diubah akan mempengaruhi mata pelajaran pada data
+                                        nilai.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-none bottom-hint" data-href="#absensi">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
+                                <ul class="mb-0">
+                                    <li>Huruf A berarti siswa tanpa keterangan</li>
+                                    <li>Huruf S berarti siswa sakit</li>
+                                    <li>Huruf I berarti siswa ijin</li>
+                                    <li>Huruf H berarti siswa hadir</li>
+                                    <li>Hover dibagian angka absensi ke- untuk melihat tanggal absensi</li>
                                 </ul>
                             </div>
                         </div>
@@ -99,13 +140,25 @@
 
 @push('scripts')
     <script>
-        $('.nav-tabs a').click(function(){
+        $('.nav-tabs a').click(function() {
+            hideBottomHint()
             const rawHrefValue = $(this).attr('href')
-            const hrefValue = rawHrefValue.replace('#', '')
-            const hintElement = $(`[data-id="${hrefValue}"]`)
-            if(hintElement != undefined){
+            if (rawHrefValue != '#absensi') {
+                const absensiFormCon = document.getElementById('absensiFormContainer')
+                absensiFormCon.classList.add('d-none')
+            }
+            const hintElement = $(`[data-href="${rawHrefValue}"]`)
+            if (hintElement != undefined) {
                 hintElement.removeClass('d-none')
             }
         })
+
+        function hideBottomHint() {
+            const listHint = document.getElementsByClassName('bottom-hint')
+            for (let index = 0; index < listHint.length; index++) {
+                const bottomHint = listHint[index];
+                bottomHint.classList.add('d-none')
+            }
+        }
     </script>
 @endpush

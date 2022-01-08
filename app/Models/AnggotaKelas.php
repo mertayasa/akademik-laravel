@@ -34,4 +34,19 @@ class AnggotaKelas extends Model
     {
         return $this->belongsTo('App\Models\Siswa', 'id_siswa');
     }
+
+    public function absensi()
+    {
+        return $this->hasMany('App\Models\Absensi', 'id_anggota_kelas');
+    }
+
+    public function getAbsensiByDate($tgl, $return_full_status = false)
+    {
+        $absensi = $this->absensi->where('tgl_absensi', $tgl)->first();
+        if($return_full_status){
+            return isset($absensi) ? $absensi->kehadiran : 'alpa';
+        }
+
+        return isset($absensi) ? ucfirst(substr($absensi->kehadiran, 0, 1)) : 'A';
+    }
 }
