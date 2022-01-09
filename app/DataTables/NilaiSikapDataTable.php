@@ -16,8 +16,8 @@ class NilaiSikapDataTable
                 $deleteUrl = "'" . route('nilai_sikap.destroy', $nilai_sikap->id) . "', 'NilaiSikapDataTable'";
                 return
                     '<div class="btn-group">' .
-                    '<a href="' . route('nilai_sikap.edit', $nilai_sikap->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><i class="menu-icon fa fa-trash"></i></a>' .
+                    '<a href="' . route('nilai_sikap.edit', $nilai_sikap->id) . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><b> Edit </b></a>' .
+                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><b> Hapus</b></a>' .
 
                     '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);

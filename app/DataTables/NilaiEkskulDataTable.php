@@ -16,8 +16,8 @@ class NilaiEkskulDataTable
                 $deleteUrl = "'" . route('nilai_ekskul.destroy', $nilai_ekskul->id) . "', 'NilaiEkskulDataTable'";
                 return
                     '<div class="btn-group">' .
-                    '<a href="' . route('nilai_ekskul.edit', $nilai_ekskul->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><i class="menu-icon fa fa-trash"></i></a>' .
+                    '<a href="' . route('nilai_ekskul.edit', $nilai_ekskul->id) . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><b> Edit </b></a>' .
+                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><b> Hapus </b>></a>' .
 
                     '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);

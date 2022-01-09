@@ -16,8 +16,8 @@ class WaliKelasDataTable
                 $deleteUrl = "'" . route('wali_kelas.destroy', $wali_kelas->id) . "', 'WaliKelasDataTable'";
                 return
                     '<div class="btn-group">' .
-                    '<a href="' . route('wali_kelas.edit', $wali_kelas->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><i class="menu-icon fa fa-trash"></i></a>' .
+                    '<a href="' . route('wali_kelas.edit', $wali_kelas->id) . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><b> Edit </b></a>' .
+                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px"><b> Hapus</b></a>' .
 
                     '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);
