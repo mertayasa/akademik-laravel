@@ -15,5 +15,6 @@ class Absensi extends Model
         'id_anggota_kelas',
         'tgl_absensi',
         'kehadiran',
+        'semester',
     ];
 }

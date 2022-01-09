@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use App\Models\AnggotaKelas;
+use App\Models\TahunAjar;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,6 +27,7 @@ class AbsensiController extends Controller
             $anggota_kelas = AnggotaKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->get();
         
             $data = [
+                'semester' => getSemester($tgl, $id_tahun_ajar),
                 'tgl_absen' => $tgl,
                 'anggota_kelas' => $anggota_kelas
             ];
@@ -36,6 +38,35 @@ class AbsensiController extends Controller
             return response(['code' => 0, 'message' => 'Gagal memuat form']);
         }
         return response(['code' => 1, 'form' => $form]);
+    }
+
+    public function updateOrCreate(Request $request, $semester, $tgl)
+    {
+        $kehadiran_raw = $request->kehadiran;
+        $kehadiran = [];
+
+        foreach($kehadiran_raw as $key => $hadir){
+            Absensi::updateOrCreate([
+                'id_anggota_kelas' => $key,
+                'tgl_absensi' => $tgl 
+            ], [
+                'id_anggota_kelas' => $key,
+                'kehadiran' => $hadir,
+                'semester' => $semester,
+                'tgl_absensi' => $tgl 
+            ]);
+            // array_push($kehadiran, [
+            //     'id_anggota_kelas' => $key,
+            //     'kehadiran' => $hadir,
+            //     'id_tahun_ajar' => $id_tahun_ajar,
+            //     'id_kelas' => $id_kelas,
+            //     'tgl_absensi' => $tgl 
+            // ]);
+        }
+
+        return response($kehadiran);
+        
+        return response($request->all());
     }
 
     /**

@@ -15,10 +15,15 @@ class CreateTahunAjarsTable extends Migration
     {
         Schema::create('tahun_ajar', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan', 50);
             $table->integer('tahun_mulai');
             $table->integer('tahun_selesai');
-            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
+            $table->date('mulai_smt_ganjil')->nullable();
+            $table->date('selesai_smt_ganjil')->nullable();
+            $table->date('mulai_smt_genap')->nullable();
+            $table->date('selesai_smt_genap')->nullable();
+            
+            $table->enum('status', ['aktif', 'nonaktif'])->default('nonaktif');
+            $table->string('keterangan', 50);
             $table->timestamps();
         });
     }

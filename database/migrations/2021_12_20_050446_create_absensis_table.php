@@ -17,6 +17,7 @@ class CreateAbsensisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->date('tgl_absensi');
+            $table->enum('semester', ['ganjil', 'genap']);
             $table->enum('kehadiran', ['hadir', 'sakit', 'ijin', 'alpa'])->default('hadir');
             $table->timestamps();
 

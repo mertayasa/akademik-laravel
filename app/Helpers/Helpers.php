@@ -137,3 +137,8 @@ function getHari()
         '7' => 'Minggu',
     ];
 }
+
+function getSemester($tgl, $id_tahun_ajar)
+{
+    # code...
+}

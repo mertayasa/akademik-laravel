@@ -1,32 +1,35 @@
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Kehadiran</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($anggota_kelas as $anggota)
+{!! Form::open(['route' => ['absensi.update_create', [$id_kelas, $id_tahun_ajar, $tgl_absen]], 'method' => 'POST', 'id' => 'postAbsensiForm']) !!}
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $anggota->siswa->nama }}</td>
-                <td class="text-center">
-                    {!! Form::radio('kehadiran['.$anggota->id.']', 'hadir', $anggota->getAbsensiByDate($tgl_absen, true) == 'hadir' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'hadir']) !!}
-                    {!! Form::label('kehadiran'.$anggota->id.'hadir', 'Hadir', ['class' => 'mr-2']) !!}
-
-                    {!! Form::radio('kehadiran['.$anggota->id.']', 'ijin', $anggota->getAbsensiByDate($tgl_absen, true) == 'ijin' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'ijin']) !!}
-                    {!! Form::label('kehadiran'.$anggota->id.'ijin', 'Ijin', ['class' => 'mr-2']) !!}
-
-                    {!! Form::radio('kehadiran['.$anggota->id.']', 'sakit', $anggota->getAbsensiByDate($tgl_absen, true) == 'sakit' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'sakit']) !!}
-                    {!! Form::label('kehadiran'.$anggota->id.'sakit', 'Sakit', ['class' => 'mr-2']) !!}
-
-                    {!! Form::radio('kehadiran['.$anggota->id.']', 'alpa', $anggota->getAbsensiByDate($tgl_absen, true) == 'alpa' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'alpa']) !!}
-                    {!! Form::label('kehadiran'.$anggota->id.'alpa', 'Alpa', []) !!}
-                </td>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kehadiran</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach ($anggota_kelas as $anggota)
+                <tr>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td>{{ $anggota->siswa->nama }}</td>
+                    <td class="text-center">
+                        {!! Form::radio('kehadiran['.$anggota->id.']', 'hadir', $anggota->getAbsensiByDate($tgl_absen, true) == 'hadir' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'hadir']) !!}
+                        {!! Form::label('kehadiran'.$anggota->id.'hadir', 'Hadir', ['class' => 'mr-2']) !!}
+
+                        {!! Form::radio('kehadiran['.$anggota->id.']', 'ijin', $anggota->getAbsensiByDate($tgl_absen, true) == 'ijin' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'ijin']) !!}
+                        {!! Form::label('kehadiran'.$anggota->id.'ijin', 'Ijin', ['class' => 'mr-2']) !!}
+
+                        {!! Form::radio('kehadiran['.$anggota->id.']', 'sakit', $anggota->getAbsensiByDate($tgl_absen, true) == 'sakit' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'sakit']) !!}
+                        {!! Form::label('kehadiran'.$anggota->id.'sakit', 'Sakit', ['class' => 'mr-2']) !!}
+
+                        {!! Form::radio('kehadiran['.$anggota->id.']', 'alpa', $anggota->getAbsensiByDate($tgl_absen, true) == 'alpa' ?  true : false, ['id' => 'kehadiran'.$anggota->id.'alpa']) !!}
+                        {!! Form::label('kehadiran'.$anggota->id.'alpa', 'Alpa', []) !!}
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+{!! Form::close() !!}
+
 
 <button class="btn btn-primary" onclick="updateAbsensi()">Simpan</button>

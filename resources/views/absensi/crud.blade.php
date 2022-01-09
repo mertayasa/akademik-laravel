@@ -18,15 +18,60 @@
                     <div class="row">
                         <div class="col-3">
                             <h6>Tanggal yang sudah diabsen : </h6>
-                            <ol>
-                                @forelse ($durasi_absensi as $durasi)
-                                    <li>{{ \Carbon\Carbon::parse($durasi)->format('d-m-Y') }} <a onclick="generateForm(this, '{{ $durasi }}')"
-                                            class="text-primary"
-                                            data-url="{{ route('absensi.generate_form', [$id_kelas, $id_tahun_ajar]) }}">edit</a>
-                                    </li>
-                                @empty
-                                    <li>Belum ada absen</li>
-                                @endforelse
+                            <ol class="pl-0">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed p-2" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                                Semester 1
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <ol>
+                                                    @forelse ($durasi_absensi_ganjil as $durasi)
+                                                        <li>{{ \Carbon\Carbon::parse($durasi)->format('d-m-Y') }} <a
+                                                                onclick="generateForm(this, '{{ $durasi }}')"
+                                                                class="text-primary"
+                                                                data-url="{{ route('absensi.generate_form', [$id_kelas, $id_tahun_ajar]) }}">edit</a>
+                                                        </li>
+                                                    @empty
+                                                        <span>Belum ada absen</span>
+                                                    @endforelse
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed p-2" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Semester 2
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse"
+                                            aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <ol>
+                                                    @forelse ($durasi_absensi_genap as $durasi)
+                                                        <li>{{ \Carbon\Carbon::parse($durasi)->format('d-m-Y') }} <a
+                                                                onclick="generateForm(this, '{{ $durasi }}')"
+                                                                class="text-primary"
+                                                                data-url="{{ route('absensi.generate_form', [$id_kelas, $id_tahun_ajar]) }}">edit</a>
+                                                        </li>
+                                                    @empty
+                                                        <span>Belum ada absen</span>
+                                                    @endforelse
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </ol>
                         </div>
                         <div class="col-9">
@@ -47,10 +92,12 @@
     <script>
         function generateForm(element, date = '') {
             const actionUrl = element.getAttribute('data-url')
-            let absensiDate = document.getElementById('absensiDate').value
+            const absensiDateInput = document.getElementById('absensiDate')
+            let absensiDate = absensiDateInput.value
             const absensiForm = document.getElementById('absensiForm')
             const absensiDateSpan = document.getElementById('absensiDateSpan')
             if (date != '') {
+                absensiDateInput.value = date
                 absensiDate = date
             }
 
@@ -88,6 +135,42 @@
                 })
                 .catch((error) => {
                     showToast(0, 'Gagal mengubah data jadwal')
+                })
+        }
+
+        function updateAbsensi(){
+            const postAbsensiForm = document.getElementById('postAbsensiForm')
+            const formData = new FormData(postAbsensiForm)
+
+            console.log(postAbsensiForm);
+            for (var pair of formData.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+            }
+
+            fetch(postAbsensiForm.getAttribute('action'), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    const data = response.json()
+                    if (response.status == 400) {
+                        data.then((res) => {
+                            const errors = res.errors
+                            showValidationMessage(errors)
+                        })
+                    }
+                    return data
+                })
+                .then(data => {
+                    console.log(data);
+                    // return showToast(data.code, data.message)
+                })
+                .catch((error) => {
+                    showToast(0, 'Gagal mengubah absensi')
                 })
         }
     </script>
