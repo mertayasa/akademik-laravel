@@ -1,12 +1,15 @@
 <nav id="sidebar" class="sidebar">
-    <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">AdminKit</span>
-        </a>
+    <div class="sidebar-content js-simplebar justify-content-center">
+        <div class="pt-4 pb-3">
+            <center>
+                <img class="img-fluid" src="{{ asset('admin/img/logo.png') }}" alt="Responsive image" width="100"
+                    height="100">
+            </center>
+        </div>
 
         <ul class="sidebar-nav">
             <li class="sidebar-header">
-                Pages
+                Menu
             </li>
 
             <li class="sidebar-item {{ isActive('dashboard') }}">
