@@ -17,6 +17,10 @@ class TahunAjar extends Model
         'keterangan',
         'tahun_mulai',
         'tahun_selesai',
+        'mulai_smt_ganjil',
+        'selesai_smt_ganjil',
+        'mulai_smt_genap',
+        'selesai_smt_genap',
         'status',	
     ];
 }
