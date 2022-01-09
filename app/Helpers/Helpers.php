@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TahunAjar;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -140,5 +141,13 @@ function getHari()
 
 function getSemester($tgl, $id_tahun_ajar)
 {
-    # code...
+    $tahun_ajar = TahunAjar::find($id_tahun_ajar);
+    if($tgl >= $tahun_ajar->mulai_smt_ganjil && $tgl <= $tahun_ajar->selesai_smt_ganjil){
+        return 'ganjil';
+    }
+    else if($tgl >= $tahun_ajar->mulai_smt_genap && $tgl <= $tahun_ajar->selesai_smt_genap){
+        return 'genal';
+    }else{
+        return false;
+    }
 }

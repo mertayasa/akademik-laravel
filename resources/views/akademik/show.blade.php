@@ -34,7 +34,7 @@
                                 <div class="tab-pane fade show active" id="siswa">
                                     <div class="card-body px-0">
                                         <div class="card-header d-flex justify-content-end px-0 pt-0">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#studentModal"
+                                            <a href="#" data-bs-toggle="modal" onclick="createAnggota(this)" data-bs-target="#studentModal"
                                                 class="btn btn-primary add" data-bs-toggle="tooltip"
                                                 data-bs-placement="bottom" title="Tambah Anggota Kelas"> <i
                                                     class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
@@ -62,11 +62,13 @@
                                                 <i class="fas fa-folder-plus"></i> Management Absensi</button>
                                         </div>
 
-                                        @if ($count_anggota > 0)
-                                            @include('absensi.table')
-                                        @else
-                                            <i>Kelas ini belum memiliki anggota</i>
-                                        @endif
+                                        <div id="absensiContainer">
+                                            @if ($count_anggota > 0)
+                                                    @include('absensi.table')
+                                            @else
+                                                <i>Kelas ini belum memiliki anggota</i>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="wali">

@@ -40,6 +40,10 @@
 
         const btnStoreStudent = document.getElementById('btnStoreStudent')
 
+        function createAnggota(){
+            clearErrorMessage()
+        }
+
         btnStoreStudent.addEventListener('click', event => {
             const formAdd = document.getElementById('formAddStudent')
             const actionUrl = formAdd.getAttribute('action')
@@ -56,15 +60,8 @@
                 const data = response.json()
                 if (response.status == 400) {
                     data.then((res) => {
-                        const error = res.errors
-                        Object.keys(error).forEach(function(key) {
-                            let errorSpan = document.querySelectorAll(`[error-name="${key}"]`)
-                            let errorInput = document.querySelectorAll(`[name="${key}"]`)
-                            errorInput[0].classList.add('is-invalid')
-                            if(errorSpan){
-                                errorSpan[0].innerHTML = error[key][0]
-                            }
-                        })
+                        const errors = res.errors
+                        showValidationMessage(errors)
                     })
                 }
 

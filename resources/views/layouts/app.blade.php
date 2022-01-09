@@ -142,6 +142,33 @@
                 toastr.error(text)
             }
         }
+
+        function clearErrorMessage(){
+            const invalidFeedback = document.getElementsByClassName('invalid-feedback')
+
+            for (let invalid = 0; invalid < invalidFeedback.length; invalid++) {
+                const element = invalidFeedback[invalid]
+                const targetField = element.getAttribute('error-name')
+                const inputElement = document.querySelectorAll(`[name="${targetField}"]`)
+                element.innerHTML = ''
+                if(inputElement[0] != undefined){
+                    inputElement[0].classList.remove('is-invalid')
+                }
+            }
+        }
+
+        function showValidationMessage(errors){
+            Object.keys(errors).forEach(function(key) {
+                let errorSpan = document.querySelectorAll(`[error-name="${key}"]`)
+                let errorInput = document.querySelectorAll(`[name="${key}"]`)
+                errorInput[0].classList.add('is-invalid')
+                if (errorSpan[0] != undefined) {
+                    errorSpan[0].innerHTML = errors[key][0]
+                }else{
+                    showToast(0, 'Terjadi kesalahan pada sistem')
+                }
+            })
+        }
     </script>
 
     @stack('scripts')

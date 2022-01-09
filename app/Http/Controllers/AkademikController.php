@@ -36,14 +36,11 @@ class AkademikController extends Controller
 
     public function show($id_kelas, $id_tahun_ajar)
     {
-        $anggota_kelas = AnggotaKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar);
-        $durasi_absensi = Absensi::select('tgl_absensi')->whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->orderBy('tgl_absensi', 'ASC')->distinct()->pluck('tgl_absensi');
-        $durasi_absensi_ganjil = Absensi::select('tgl_absensi')->where('semester', 'ganjil')->whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->orderBy('tgl_absensi', 'ASC')->distinct()->pluck('tgl_absensi');
-        $durasi_absensi_genap = Absensi::select('tgl_absensi')->where('semester', 'genap')->whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->orderBy('tgl_absensi', 'ASC')->distinct()->pluck('tgl_absensi');
         $tahun_ajar = TahunAjar::find($id_tahun_ajar);
-
-        // dd($durasi_absensi_genap);
-        // $this->seedAbsen();
+        $anggota_kelas = AnggotaKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar);
+        $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+        $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+        $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
@@ -61,39 +58,5 @@ class AkademikController extends Controller
         ];
 
         return view('akademik.show', $data);
-    }
-
-    public function seedAbsen()
-    {
-        $status = ['hadir', 'sakit', 'ijin', 'alpa'];
-        $anggota_kelas = AnggotaKelas::all();
-        $period_ganjil = CarbonPeriod::create(Carbon::parse('2022-01-01'), Carbon::now());
-        $period_genap = CarbonPeriod::create(Carbon::parse('2022-01-10'), Carbon::now()->addDays(4));
-        $date_period_ganjil = $period_ganjil->toArray();
-        $date_period_genap = $period_genap->toArray();
-        
-        foreach($date_period_ganjil as $date_pe){
-            foreach($anggota_kelas as $anggota){
-                Absensi::create([
-                    'id_anggota_kelas' => $anggota->id,
-                    'tgl_absensi' => $date_pe,
-                    'semester' => 'ganjil',
-                    'kehadiran' => $status[rand(0,3)],
-                ]);
-            }
-        }
-        
-        foreach($date_period_genap as $date_pe){
-            foreach($anggota_kelas as $anggota){
-                Absensi::create([
-                    'id_anggota_kelas' => $anggota->id,
-                    'tgl_absensi' => $date_pe,
-                    'semester' => 'genap',
-                    'kehadiran' => $status[rand(0,3)],
-                ]);
-            }
-        }
-
-        dd($date_period_ganjil);
     }
 }

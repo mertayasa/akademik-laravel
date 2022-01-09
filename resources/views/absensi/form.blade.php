@@ -1,4 +1,4 @@
-{!! Form::open(['route' => ['absensi.update_create', [$id_kelas, $id_tahun_ajar, $tgl_absen]], 'method' => 'POST', 'id' => 'postAbsensiForm']) !!}
+{!! Form::open(['route' => ['absensi.update_create', [$semester, $tgl_absen]], 'method' => 'POST', 'id' => 'postAbsensiForm']) !!}
     <table class="table table-bordered">
         <thead>
             <tr>

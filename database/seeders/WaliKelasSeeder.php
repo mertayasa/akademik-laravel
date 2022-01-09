@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kelas;
 use App\Models\WaliKelas;
 use App\Models\TahunAjar;
 use App\Models\User;
@@ -17,42 +18,19 @@ class WaliKelasSeeder extends Seeder
     public function run()
     {
         // WaliKelas::factory()->count(6)->create();
+        $tahun_ajar = TahunAjar::all();
+        $kelas = Kelas::all();
 
-        $wali_kelas = [
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '1',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '2',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '3',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '4',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '5',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-            [
-                'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
-                'id_kelas' => '6',
-                'id_tahun_ajar' => TahunAjar::inRandomOrder()->first()->id,
-            ],
-        ];
+        foreach($tahun_ajar as $tahun){
+            foreach($kelas as $kel){
+                $wali = [
+                    'id_user' => User::where('level', 'guru')->inRandomOrder()->first()->id,
+                    'id_kelas' => $kel->id,
+                    'id_tahun_ajar' => $tahun->id,
+                ];
 
-        foreach ($wali_kelas as $wali) {
-            WaliKelas::updateOrCreate(['id_kelas' => $wali['id_kelas']], $wali);
+                WaliKelas::updateOrCreate(['id_kelas' => $wali['id_kelas'], 'id_tahun_ajar' => $wali['id_tahun_ajar']], $wali);
+            }
         }
     }
 }

@@ -167,7 +167,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'absensi', 'as' => 'absensi.'], function () {
         Route::get('/', [AbsensiController::class, 'index'])->name('index');
         Route::get('generate-form/{id_kelas}/{id_tahun_ajar}/{tgl?}', [AbsensiController::class, 'generateForm'])->name('generate_form');
-        Route::post('update-or-create/{id_kelas}/{id_tahun_ajar}/{tgl?}', [AbsensiController::class, 'updateOrCreate'])->name('update_create');
+        Route::post('update-or-create/{semester}/{tgl?}', [AbsensiController::class, 'updateOrCreate'])->name('update_create');
         Route::post('store', [AbsensiController::class, 'store'])->name('store');
         Route::patch('update/{absensi}', [AbsensiController::class, 'update'])->name('update');
         Route::delete('destroy/{absensi}', [AbsensiController::class, 'destroy'])->name('destroy');

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NilaiSikapSeeder::class);
         $this->call(NilaiKesehatanSeeder::class);
         $this->call(WaliKelasSeeder::class);
+        $this->call(AbsensiSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }
