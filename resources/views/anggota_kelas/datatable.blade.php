@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped" width="100%" id="AnggotaKelasDataTable" data-url="{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar, ($custom_action ?? '')]) }}">
+<table class="table table-hover table-striped" width="100%" id="{{ $custom_id ?? 'AnggotaKelasDataTable'}}" data-url="{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar, ($custom_action ?? '')]) }}">
     <thead>
         <tr>
             <th style="width: 30px">No</th>
@@ -14,17 +14,18 @@
 
 @push('scripts')
     <script>
-        let url = "{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar]) }}"
+        // let url = "{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar]) }}"
 
-        datatable(url)
+        // datatable()
 
-        function datatable(url) {
-
-            $('#AnggotaKelasDataTable').DataTable({
+        // function datatable() {
+        //     console.log('#{{ $custom_id ?? "AnggotaKelasDataTable"}}');
+        //     console.log(document.getElementById('{{ $custom_id ?? 'AnggotaKelasDataTable'}}'));
+            $('#{{ $custom_id ?? "AnggotaKelasDataTable"}}').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: document.getElementById('AnggotaKelasDataTable').getAttribute('data-url'),
+                ajax: document.getElementById('{{ $custom_id ?? 'AnggotaKelasDataTable'}}').getAttribute('data-url'),
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'no',
@@ -80,6 +81,6 @@
                     searchPlaceholder: "Cari"
                 },
             });
-        }
+        // }
     </script>
 @endpush

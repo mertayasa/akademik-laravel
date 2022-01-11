@@ -86,7 +86,8 @@
                                 <div class="tab-pane fade" id="nilai">
                                     <div class="card-body px-0">
                                         @if ($count_anggota > 0)
-                                            @include('anggota_kelas.datatable', ['custom_action' => 'anggota_kelas.datatable_nilai_action'])
+                                            {{-- @include('anggota_kelas.datatable') --}}
+                                            @include('anggota_kelas.datatable', ['custom_action' => 'anggota_kelas.datatable_nilai_action', 'custom_id' => 'asdanjing'])
                                         @else
                                             <i>Kelas ini belum memiliki anggota</i>
                                         @endif
@@ -151,6 +152,8 @@
                             <div class="card-body">
                                 <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
                                 <ul class="mb-0">
+                                    <li>Tekan tombol Smt Ganjil pada tabel siswa untuk melihat nilai semester ganjil dari siswa</li>
+                                    <li>Tekan tombol Smt Genap pada tabel siswa untuk melihat nilai semester genap dari siswa</li>
                                     <li>Silahkan tambahkan mata pelajaran yang akan dinilai</li>
                                     <li>Apabila mata pelajaran dihapus dari daftar penilaian, maka semua nilai terkait mata pelajaran dan anggota kelas akan dihapus dari db</li>
                                 </ul>
