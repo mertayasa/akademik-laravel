@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class=" mb-0 ">Data Anggota Siswa Kelas {{ $id_kelas }} Tahun Ajaran
+                        <h2 class=" mb-0 ">Data Kelas {{ $id_kelas }} Tahun Ajaran
                             {{ $tahun_ajar->tahun_mulai }} - {{ $tahun_ajar->tahun_selesai }}</h2>
                     </div>
                     <div class="px-3">
@@ -27,6 +27,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#nilai" class="nav-link" data-toggle="tab">Nilai</a>
                                 </li>
                             </ul>
 
@@ -80,6 +83,15 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="nilai">
+                                    <div class="card-body px-0">
+                                        @if ($count_anggota > 0)
+                                            @include('anggota_kelas.datatable', ['custom_action' => 'anggota_kelas.datatable_nilai_action'])
+                                        @else
+                                            <i>Kelas ini belum memiliki anggota</i>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
@@ -87,6 +99,7 @@
                 </div>
 
                 @include('absensi.crud')
+                @include('nilai.mapel_list')
 
                 <div class="row bottom-hint" data-href="#siswa">
                     <div class="col-12">
@@ -132,12 +145,27 @@
                     </div>
                 </div>
 
+                <div class="row d-none bottom-hint" data-href="#nilai">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <span class="text-danger"> <b> <i>Catatan :</i> </b> </span> <br>
+                                <ul class="mb-0">
+                                    <li>Silahkan tambahkan mata pelajaran yang akan dinilai</li>
+                                    <li>Apabila mata pelajaran dihapus dari daftar penilaian, maka semua nilai terkait mata pelajaran dan anggota kelas akan dihapus dari db</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     @include('akademik.modal.anggota')
     @include('akademik.modal.jadwal')
+    @include('akademik.modal.mapel_list')
 @endsection
 
 @push('scripts')
@@ -145,10 +173,19 @@
         $('.nav-tabs a').click(function() {
             hideBottomHint()
             const rawHrefValue = $(this).attr('href')
+            
             if (rawHrefValue != '#absensi') {
                 const absensiFormCon = document.getElementById('absensiFormContainer')
                 absensiFormCon.classList.add('d-none')
             }
+
+            const mapelListCon = document.getElementById('mapelListContainer')
+            if (rawHrefValue != '#nilai') {
+                mapelListCon.classList.add('d-none')
+            }else{
+                mapelListCon.classList.remove('d-none')
+            }
+
             const hintElement = $(`[data-href="${rawHrefValue}"]`)
             if (hintElement != undefined) {
                 hintElement.removeClass('d-none')

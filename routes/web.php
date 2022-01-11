@@ -189,7 +189,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/{anggota_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'edit'])->name('edit');
         Route::patch('update/{anggota_kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'update'])->name('update');
         Route::delete('destroy/{anggota_kelas}', [AnggotaKelasController::class, 'destroy'])->name('destroy');
-        Route::get('datatable/{kelas}/{id_tahun_ajar}', [AnggotaKelasController::class, 'datatable'])->name('datatable');
+        Route::get('datatable/{kelas}/{id_tahun_ajar}/{custom_action?}', [AnggotaKelasController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'nilai', 'as' => 'nilai.'], function () {

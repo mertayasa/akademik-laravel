@@ -22,7 +22,7 @@ class Nilai extends Model
     ];
 
     public $with = [
-        'anggota_kelas', 'jadwal'
+        'anggota_kelas', 'jadwal', 'mapel'
     ];
 
 
@@ -30,8 +30,14 @@ class Nilai extends Model
     {
         return $this->belongsTo('App\Models\AnggotaKelas', 'id_anggota_kelas');
     }
+
     public function jadwal()
     {
         return $this->belongsTo('App\Models\Jadwal', 'id_jadwal');
+    }
+
+    public function mapel()
+    {
+        return $this->belongsTo('App\Models\Mapel', 'id_mapel');
     }
 }

@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped" width="100%" id="AnggotaKelasDataTable">
+<table class="table table-hover table-striped" width="100%" id="AnggotaKelasDataTable" data-url="{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar, ($custom_action ?? '')]) }}">
     <thead>
         <tr>
             <th style="width: 30px">No</th>
@@ -14,18 +14,17 @@
 
 @push('scripts')
     <script>
-        let table
         let url = "{{ route('anggota_kelas.datatable', [$id_kelas, $id_tahun_ajar]) }}"
 
         datatable(url)
 
         function datatable(url) {
 
-            table = $('#AnggotaKelasDataTable').DataTable({
+            $('#AnggotaKelasDataTable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: url,
+                ajax: document.getElementById('AnggotaKelasDataTable').getAttribute('data-url'),
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'no',

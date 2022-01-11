@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Log;
 
 class AnggotaKelasController extends Controller
 {
-    public function datatable(Kelas $kelas, $id_tahun_ajar)
+    public function datatable(Kelas $kelas, $id_tahun_ajar, $custom_action = null)
     {
         $siswa = $kelas->getAnggotaKelas($id_tahun_ajar);
 
-        return AnggotaKelasDataTable::set($siswa);
+        return AnggotaKelasDataTable::set($siswa, $custom_action);
     }
 
     public function store(AnggotaKelasReq $request)

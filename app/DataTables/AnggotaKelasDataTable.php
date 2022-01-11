@@ -7,20 +7,12 @@ use Yajra\DataTables\DataTables;
 class AnggotaKelasDataTable
 {
 
-    static public function set($anggota_kelas)
+    static public function set($anggota_kelas, $custom_action = null)
     {
-        // 
         return Datatables::of($anggota_kelas)
-
-            ->addColumn('action', function ($anggota_kelas) {
-                $deleteUrl = "'" . route('anggota_kelas.destroy', $anggota_kelas->id) . "', 'AnggotaKelasDataTable'";
-                return
-                    '<div class="btn-group">' .
-                    '<a href="' . 'asd' . '" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Profil" style="margin-right: 5px" > <b> Profil </b> </a>' .
-                    '<a href="' . route('siswa.show', $anggota_kelas->siswa->id) . '" class="btn btn-sm btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Atur Nilai" style="margin-right: 5px" ><b> Nilai</b></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Dari Kelas" style="margin-right: 5px"><b> Hapus</b></a>' .
-
-                    '</div>';
-            })->addIndexColumn()->rawColumns(['action'])->make(true);
+            ->addColumn('action', function($anggota_kelas) use($custom_action) {
+                return view($custom_action != null ? $custom_action : 'anggota_kelas.datatable_action', compact('anggota_kelas'));
+            })
+            ->addIndexColumn()->rawColumns(['action'])->make(true);
     }
 }

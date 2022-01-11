@@ -29,6 +29,7 @@
                                         <h1 class="mt-1 "> {{ $data->kode }}</h1>
                                     </div>
                                     <div class="icon">
+                                        {{-- {{ $data->jenjang }} --}}
                                         <i class="fas fa-user-graduate"></i>
                                     </div>
                                 </div>

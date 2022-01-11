@@ -7,6 +7,7 @@ use App\Models\Akademik;
 use App\Models\Kelas;
 use App\Models\AnggotaKelas;
 use App\Models\Mapel;
+use App\Models\Nilai;
 use App\Models\TahunAjar;
 use App\Models\Siswa;
 use App\Models\User;
@@ -41,12 +42,17 @@ class AkademikController extends Controller
         $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+        $nilai_with_mapel = Nilai::whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->get()->unique('id_mapel');
+        $mapel_of_nilai = $nilai_with_mapel->map(function($nilai){
+            return $nilai->mapel;
+        });
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
             'tahun_ajar' => $tahun_ajar,
+            'mapel_of_nilai' => $mapel_of_nilai,
             'mapel' => Mapel::where('status', 'aktif')->pluck('nama', 'id'),
             'guru' => User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id'),
             'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first(),
@@ -58,5 +64,29 @@ class AkademikController extends Controller
         ];
 
         return view('akademik.show', $data);
+    }
+
+    public function seedNilai()
+    {
+        $anggota_kelas = AnggotaKelas::all();
+        $mapel = Mapel::inRandomOrder()->take(3)->get();
+        foreach($mapel as $map){
+            foreach ($anggota_kelas as $key => $anggota) {
+                Nilai::create([
+                    'id_anggota_kelas' => $anggota->id,
+                    'id_mapel' => $map->id,
+                    'semester' => 'ganjil',
+                ]);
+            }
+        }
+        foreach($mapel as $map){
+            foreach ($anggota_kelas as $key => $anggota) {
+                Nilai::create([
+                    'id_anggota_kelas' => $anggota->id,
+                    'id_mapel' => $map->id,
+                    'semester' => 'genap',
+                ]);
+            }
+        }
     }
 }
