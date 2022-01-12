@@ -13,7 +13,7 @@
                     <td class="text-center align-middle">{{ $loop->iteration }}</td>
                     <td class="text-center align-middle">{{ $mapel->nama }}</td>
                     <td class="text-center align-middle">
-                        <button class="btn btn-danger" onclick="deleteMapelFromNilai(`{{ $mapel->id }}`)">Hapus</button>
+                        <button class="btn btn-danger" data-url="{{ route('nilai.destroy_mapel', [$id_kelas, $id_tahun_ajar, $mapel->id]) }}" onclick="deleteMapelFromNilai(this)">Hapus</button>
                     </td>
                 </tr>                
             @endforeach

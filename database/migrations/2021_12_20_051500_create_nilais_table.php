@@ -18,9 +18,10 @@ class CreateNilaisTable extends Migration
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->unsignedBigInteger('id_mapel');
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
-            $table->integer('tugas')->default(0);
-            $table->integer('uts')->default(0);
-            $table->integer('uas')->default(0);
+            $table->integer('nilai')->default(0);
+            // $table->integer('tugas')->default(0);
+            // $table->integer('uts')->default(0);
+            // $table->integer('uas')->default(0);
             $table->text('desk_pengetahuan')->nullable();
             $table->text('desk_keterampilan')->nullable();
             $table->timestamps();

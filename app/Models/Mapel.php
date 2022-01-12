@@ -17,4 +17,8 @@ class Mapel extends Model
         'status',
     ];
 
+    public function getIsLokalAttribute()
+    {
+        return $this->attributes['is_lokal'] == 'true' ? true : false;
+    }
 }

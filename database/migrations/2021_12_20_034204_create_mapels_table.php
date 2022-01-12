@@ -15,7 +15,7 @@ class CreateMapelsTable extends Migration
     {
         Schema::create('mapel', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 20);
+            $table->string('nama', 50);
             $table->enum('is_lokal', ['true', 'false']);
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();

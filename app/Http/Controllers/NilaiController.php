@@ -10,6 +10,8 @@ use App\DataTables\NilaiDataTable;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Calculation\Category;
 
 class NilaiController extends Controller
 {
@@ -69,6 +71,78 @@ class NilaiController extends Controller
         }
 
         return redirect('nilai')->with('success', 'Data nilain Berhasil Ditambahkan');
+    }
+
+    public function storeMapel(Request $request, $id_kelas, $id_tahun_ajar)
+    {
+        try{
+            $anggota_kelas_raw = AnggotaKelas::byKelasAndTahun($id_kelas, $id_tahun_ajar);
+            $anggota_kelas = $anggota_kelas_raw->get();
+
+            DB::transaction(function() use($anggota_kelas, $request){
+                foreach($anggota_kelas as $anggota){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $request->id_mapel,
+                        'semester' => 'ganjil',
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $request->id_mapel,
+                        'semester' => 'ganjil',
+                    ]);
+                }
+        
+                foreach($anggota_kelas as $anggota){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $request->id_mapel,
+                        'semester' => 'genap',
+                    ],[
+                        'id_anggota_kelas' => $anggota->id,
+                        'id_mapel' => $request->id_mapel,
+                        'semester' => 'genap',
+                    ]);
+                }
+            }, 5);
+
+            $table = $this->renderNilaiMapelTable($id_kelas, $id_tahun_ajar, $anggota_kelas_raw);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menambahkan mata pelajaran yang dinilai']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menambahkan mata pelajaran yang dinilai', 'table' => $table]);
+    }
+
+    public function destroyMapel($id_kelas, $id_tahun_ajar, $id_mapel)
+    {
+        $anggota_kelas = AnggotaKelas::byKelasAndTahun($id_kelas, $id_tahun_ajar);
+        $nilai_by_anggota = Nilai::whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->where('id_mapel', $id_mapel)->get();
+        try{
+            DB::transaction(function () use($nilai_by_anggota){
+                foreach($nilai_by_anggota as $nilai){
+                    $nilai->delete();
+                }
+            });
+            $table = $this->renderNilaiMapelTable($id_kelas, $id_tahun_ajar, $anggota_kelas);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data mata pelajaran yang dinilai']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data mata pelajaran yang dinilai', 'table' => $table]);
+    }
+
+    private function renderNilaiMapelTable($id_kelas, $id_tahun_ajar, $anggota_kelas_raw)
+    {
+        $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas_raw->pluck('id')->toArray());
+        $data = [
+            'id_kelas' => $id_kelas,
+            'id_tahun_ajar' => $id_tahun_ajar,
+            'mapel_of_nilai' => $mapel_of_nilai
+        ];
+
+        return view('nilai.table_mapel', $data)->render();
     }
 
     /**

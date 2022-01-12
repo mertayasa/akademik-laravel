@@ -6,6 +6,7 @@ use App\Models\Absensi;
 use App\Models\Akademik;
 use App\Models\Kelas;
 use App\Models\AnggotaKelas;
+use App\Models\Ekskul;
 use App\Models\Mapel;
 use App\Models\Nilai;
 use App\Models\TahunAjar;
@@ -38,17 +39,16 @@ class AkademikController extends Controller
     public function show($id_kelas, $id_tahun_ajar)
     {
         $tahun_ajar = TahunAjar::find($id_tahun_ajar);
-        $anggota_kelas = AnggotaKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar);
+        $anggota_kelas = AnggotaKelas::byKelasAndTahun($id_kelas, $id_tahun_ajar);
         $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-        $nilai_with_mapel = Nilai::whereIn('id_anggota_kelas', $anggota_kelas->pluck('id')->toArray())->get()->unique('id_mapel');
-        $mapel_of_nilai = $nilai_with_mapel->map(function($nilai){
-            return $nilai->mapel;
-        });
+        $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        $ekskul = Ekskul::all();
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
+            'ekskul' => $ekskul,
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
             'tahun_ajar' => $tahun_ajar,

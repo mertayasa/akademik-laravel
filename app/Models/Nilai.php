@@ -14,9 +14,10 @@ class Nilai extends Model
         'id_anggota_kelas',
         'id_mapel',
         'semester',
-        'tugas',
-        'uts',
-        'uas',
+        'nilai',
+        // 'tugas',
+        // 'uts',
+        // 'uas',
         'desk_pengetahuan',
         'desk_keterampilan',
     ];
@@ -25,6 +26,15 @@ class Nilai extends Model
         'anggota_kelas', 'jadwal', 'mapel'
     ];
 
+    static function getUniqueMapel($query, $anggota_kelas)
+    {
+        $nilai_with_mapel = $query->whereIn('id_anggota_kelas', $anggota_kelas)->get()->unique('id_mapel');
+        $mapel_of_nilai = $nilai_with_mapel->map(function($nilai){
+            return $nilai->mapel;
+        });
+
+        return $mapel_of_nilai;
+    }
 
     public function anggota_kelas()
     {

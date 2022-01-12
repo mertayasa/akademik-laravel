@@ -196,6 +196,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [NilaiController::class, 'index'])->name('index');
         Route::get('create', [NilaiController::class, 'create'])->name('create');
         Route::post('store', [NilaiController::class, 'store'])->name('store');
+        Route::post('store-mapel/{id_kelas}/{id_tahun_ajar}', [NilaiController::class, 'storeMapel'])->name('store_mapel');
+        Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
         Route::get('edit/{nilai}', [NilaiController::class, 'edit'])->name('edit');
         Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
         Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
