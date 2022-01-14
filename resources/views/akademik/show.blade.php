@@ -102,7 +102,6 @@
                 @include('absensi.crud')
                 @include('nilai.mapel_list')
                 <div id="raportContainer" class="d-none"></div>
-                {{-- @include('nilai.edit_raport') --}}
 
                 <div class="row bottom-hint" data-href="#siswa">
                     <div class="col-12">

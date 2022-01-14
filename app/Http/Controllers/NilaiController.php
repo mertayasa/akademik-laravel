@@ -330,7 +330,7 @@ class NilaiController extends Controller
             return response(['code' => 0, 'message' => 'Gagal menyimpan data nilai']);
         }
 
-        return response(['code' => 1, 'message' => 'Nerhasil menyimpan data nilai']);
+        return response(['code' => 1, 'message' => 'Berhasil menyimpan data nilai']);
     }
 
     /**

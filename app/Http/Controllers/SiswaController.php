@@ -54,10 +54,10 @@ class SiswaController extends Controller
             Siswa::create($request->all());
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Data siswan Gagal Ditambahkan');
+            return redirect()->back()->withInput()->with('error', 'Data siswa Gagal Ditambahkan');
         }
 
-        return redirect('siswa')->with('success', 'Data siswan Berhasil Ditambahkan');
+        return redirect('siswa')->with('success', 'Data siswa Berhasil Ditambahkan');
     }
 
     /**
