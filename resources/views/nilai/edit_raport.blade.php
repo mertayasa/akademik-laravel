@@ -8,7 +8,10 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            @include('nilai.form_raport')
+                            {!! Form::open(['method' => 'POST', 'id' => 'updateRaport', 'route' => ['nilai.update_raport', [$id_anggota_kelas = 1]]]) !!}
+                                @include('nilai.form_raport')
+                                <a href="javascript:void(0)" class="btn btn-primary" id="btnUpdateRaport">Simpan Nilai</a>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

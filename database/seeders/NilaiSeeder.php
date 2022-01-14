@@ -26,7 +26,16 @@ class NilaiSeeder extends Seeder
                     'id_anggota_kelas' => $anggota->id,
                     'id_mapel' => $map->id,
                     'semester' => 'ganjil',
-                    'nilai' => rand(56, 99),
+                    'tm1_p' => rand(56, 99),
+                    'tm2_p' => rand(56, 99),
+                    'tm3_p' => rand(56, 99),
+                    'tm4_p' => rand(56, 99),
+                    'tm1_k' => rand(56, 99),
+                    'tm2_k' => rand(56, 99),
+                    'tm3_k' => rand(56, 99),
+                    'tm4_k' => rand(56, 99),
+                    'pts' => rand(56, 99),
+                    'pas' => rand(56, 99),
                 ]);
             }
         }
@@ -36,7 +45,16 @@ class NilaiSeeder extends Seeder
                     'id_anggota_kelas' => $anggota->id,
                     'id_mapel' => $map->id,
                     'semester' => 'genap',
-                    'nilai' => rand(56, 99),
+                    'tm1_p' => rand(56, 99),
+                    'tm2_p' => rand(56, 99),
+                    'tm3_p' => rand(56, 99),
+                    'tm4_p' => rand(56, 99),
+                    'tm1_k' => rand(56, 99),
+                    'tm2_k' => rand(56, 99),
+                    'tm3_k' => rand(56, 99),
+                    'tm4_k' => rand(56, 99),
+                    'pts' => rand(56, 99),
+                    'pas' => rand(56, 99),
                 ]);
             }
         }

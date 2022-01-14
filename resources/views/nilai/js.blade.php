@@ -1,6 +1,7 @@
 @push('scripts')
     <script>
         const btnStoreMapelNilai = document.getElementById('btnStoreMapelNilai')
+        const btnUpdateRaport = document.getElementById('btnUpdateRaport')
         
         // Store Nilai For Mapel
         btnStoreMapelNilai.addEventListener('click', event => {
@@ -93,5 +94,49 @@
                 }
             })
         }
+
+        btnUpdateRaport.addEventListener('click', event => {
+            const updateRaport = document.getElementById('updateRaport')
+            const nmilaiUpdateUrl = updateRaport.getAttribute('action')
+            const formData = new FormData(updateRaport)
+
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0]+ ', ' + pair[1]); 
+            // }
+
+            fetch(nmilaiUpdateUrl, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                const data = response.json()
+                if (response.status == 400) {
+                    data.then((res) => {
+                        const errors = res.errors
+                        showValidationMessage(errors)
+                    })
+                }
+
+                return data
+            })
+            .then(data => {
+                console.log(data);
+                // if (data.code == 1) {
+                //     mapelListTable.innerHTML = ''
+                //     mapelListTable.insertAdjacentHTML('beforeend', data.table)
+                //     $('#mapelNilaiModal').modal('hide')
+                // }
+
+                // showToast(data.code, data.message)
+            })
+            .catch((error) => {
+                console.log(error);
+                showToast(0, 'Gagal mengubah data mata pelajaran yang dinilai')
+            })
+        })
     </script>
 @endpush

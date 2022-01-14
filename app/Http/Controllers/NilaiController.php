@@ -188,6 +188,10 @@ class NilaiController extends Controller
         return redirect('nilai')->with('info', 'Data nilai Berhasil Diedit  ');
     }
 
+    public function updateRaport(Request $request, AnggotaKelas $anggota_kelas)
+    {
+        return response([$request->all()]);
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -7,15 +7,43 @@
                     <div class="col-12 col-md-3 my-auto">
                             {{ $mapel->nama }}
                     </div>
-                    <div class="col-12 col-md-3">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Nilai Pengetahuan', ['class' => 'mb-1']) !!}
-                        {!! Form::number('pengetahuan['. $mapel->id .'][nilai]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Deskripsi Pengetahuan', ['class' => 'mb-1']) !!}
-                        {!! Form::text('pengetahuan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
+                    <div class="col-12 col-md-9">
+                        <div class="row">
+                            {!! Form::hidden('pengetahuan['. $mapel->id .'][id_mapel]', $mapel->id, []) !!}
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 1', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm1]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 2', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm2]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 3', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm3]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 4', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm4]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PTS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][pts]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PAS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][pas]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 mt-2">
+                                {!! Form::label('keterangan'.Str::camel($mapel->nama), 'Deskripsi', ['class' => 'mb-1']) !!}
+                                {!! Form::text('pengetahuan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'keterangan'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @if (!$loop->last)
+                    <hr>
+                @endif
             @endif
         @endforeach
     </div>
@@ -30,15 +58,43 @@
                     <div class="col-12 col-md-3 my-auto">
                             {{ $mapel->nama }}
                     </div>
-                    <div class="col-12 col-md-3">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Nilai Keterampilan', ['class' => 'mb-1']) !!}
-                        {!! Form::number('keterampilan['. $mapel->id .'][nilai]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Deskripsi Keterampilan', ['class' => 'mb-1']) !!}
-                        {!! Form::text('keterampilan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
+                    <div class="col-12 col-md-9">
+                        <div class="row">
+                            {!! Form::hidden('keterampilan['. $mapel->id .'][id_mapel]', $mapel->id, []) !!}
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 1', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm1]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 2', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm2]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 3', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm3]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 4', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm4]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PTS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][pts]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PAS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][pas]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 mt-2">
+                                {!! Form::label('keterangan'.Str::camel($mapel->nama), 'Deskripsi', ['class' => 'mb-1']) !!}
+                                {!! Form::text('keterampilan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'keterangan'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @if (!$loop->last)
+                    <hr>
+                @endif
             @endif
         @endforeach
     </div>
@@ -53,15 +109,43 @@
                     <div class="col-12 col-md-3 my-auto">
                             {{ $mapel->nama }}
                     </div>
-                    <div class="col-12 col-md-3">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Nilai Pengetahuan (Muatan Lokal)', ['class' => 'mb-1']) !!}
-                        {!! Form::number('pengetahuan['. $mapel->id .'][nilai]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Deskripsi Pengetahuan (Muatan Lokal)', ['class' => 'mb-1']) !!}
-                        {!! Form::text('pengetahuan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
+                    <div class="col-12 col-md-9">
+                        <div class="row">
+                            {!! Form::hidden('pengetahuan['. $mapel->id .'][id_mapel]', $mapel->id, []) !!}
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 1', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm1]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 2', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm2]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 3', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm3]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 4', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][tm4]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PTS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][pts]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PAS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('pengetahuan['. $mapel->id .'][pas]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 mt-2">
+                                {!! Form::label('keterangan'.Str::camel($mapel->nama), 'Deskripsi', ['class' => 'mb-1']) !!}
+                                {!! Form::text('pengetahuan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'keterangan'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @if (!$loop->last)
+                    <hr>
+                @endif
             @endif
         @endforeach
     </div>
@@ -76,15 +160,43 @@
                     <div class="col-12 col-md-3 my-auto">
                             {{ $mapel->nama }}
                     </div>
-                    <div class="col-12 col-md-3">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Nilai Keterampilan (Muatan Lokal)', ['class' => 'mb-1']) !!}
-                        {!! Form::number('keterampilan['. $mapel->id .'][nilai]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {!! Form::label('namaMapel'.$mapel->nama, 'Deskripsi Keterampilan (Muatan Lokal)', ['class' => 'mb-1']) !!}
-                        {!! Form::text('keterampilan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$mapel->nama]) !!}
+                    <div class="col-12 col-md-9">
+                        <div class="row">
+                            {!! Form::hidden('keterampilan['. $mapel->id .'][id_mapel]', $mapel->id, []) !!}
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 1', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm1]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 2', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm2]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 3', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm3]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'TM 4', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][tm4]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PTS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][pts]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 col-md-16-6">
+                                {!! Form::label('nilai'.Str::camel($mapel->nama), 'PAS', ['class' => 'mb-1']) !!}
+                                {!! Form::number('keterampilan['. $mapel->id .'][pas]', null, ['class' => 'form-control', 'id' => 'nilai'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                            <div class="col-12 mt-2">
+                                {!! Form::label('keterangan'.Str::camel($mapel->nama), 'Deskripsi', ['class' => 'mb-1']) !!}
+                                {!! Form::text('keterampilan['. $mapel->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'keterangan'.Str::camel($mapel->nama)]) !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @if (!$loop->last)
+                    <hr>
+                @endif
             @endif
         @endforeach
     </div>
@@ -100,14 +212,17 @@
                             {{ $eks->nama }}
                     </div>
                     <div class="col-12 col-md-3">
-                        {!! Form::label('namaMapel'.$eks->nama, 'Nilai Ekskul', ['class' => 'mb-1']) !!}
+                        {!! Form::label('namaMapel'.$eks->nama, 'Nilai Ekskul', ['class' => 'mb-1 d-none d-md-block']) !!}
                         {!! Form::number('ekskul['. $eks->id .'][nilai]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$eks->nama]) !!}
                     </div>
                     <div class="col-12 col-md-6">
-                        {!! Form::label('namaMapel'.$eks->nama, 'Deskripsi Ekskul', ['class' => 'mb-1']) !!}
+                        {!! Form::label('namaMapel'.$eks->nama, 'Keterangan', ['class' => 'mb-1 mt-2 mt-md-0']) !!}
                         {!! Form::text('ekskul['. $eks->id .'][keterangan]', null, ['class' => 'form-control', 'id' => 'namaMapel'.$eks->nama]) !!}
                     </div>
                 </div>
+                @if (!$loop->last)
+                    <hr>
+                @endif
             @endif
         @endforeach
     </div>
@@ -121,7 +236,7 @@
                     Tinggi Badan
             </div>
             <div class="col-12 col-md-3">
-                {!! Form::label('namaMapel', 'Tinggi Badan', ['class' => 'mb-1']) !!}
+                {!! Form::label('namaMapel', 'Tinggi Badan', ['class' => 'mb-1 d-none d-md-block']) !!}
                 {!! Form::number('proporsi[tinggi]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
@@ -130,7 +245,7 @@
                     Berat Badan
             </div>
             <div class="col-12 col-md-3">
-                {!! Form::label('namaMapel', 'Berat Badan', ['class' => 'mb-1']) !!}
+                {!! Form::label('namaMapel', 'Berat Badan', ['class' => 'mb-1 d-none d-md-block']) !!}
                 {!! Form::number('proposi[berat]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
@@ -145,8 +260,8 @@
                     Pendengaran
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Pendengaran', ['class' => 'mb-1']) !!}
-                {!! Form::text('kesehatan[pendengaran]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
+                {!! Form::text('kesehatan[pendengaran]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
         <div class="row mb-3">
@@ -154,8 +269,8 @@
                     Penglihatan
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Penglihatan', ['class' => 'mb-1']) !!}
-                {!! Form::text('kesehatan[penglihatan]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
+                {!! Form::text('kesehatan[penglihatan]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
         <div class="row mb-3">
@@ -163,8 +278,8 @@
                     Gigi
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Gigi', ['class' => 'mb-1']) !!}
-                {!! Form::text('kesehatan[gigi]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
+                {!! Form::text('kesehatan[gigi]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
         <div class="row mb-3">
@@ -172,8 +287,8 @@
                     Lain-Lain
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Lain-Lain', ['class' => 'mb-1']) !!}
-                {!! Form::text('kesehatan[lain]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
+                {!! Form::text('kesehatan[lain]', null, ['class' => 'form-control', 'id' => 'namaMapel']) !!}
             </div>
         </div>
     </div>
@@ -187,7 +302,7 @@
                     Sikap Spiritual
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Sikap Spriritual', ['class' => 'mb-1']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
                 {!! Form::textarea('sikap[spiritual]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
             </div>
         </div>
@@ -196,7 +311,7 @@
                     Sikap Sosial
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Sikap Sosial', ['class' => 'mb-1']) !!}
+                {!! Form::label('namaMapel', 'Keterangan', ['class' => 'mb-1 d-none d-md-block']) !!}
                 {!! Form::textarea('sikap[sosial]', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
             </div>
         </div>
@@ -211,7 +326,7 @@
                     Saran untuk siswa
             </div>
             <div class="col-12 col-md-6">
-                {!! Form::label('namaMapel', 'Saran Untuk Siswa', ['class' => 'mb-1']) !!}
+                {!! Form::label('namaMapel', 'Saran Untuk Siswa', ['class' => 'mb-1 d-none d-md-block']) !!}
                 {!! Form::textarea('saran', null, ['class' => 'form-control', 'id' => 'namaMapel', 'style' => 'height:70px']) !!}
             </div>
         </div>

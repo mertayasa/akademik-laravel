@@ -200,6 +200,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
         Route::get('edit/{nilai}', [NilaiController::class, 'edit'])->name('edit');
         Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
+        Route::post('update-raport/{id_anggota_kelas}', [NilaiController::class, 'updateRaport'])->name('update_raport');
         Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
     });

@@ -30,6 +30,11 @@
         .toast-success{
             background-color: green !important;
         }
+
+        .col-md-16-6{
+            flex: 0 0 auto;
+            width: 16.6%;
+        }
 	</style>
     @stack('styles')
 </head>
