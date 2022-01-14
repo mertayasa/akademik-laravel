@@ -350,4 +350,22 @@ class NilaiController extends Controller
 
         return response(['code' => 1, 'message' => 'Berhasil menghapus data nilai']);
     }
+
+    public function exportRaport(AnggotaKelas $anggota_kelas, $semester)
+    {
+        // Memanggil relasi yg ada d dlm kurung
+        $anggota_kelas->load(
+            'nilai',
+            'nilai_ekskul',
+            'nilai_kesehatan',
+            'nilai_proporsi',
+            'nilai_sikap',
+            'saran',
+        );
+
+        // Contoh mengambil rata-rata nilai dan predikatnya
+        $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, 8);
+        dd($nilai);
+        dd(getPredikatNilai($nilai));
+    }
 }

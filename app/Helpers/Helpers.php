@@ -151,3 +151,24 @@ function getSemester($tgl, $id_tahun_ajar)
         return false;
     }
 }
+
+function getPredikatNilai($nilai)
+{
+    switch($nilai){
+        case $nilai > 0 and $nilai <= 60:
+            return 'D';
+        break;
+        case $nilai > 60 and $nilai <= 70:
+            return 'C';
+        break;
+        case $nilai > 70 and $nilai <= 85:
+            return 'B';
+        break;
+        case $nilai > 85 and $nilai <= 90:
+            return 'B+';
+        break;
+        case $nilai > 90:
+            return 'A';
+        break;
+    }
+}

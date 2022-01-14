@@ -204,6 +204,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('update-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'updateRaport'])->name('update_raport');
         Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
+        Route::get('export-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'exportRaport'])->name('export_raport');
     });
 
     Route::group(['prefix' => 'nilai_ekskul', 'as' => 'nilai_ekskul.'], function () {
