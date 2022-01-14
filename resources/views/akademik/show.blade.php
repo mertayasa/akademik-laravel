@@ -101,7 +101,8 @@
 
                 @include('absensi.crud')
                 @include('nilai.mapel_list')
-                @include('nilai.edit_raport')
+                <div id="raportContainer" class="d-none"></div>
+                {{-- @include('nilai.edit_raport') --}}
 
                 <div class="row bottom-hint" data-href="#siswa">
                     <div class="col-12">
@@ -190,12 +191,12 @@
                 mapelListCon.classList.remove('d-none')
             }
 
-            const formRaportContainer = document.getElementById('formRaportContainer')
-            if (rawHrefValue != '#nilai') {
-                formRaportContainer.classList.add('d-none')
-            }else{
-                formRaportContainer.classList.remove('d-none')
-            }
+            // const formRaportContainer = document.getElementById('formRaportContainer')
+            // if (rawHrefValue != '#nilai') {
+            //     formRaportContainer.classList.add('d-none')
+            // }else{
+            //     formRaportContainer.classList.remove('d-none')
+            // }
 
             const hintElement = $(`[data-href="${rawHrefValue}"]`)
             if (hintElement != undefined) {

@@ -7,6 +7,12 @@ use App\Models\Jadwal;
 use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
 use App\DataTables\NilaiDataTable;
+use App\Models\Ekskul;
+use App\Models\NilaiEkskul;
+use App\Models\NilaiKesehatan;
+use App\Models\NilaiProporsi;
+use App\Models\NilaiSikap;
+use App\Models\Saran;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -188,9 +194,143 @@ class NilaiController extends Controller
         return redirect('nilai')->with('info', 'Data nilai Berhasil Diedit  ');
     }
 
-    public function updateRaport(Request $request, AnggotaKelas $anggota_kelas)
+    public function editRaport(AnggotaKelas $anggota_kelas, $semester)
     {
-        return response([$request->all()]);
+        try{
+            $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            $ekskul = Ekskul::all();
+    
+            $data = [
+                'anggota_kelas' => $anggota_kelas,
+                'semester' => $semester,
+                'ekskul' => $ekskul,
+                'mapel_of_nilai' => $mapel_of_nilai,
+            ];
+    
+            $form_raport = view('nilai.edit_raport', $data)->render();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mengambil data nilai']);
+        }
+
+        return response(['code' => 1, 'form_raport' => $form_raport]);
+    }
+
+    public function updateRaport(Request $request, AnggotaKelas $anggota_kelas, $semester)
+    {
+        try{
+            DB::transaction(function () use($request, $anggota_kelas, $semester){
+                $data_pengetahuan = $request->input('pengetahuan', []);
+                $data_keterampilan = $request->input('keterampilan', []);
+                $data_ekskul = $request->input('ekskul', []);
+                $data_proporsi = $request->input('proporsi', []);
+                $data_kesehatan = $request->input('kesehatan', []);
+                $data_sikap = $request->input('sikap', []);
+                $data_saran = $request->input('saran', []);
+    
+                foreach($data_pengetahuan as $key => $pengetahuan){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'id_mapel' => $key,
+                        'semester' => $semester,
+                    ], [
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'semester' => $semester,
+                        'id_mapel' => $key,
+                        'tm1_p' => $pengetahuan['tm1_p'] ?? 0,
+                        'tm2_p' => $pengetahuan['tm2_p'] ?? 0,
+                        'tm3_p' => $pengetahuan['tm3_p'] ?? 0,
+                        'tm4_p' => $pengetahuan['tm4_p'] ?? 0,
+                        'pts' => $pengetahuan['pts'] ?? 0,
+                        'pas' => $pengetahuan['pas'] ?? 0,
+                        'desk_pengetahuan' => $pengetahuan['keterangan'] ?? '-',
+                    ]);
+                }
+        
+                foreach($data_keterampilan as $key => $keterampilan){
+                    Nilai::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'id_mapel' => $key,
+                        'semester' => $semester,
+                    ],[
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'semester' => $semester,
+                        'id_mapel' => $key,
+                        'tm1_k' => $keterampilan['tm1_k'] ?? 0,
+                        'tm2_k' => $keterampilan['tm2_k'] ?? 0,
+                        'tm3_k' => $keterampilan['tm3_k'] ?? 0,
+                        'tm4_k' => $keterampilan['tm4_k'] ?? 0,
+                        'desk_keterampilan' => $keterampilan['keterangan'] ?? '-',
+                    ]);
+                }
+        
+                foreach($data_ekskul as $key => $ekskul){
+                    NilaiEkskul::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'id_ekskul' => $key,
+                        'semester' => $semester,
+                    ],[
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'id_ekskul' => $key,
+                        'semester' => $semester,
+                        'keterangan' => $ekskul['keterangan'] ?? '-',
+                    ]);
+                }
+        
+                foreach($data_proporsi as $key => $proporsi){
+                    NilaiProporsi::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'jenis_proporsi' => $key,
+                        'semester' => $semester,
+                    ],[
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'semester' => $semester,
+                        'jenis_proporsi' => $key,
+                        'keterangan' => $proporsi ?? '',
+                    ]);
+                }
+        
+                foreach($data_kesehatan as $key => $kesehatan){
+                    NilaiKesehatan::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'jenis_kesehatan' => $key,
+                        'semester' => $semester,
+                    ],[
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'semester' => $semester,
+                        'jenis_kesehatan' => $key,
+                        'keterangan' => $kesehatan ?? '-',
+                    ]);
+                }
+        
+                foreach($data_sikap as $key => $sikap){
+                    NilaiSikap::updateOrCreate([
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'jenis_sikap' => $key,
+                        'semester' => $semester,
+                    ],[
+                        'id_anggota_kelas' => $anggota_kelas->id,
+                        'semester' => $semester,
+                        'jenis_sikap' => $key,
+                        'keterangan' => $sikap ?? '-',
+                    ]);
+                }
+        
+                Saran::updateOrCreate([
+                    'id_anggota_kelas' => $anggota_kelas->id,
+                    'semester' => $semester,
+                ],[
+                    'id_anggota_kelas' => $anggota_kelas->id,
+                    'semester' => $semester,
+                    'keterangan' => $data_saran ?? '-',
+                ]);
+            }, 3);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menyimpan data nilai']);
+        }
+
+        return response(['code' => 1, 'message' => 'Nerhasil menyimpan data nilai']);
     }
 
     /**

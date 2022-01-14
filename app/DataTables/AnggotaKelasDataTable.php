@@ -11,7 +11,7 @@ class AnggotaKelasDataTable
     {
         return Datatables::of($anggota_kelas)
             ->addColumn('action', function($anggota_kelas) use($custom_action) {
-                return view($custom_action != null ? $custom_action : 'anggota_kelas.datatable_action', compact('anggota_kelas'));
+                return view(($custom_action != null ? $custom_action : 'anggota_kelas.datatable_action'), compact('anggota_kelas'));
             })
             ->addIndexColumn()->rawColumns(['action'])->make(true);
     }

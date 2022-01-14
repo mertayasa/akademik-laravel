@@ -46,6 +46,9 @@ class AkademikController extends Controller
         $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
         $ekskul = Ekskul::all();
 
+        // $asd = 'nama';
+        // dd($ekskul[0]->$asd);
+
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
             'ekskul' => $ekskul,
@@ -64,29 +67,5 @@ class AkademikController extends Controller
         ];
 
         return view('akademik.show', $data);
-    }
-
-    public function seedNilai()
-    {
-        $anggota_kelas = AnggotaKelas::all();
-        $mapel = Mapel::inRandomOrder()->take(3)->get();
-        foreach($mapel as $map){
-            foreach ($anggota_kelas as $key => $anggota) {
-                Nilai::create([
-                    'id_anggota_kelas' => $anggota->id,
-                    'id_mapel' => $map->id,
-                    'semester' => 'ganjil',
-                ]);
-            }
-        }
-        foreach($mapel as $map){
-            foreach ($anggota_kelas as $key => $anggota) {
-                Nilai::create([
-                    'id_anggota_kelas' => $anggota->id,
-                    'id_mapel' => $map->id,
-                    'semester' => 'genap',
-                ]);
-            }
-        }
     }
 }

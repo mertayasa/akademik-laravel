@@ -30,7 +30,7 @@ class AnggotaKelas extends Model
     {
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
-    
+
     public function tahun_ajar()
     {
         return $this->belongsTo('App\Models\TahunAjar', 'id_tahun_ajar');
@@ -70,6 +70,11 @@ class AnggotaKelas extends Model
         return $this->hasMany('App\Models\NilaiSikap', 'id_anggota_kelas');
     }
 
+    public function saran()
+    {
+        return $this->hasMany('App\Models\Saran', 'id_anggota_kelas');
+    }
+
     public function getAbsensiByDate($tgl, $return_full_status = false)
     {
         $absensi = $this->absensi->where('tgl_absensi', $tgl)->first();
@@ -79,4 +84,65 @@ class AnggotaKelas extends Model
 
         return isset($absensi) ? ucfirst(substr($absensi->kehadiran, 0, 1)) : 'A';
     }
+
+    public function getNilaiValue($type, $id_mapel, $semester)
+    {
+        $nilai = $this->nilai->where('semester', $semester)->where('id_mapel', $id_mapel)->first();
+        if(isset($nilai)){
+            return $nilai->$type;
+        }
+
+        return null;
+    }
+
+    public function getNilaiEkskulValue($id_ekskul, $semester)
+    {
+        $nilai = $this->nilai_ekskul->where('semester', $semester)->where('id_ekskul', $id_ekskul)->first();
+        if(isset($nilai)){
+            return $nilai->keterangan;
+        }
+
+        return null;
+    }
+
+    public function getNilaiSikapValue($jenis_sikap, $semester)
+    {
+        $nilai = $this->nilai_sikap->where('semester', $semester)->where('jenis_sikap', $jenis_sikap)->first();
+        if(isset($nilai)){
+            return $nilai->keterangan;
+        }
+
+        return null;
+    }
+
+    public function getNilaiProporsiValue($jenis_proporsi, $semester)
+    {
+        $nilai = $this->nilai_proporsi->where('semester', $semester)->where('jenis_proporsi', $jenis_proporsi)->first();
+        if(isset($nilai)){
+            return $nilai->keterangan;
+        }
+
+        return null;
+    }
+
+    public function getNilaiKesehatanValue($jenis_kesehatan, $semester)
+    {
+        $nilai = $this->nilai_kesehatan->where('semester', $semester)->where('jenis_kesehatan', $jenis_kesehatan)->first();
+        if(isset($nilai)){
+            return $nilai->keterangan;
+        }
+
+        return null;
+    }
+
+    public function getSaranValue($semester)
+    {
+        $nilai = $this->saran->where('semester', $semester)->first();
+        if(isset($nilai)){
+            return $nilai->keterangan;
+        }
+
+        return null;
+    }
+    
 }

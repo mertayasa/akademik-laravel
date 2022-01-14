@@ -6,6 +6,7 @@ use App\Models\AnggotaKelas;
 use App\Models\Mapel;
 use Illuminate\Database\Seeder;
 use App\Models\Nilai;
+use Faker\Factory as Faker;
 
 class NilaiSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class NilaiSeeder extends Seeder
     {
         // Nilai::factory()->count(20)->create();
 
+        $faker = Faker::create('id_ID');
         $anggota_kelas = AnggotaKelas::all();
         $mapel = Mapel::inRandomOrder()->take(3)->get();
         foreach($mapel as $map){
@@ -36,6 +38,8 @@ class NilaiSeeder extends Seeder
                     'tm4_k' => rand(56, 99),
                     'pts' => rand(56, 99),
                     'pas' => rand(56, 99),
+                    'desk_pengetahuan' => $faker->sentence(),
+                    'desk_keterampilan' => $faker->sentence(),
                 ]);
             }
         }
@@ -55,6 +59,8 @@ class NilaiSeeder extends Seeder
                     'tm4_k' => rand(56, 99),
                     'pts' => rand(56, 99),
                     'pas' => rand(56, 99),
+                    'desk_pengetahuan' => $faker->sentence(),
+                    'desk_keterampilan' => $faker->sentence(),
                 ]);
             }
         }
