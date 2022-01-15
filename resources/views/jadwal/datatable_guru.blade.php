@@ -10,15 +10,11 @@
     <thead>
         <tr>
             <th></th>
+            <th></th>
             <th>Pelajaran</th>
+            <th>Kelas</th>
             <th>Jam Mulai</th>
             <th>Jam Selesai</th>
-            <th>Guru</th>
-            @if (Auth::user()->isAdmin())
-                <th>Aksi</th>
-            @else
-                <th></th>
-            @endif        
         </tr>
     </thead>
     <tbody></tbody>
@@ -27,7 +23,7 @@
 @push('scripts')
     <script>
         let jadwalTable
-        let jadwalUrl = "{{ route('jadwal.datatable', [$id_kelas, $id_tahun_ajar]) }}"
+        let jadwalUrl = "{{ route('jadwal.datatable.guru') }}"
 
         jadwalDatatable(jadwalUrl)
 
@@ -44,8 +40,19 @@
                         name: 'hari',
                     },
                     {
+                        data: 'kode_hari',
+                        name: 'kode_hari',
+                        visible: false,
+                        searchable: false,
+                    },
+                    {
                         data: 'mapel.nama',
                         name: 'mapel.nama',
+                    },
+                    {
+                        data: 'kelas.jenjang',
+                        name: 'kelas.jenjang',
+                        className: "text-center align-middle"
                     },
                     {
                         data: 'jam_mulai',
@@ -55,18 +62,6 @@
                     {
                         data: 'jam_selesai',
                         name: 'jam_selesai',
-                        className: "text-center align-middle"
-                    },
-                    {
-                        data: 'guru.nama',
-                        name: 'guru.nama',
-                        className: "text-center align-middle"
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
                         className: "text-center align-middle"
                     }
                 ],
@@ -86,7 +81,7 @@
                         }
                     } );
                 },
-                order: [[ groupColumn, "ASC" ]],
+                order: [[ 1, "ASC" ]],
                 columnDefs: [
                     { 
                         visible: false, 

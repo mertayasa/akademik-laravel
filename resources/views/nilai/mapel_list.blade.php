@@ -2,9 +2,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
-                <button data-bs-toggle="modal" data-bs-target="#mapelNilaiModal" class="btn btn-primary add"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Mata Pelajaran">
-                    <i class="fas fa-folder-plus"></i> Tambah Mata Pelajaran</button>
+                @if (Auth::user()->isAdmin())
+                    <button data-bs-toggle="modal" data-bs-target="#mapelNilaiModal" class="btn btn-primary add"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Mata Pelajaran">
+                        <i class="fas fa-folder-plus"></i> Tambah Mata Pelajaran</button>
+                @endif
             </div>
             <div class="card-body mt-0 pt-0">
                 <div class="col-12">

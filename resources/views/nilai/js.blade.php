@@ -104,7 +104,7 @@
         }
 
         function showNilaiRaport(showNilaiUrl){
-            console.log(showNilaiUrl);
+            // console.log(showNilaiUrl);
             const raportContainer = document.getElementById('raportContainer')
             raportContainer.classList.remove('d-none')
 
@@ -117,7 +117,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.code == 1) {
                     raportContainer.innerHTML = ''
                     raportContainer.insertAdjacentHTML('beforeend', data.form_raport)

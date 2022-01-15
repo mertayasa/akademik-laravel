@@ -75,10 +75,41 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Siswa', 'id_user');
     }
 
+    public function isAdmin()
+    {
+        return $this->attributes['level'] == self::$admin ? true : false;    
+    }
+
+    public function isOrtu()
+    {
+        return $this->attributes['level'] == self::$ortu ? true : false;    
+    }
+
+    public function isGuru()
+    {
+        return $this->attributes['level'] == self::$guru ? true : false;    
+    }
+
+    public function isWali()
+    {
+        if($this->attributes['level'] == self::$guru){
+            $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+            if($this->wali_kelas->where('id_tahun_ajar', $tahun_ajar_active->id)->count() > 0){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function anggota_kelas()
     {
         return $this->hasManyThrough(AnggotaKelas::class, Siswa::class, 'id_user', 'id_siswa');
+    }
+
+    public function wali_kelas()
+    {
+        return $this->hasMany(WaliKelas::class, 'id_user');
     }
 
     public function kelas()

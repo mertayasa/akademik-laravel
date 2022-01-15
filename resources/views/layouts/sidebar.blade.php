@@ -17,7 +17,24 @@
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-            @if (roleName() == 'admin')
+
+            @if (Auth::user()->isWali())
+                <li class="sidebar-item {{ isActive('akademik') }}">
+                    <a class="sidebar-link" href="{{ route('akademik.index') }}">
+                        <i class="fas fa-book-reader"></i> <span class="align-middle pl-1">Akademik</span>
+                    </a>
+                </li>
+            @endif
+            
+            @if (Auth::user()->isWali())
+                <li class="sidebar-item {{ isActive('jadwal') }}">
+                    <a class="sidebar-link" href="{{ route('jadwal.index.guru') }}">
+                        <i class="fas fa-calendar-week"></i> <span class="align-middle pl-1">Jadwal Mengajar</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (Auth::user()->isAdmin())
                 <li class="sidebar-item {{ isActive('akademik') }}">
                     <a class="sidebar-link" href="{{ route('akademik.index') }}">
                         <i class="fas fa-book-reader"></i> <span class="align-middle pl-1">Akademik</span>
@@ -77,77 +94,6 @@
                     <a class="sidebar-link" href="{{ route('tahun_ajar.index') }}">
                         <i class="fas fa-book"></i> <span class="align-middle pl-1">Data Tahun Ajaran</span>
                     </a>
-                </li>
-            @endif
-
-            @if (roleName() != 'ortu')
-                <li class="sidebar-item {{ isActive('pengumuman') }}">
-                    <a class="sidebar-link" href="{{ route('pengumuman.index') }}">
-                        <i class="fas fa-bullhorn"></i><span class="align-middle pl-1">Pengumuman</span>
-                    </a>
-                </li>
-            @endif
-
-
-            @if (roleName() != 'admin')
-                <li class="sidebar-item {{ isActive('jadwal') }}">
-                    <a class="sidebar-link" href="{{ route('jadwal.index') }}">
-                        <i class="fas fa-calendar-alt"></i> <span class="align-middle pl-1">Data Jadwal</span>
-                    </a>
-                </li>
-            @endif
-
-            <li class="sidebar-item {{ isActive('prestasi') }}">
-                <a class="sidebar-link" href="{{ route('prestasi.index') }}">
-                    <i class="fas fa-trophy"></i> <span class="align-middle pl-1">Data Prestasi</span>
-                </a>
-            </li>
-            @if (roleName() == 'ortu')
-                <li class="sidebar-item {{ isActive('nilai') }}">
-                    <a class="sidebar-link" href="{{ route('nilai.index') }}">
-                        <i class="fas fa-list-ol"></i> <span class="align-middle pl-1">Data Nilai</span>
-                    </a>
-                </li>
-            @endif
-            @if (roleName() == 'guru')
-                <li class="sidebar-item {{ isActive('siswa') }}">
-                    <a class="sidebar-link" href="{{ route('siswa.index') }}">
-                        <i class="fas fa-user-graduate" class="align-middle"></i> <span
-                            class="align-middle  pl-1">Data
-                            Siswa </span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a data-target="#nilai" data-toggle="collapse" class="sidebar-link collapsed">
-                        <i class="fas fa-list-ol"></i> <span class="align-middle pl-1">Data Nilai</span>
-                    </a>
-                    <ul id="nilai" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                        <li class="sidebar-item {{ isActive('nilai') }}">
-                            <a class="sidebar-link" href="{{ route('nilai.index') }}">
-                                <span class="align-middle pl-1">Data Nilai</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ isActive('nilai_ekskul') }}">
-                            <a class="sidebar-link" href="{{ route('nilai_ekskul.index') }}">
-                                <span class="align-middle">Data Nilai Ekskul</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ isActive('nilai_sikap') }}">
-                            <a class="sidebar-link" href="{{ route('nilai_sikap.index') }}">
-                                <span class="align-middle">Data Nilai Sikap</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ isActive('nilai_kesehatan') }}">
-                            <a class="sidebar-link" href="{{ route('nilai_kesehatan.index') }}">
-                                <span class="align-middle">Data Nilai Kesehatan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ isActive('nilai_proporsi') }}">
-                            <a class="sidebar-link" href="{{ route('nilai_proporsi.index') }}">
-                                <span class="align-middle">Data Nilai Proporsi</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             @endif
 

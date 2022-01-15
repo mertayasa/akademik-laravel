@@ -16,16 +16,25 @@ use App\Models\WaliKelas;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AkademikController extends Controller
 {
     public function index(Request $request)
     {
-        $kelas = Kelas::all();
-
+        $user = Auth::user();
         $id_tahun_ajar = $request->get('id_tahun_ajar');
         $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
         $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
+        
+        if($user->isWali()){
+            $id_kelas = $user->wali_kelas->where('id_tahun_ajar', $tahun_ajar_active->id)->pluck('id_kelas');
+            $kelas = Kelas::whereIn('id', $id_kelas->toArray())->get();
+        }else if($user->isAdmin()){
+            $kelas = Kelas::all();
+        }else{
+            $kelas = collect([]);
+        }
 
         $data  =  [
             'id_tahun_ajar' => $id_tahun_ajar ?? $tahun_ajar_active->id,
@@ -45,9 +54,6 @@ class AkademikController extends Controller
         $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
         $ekskul = Ekskul::all();
-
-        // $asd = 'nama';
-        // dd($ekskul[0]->$asd);
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),

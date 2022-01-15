@@ -14,6 +14,7 @@ use App\Http\Requests\JadwalReq;
 use App\Models\AnggotaKelas;
 use App\Models\Nilai;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -26,8 +27,20 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $jadwal = jadwal::all();
+        $jadwal = Jadwal::where('status', 'aktif')->get();
         return view('jadwal.index', compact('jadwal'));
+    }
+
+    public function indexGuru()
+    {
+        return view('jadwal.index_guru');
+    }
+
+    public function datatableGuru()
+    {
+        $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+        $jadwal = Jadwal::where('id_guru', Auth::id())->where('status', 'aktif')->where('id_tahun_ajar', $tahun_ajar_active->id)->get();
+        return JadwalDataTable::set($jadwal);
     }
 
     public function datatable($id_kelas, $id_tahun_ajar)

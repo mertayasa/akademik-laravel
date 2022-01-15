@@ -25,38 +25,47 @@
                                 <li class="nav-item">
                                     <a href="#absensi" class="nav-link" data-toggle="tab">Absensi</a>
                                 </li>
+                                
+                                @if (Auth::user()->isAdmin())
+                                    <li class="nav-item">
+                                        <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
+                                    </li>
+                                @endif
+                                
                                 <li class="nav-item">
-                                    <a href="#wali" class="nav-link" data-toggle="tab">Wali Kelas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#nilai" class="nav-link" data-toggle="tab">Nilai</a>
+                                    <a href="#tabNilai" class="nav-link" data-toggle="tab">Nilai</a>
                                 </li>
                             </ul>
 
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="siswa">
                                     <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end px-0 pt-0">
-                                            <a href="#" data-bs-toggle="modal" onclick="createAnggota(this)" data-bs-target="#studentModal"
-                                                class="btn btn-primary add" data-bs-toggle="tooltip"
-                                                data-bs-placement="bottom" title="Tambah Anggota Kelas"> <i
-                                                    class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
-                                        </div>
+                                        @if (Auth::user()->isAdmin())
+                                            <div class="card-header d-flex justify-content-end px-0 pt-0">
+                                                <a href="#" data-bs-toggle="modal" onclick="createAnggota(this)" data-bs-target="#studentModal"
+                                                    class="btn btn-primary add" data-bs-toggle="tooltip"
+                                                    data-bs-placement="bottom" title="Tambah Anggota Kelas"> <i
+                                                        class="fas fa-folder-plus"></i> Anggota Kelas Baru</a>
+                                            </div>
+                                        @endif
+
                                         @include('anggota_kelas.datatable')
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="jadwal">
                                     <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end px-0 pt-0">
-                                            <a href="#" onclick="createJadwal(this)" 
-                                                class="btn btn-primary add"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#jadwalModal" 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="bottom" 
-                                                title="Tambah Jadwal">
-                                                <i class="fas fa-folder-plus"></i> Jadwal Baru</a>
-                                        </div>
+                                        @if (Auth::user()->isAdmin())
+                                            <div class="card-header d-flex justify-content-end px-0 pt-0">
+                                                <a href="#" onclick="createJadwal(this)" 
+                                                    class="btn btn-primary add"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#jadwalModal" 
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="bottom" 
+                                                    title="Tambah Jadwal">
+                                                    <i class="fas fa-folder-plus"></i> Jadwal Baru</a>
+                                            </div>
+                                        @endif
                                         @include('jadwal.datatable')
                                     </div>
                                 </div>
@@ -79,52 +88,56 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="wali">
-                                    <div class="card-body px-0">
-                                        <div class="card-header d-flex justify-content-end px-0 pt-0 pb-0">
-                                            <a href="#"
-                                                onclick="showWaliKelasForm(this)"
-                                                class="btn btn-primary add"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#waliKelasModal" 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="bottom" 
-                                                title="Atur Wali Kelas">
-                                                <i class="fas fa-user-edit"></i>
-                                                Atur Wali Kelas
-                                            </a>
-                                            <a href="#"
-                                                onclick="deleteWaliKelas(this)"
-                                                class="btn btn-danger add ml-2 {{ !isset($wali_kelas) ? 'd-none' : '' }}"
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="bottom"
-                                                data-id="{{ $wali_kelas->id ?? '' }}"
-                                                id="btnDeleteWali"
-                                                title="Hapus Wali Kelas">
-                                                <i class="fas fa-user-times"></i>
-                                                Hapus Wali Kelas
-                                            </a>
-                                        </div>
 
-                                        <div id="waliKelasContainer">
-                                            @if (isset($wali_kelas))
-                                                @include('wali_kelas.form-show')
-                                            @else
-                                                <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
-                                            @endif
+                                @if (Auth::user()->isAdmin())
+                                    <div class="tab-pane fade" id="wali">
+                                        <div class="card-body px-0">
+                                            <div class="card-header d-flex justify-content-end px-0 pt-0 pb-0">
+                                                <a href="#"
+                                                    onclick="showWaliKelasForm(this)"
+                                                    class="btn btn-primary add"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#waliKelasModal" 
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="bottom" 
+                                                    title="Atur Wali Kelas">
+                                                    <i class="fas fa-user-edit"></i>
+                                                    Atur Wali Kelas
+                                                </a>
+                                                <a href="#"
+                                                    onclick="deleteWaliKelas(this)"
+                                                    class="btn btn-danger add ml-2 {{ !isset($wali_kelas) ? 'd-none' : '' }}"
+                                                    data-bs-toggle="tooltip" 
+                                                    data-bs-placement="bottom"
+                                                    data-id="{{ $wali_kelas->id ?? '' }}"
+                                                    id="btnDeleteWali"
+                                                    title="Hapus Wali Kelas">
+                                                    <i class="fas fa-user-times"></i>
+                                                    Hapus Wali Kelas
+                                                </a>
+                                            </div>
+
+                                            <div id="waliKelasContainer">
+                                                @if (isset($wali_kelas))
+                                                    @include('wali_kelas.form-show')
+                                                @else
+                                                    <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="nilai">
+                                @endif
+
+                                <div class="tab-pane fade" id="tabNilai">
                                     <div class="card-body px-0">
                                         @if ($count_anggota > 0)
-                                            {{-- @include('anggota_kelas.datatable') --}}
-                                            @include('anggota_kelas.datatable', ['custom_action' => 'anggota_kelas.datatable_nilai_action', 'custom_id' => 'asdanjing'])
+                                            @include('anggota_kelas.datatable', ['custom_action' => 'anggota_kelas.datatable_nilai_action', 'custom_id' => 'datatableUserNilai'])
                                         @else
                                             <i>Kelas ini belum memiliki anggota</i>
                                         @endif
                                     </div>
                                 </div>
+                            
                             </div>
                         </div>
                         <a href="#" onclick="history.back()" class="btn btn-danger">Kembali</a>
@@ -179,7 +192,7 @@
                     </div>
                 </div>
 
-                <div class="row d-none bottom-hint" data-href="#nilai">
+                <div class="row d-none bottom-hint" data-href="#tabNilai">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -217,14 +230,14 @@
             }
 
             const mapelListCon = document.getElementById('mapelListContainer')
-            if (rawHrefValue != '#nilai') {
+            if (rawHrefValue != '#tabNilai') {
                 mapelListCon.classList.add('d-none')
             }else{
                 mapelListCon.classList.remove('d-none')
             }
 
             const formRaportContainer = document.getElementById('formRaportContainer')
-            if (rawHrefValue != '#nilai') {
+            if (rawHrefValue != '#tabNilai') {
                 hideFormNilai()
             }
 

@@ -3,19 +3,21 @@
 
 @section('content')
     <div class="container-fluid p-0">
-        <div class="card-header mb-3">
-            {!! Form::open(['method' => 'get']) !!}
-            <div class="row align-items-end">
-                <div class="col-12 col-md-3 pb-3 pb-md-0">
-                    {!! Form::label('user', 'Tahun Ajaran ', ['class' => 'mb-1']) !!}
-                    {!! Form::select('id_tahun_ajar', $tahun_ajar, $id_tahun_ajar, ['class' => 'form-control', 'id' => 'filterStatus']) !!}
+        @if (Auth::user()->isAdmin())
+            <div class="card-header mb-3">
+                {!! Form::open(['method' => 'get']) !!}
+                <div class="row align-items-end">
+                    <div class="col-12 col-md-3 pb-3 pb-md-0">
+                        {!! Form::label('user', 'Tahun Ajaran ', ['class' => 'mb-1']) !!}
+                        {!! Form::select('id_tahun_ajar', $tahun_ajar, $id_tahun_ajar, ['class' => 'form-control', 'id' => 'filterStatus']) !!}
+                    </div>
+                    <div class="col-12 col-md-3 pb-3 pb-md-0">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
                 </div>
-                <div class="col-12 col-md-3 pb-3 pb-md-0">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
+                {!! Form::close() !!}
             </div>
-            {!! Form::close() !!}
-        </div>
+        @endif
 
         <div class="w-100">
             <div class="row">

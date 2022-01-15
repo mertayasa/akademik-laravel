@@ -182,6 +182,9 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{jadwal}', [JadwalController::class, 'update'])->name('update');
         Route::delete('destroy/{jadwal}', [JadwalController::class, 'destroy'])->name('destroy');
         Route::get('datatable/{kelas}/{id_tahun_ajar}', [JadwalController::class, 'datatable'])->name('datatable');
+        
+        Route::get('index-guru', [JadwalController::class, 'indexGuru'])->name('index.guru');
+        Route::get('datatable-guru', [JadwalController::class, 'datatableGuru'])->name('datatable.guru');
     });
 
     Route::group(['prefix' => 'anggota_kelas', 'as' => 'anggota_kelas.'], function () {
