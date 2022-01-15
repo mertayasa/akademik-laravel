@@ -51,6 +51,7 @@ class AkademikController extends Controller
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
+            'guru' => User::guru()->get(),
             'ekskul' => $ekskul,
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,

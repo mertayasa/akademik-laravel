@@ -48,9 +48,13 @@
                                 <div class="tab-pane fade" id="jadwal">
                                     <div class="card-body px-0">
                                         <div class="card-header d-flex justify-content-end px-0 pt-0">
-                                            <a href="#" onclick="createJadwal(this)" data-bs-toggle="modal"
-                                                data-bs-target="#jadwalModal" class="btn btn-primary add"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Jadwal">
+                                            <a href="#" onclick="createJadwal(this)" 
+                                                class="btn btn-primary add"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#jadwalModal" 
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="bottom" 
+                                                title="Tambah Jadwal">
                                                 <i class="fas fa-folder-plus"></i> Jadwal Baru</a>
                                         </div>
                                         @include('jadwal.datatable')
@@ -60,7 +64,8 @@
                                     <div class="card-body px-0">
                                         <div class="card-header d-flex justify-content-end px-0 pt-0">
                                             <button onclick="showAbsensiForm(this)" class="btn btn-primary add"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="bottom"
                                                 title="Management Absensi">
                                                 <i class="fas fa-folder-plus"></i> Management Absensi</button>
                                         </div>
@@ -76,11 +81,38 @@
                                 </div>
                                 <div class="tab-pane fade" id="wali">
                                     <div class="card-body px-0">
-                                        @if (isset($wali_kelas))
-                                            @include('wali_kelas.form-show')
-                                        @else
-                                            <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
-                                        @endif
+                                        <div class="card-header d-flex justify-content-end px-0 pt-0 pb-0">
+                                            <a href="#"
+                                                onclick="showWaliKelasForm(this)"
+                                                class="btn btn-primary add"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#waliKelasModal" 
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="bottom" 
+                                                title="Atur Wali Kelas">
+                                                <i class="fas fa-user-edit"></i>
+                                                Atur Wali Kelas
+                                            </a>
+                                            <a href="#"
+                                                onclick="deleteWaliKelas(this)"
+                                                class="btn btn-danger add ml-2 {{ !isset($wali_kelas) ? 'd-none' : '' }}"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="bottom"
+                                                data-id="{{ $wali_kelas->id ?? '' }}"
+                                                id="btnDeleteWali"
+                                                title="Hapus Wali Kelas">
+                                                <i class="fas fa-user-times"></i>
+                                                Hapus Wali Kelas
+                                            </a>
+                                        </div>
+
+                                        <div id="waliKelasContainer">
+                                            @if (isset($wali_kelas))
+                                                @include('wali_kelas.form-show')
+                                            @else
+                                                <i>{{ '"Kelas ini belum memiliki wali kelas"' }} </i>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="nilai">
@@ -170,6 +202,7 @@
     @include('akademik.modal.anggota')
     @include('akademik.modal.jadwal')
     @include('akademik.modal.mapel_list')
+    @include('akademik.modal.wali_kelas')
 @endsection
 
 @push('scripts')
@@ -190,12 +223,10 @@
                 mapelListCon.classList.remove('d-none')
             }
 
-            // const formRaportContainer = document.getElementById('formRaportContainer')
-            // if (rawHrefValue != '#nilai') {
-            //     formRaportContainer.classList.add('d-none')
-            // }else{
-            //     formRaportContainer.classList.remove('d-none')
-            // }
+            const formRaportContainer = document.getElementById('formRaportContainer')
+            if (rawHrefValue != '#nilai') {
+                hideFormNilai()
+            }
 
             const hintElement = $(`[data-href="${rawHrefValue}"]`)
             if (hintElement != undefined) {
@@ -211,5 +242,9 @@
             }
         }
     </script>
-    @include('nilai.js')
 @endpush
+
+@include('nilai.js')
+@include('wali_kelas.js')
+@include('jadwal.js')
+@include('anggota_kelas.js')

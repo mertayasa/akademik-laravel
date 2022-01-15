@@ -147,6 +147,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'id_guru' => 'Guru'
+    ],
 
 ];

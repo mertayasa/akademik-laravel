@@ -55,6 +55,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeOrtu($query)
+    {
+        return $query->where('level', self::$ortu);
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('level', self::$admin);
+    }
+
+    public function scopeGuru($query)
+    {
+        return $query->where('level', self::$guru);
+    }
+
     public function siswa()
     {
         return $this->hasMany('App\Models\Siswa', 'id_user');

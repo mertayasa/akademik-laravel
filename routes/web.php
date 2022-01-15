@@ -146,9 +146,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [WaliKelasController::class, 'index'])->name('index');
         Route::get('create', [WaliKelasController::class, 'create'])->name('create');
         Route::post('store', [WaliKelasController::class, 'store'])->name('store');
-        Route::get('edit/{wali_kelas}', [WaliKelasController::class, 'edit'])->name('edit');
         Route::get('show/{wali_kelas}', [WaliKelasController::class, 'show'])->name('show');
+        Route::get('edit/{wali_kelas}', [WaliKelasController::class, 'edit'])->name('edit');
         Route::patch('update/{wali_kelas}', [WaliKelasController::class, 'update'])->name('update');
+        Route::post('set/{kelas}/{tahun_ajar}', [WaliKelasController::class, 'setWaliKelas'])->name('set');
         Route::delete('destroy/{wali_kelas}', [WaliKelasController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [WaliKelasController::class, 'datatable'])->name('datatable');
     });
@@ -193,16 +194,17 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'nilai', 'as' => 'nilai.'], function () {
-        Route::get('/', [NilaiController::class, 'index'])->name('index');
-        Route::get('create', [NilaiController::class, 'create'])->name('create');
-        Route::post('store', [NilaiController::class, 'store'])->name('store');
-        Route::post('store-mapel/{id_kelas}/{id_tahun_ajar}', [NilaiController::class, 'storeMapel'])->name('store_mapel');
-        Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
-        Route::get('edit/{nilai}', [NilaiController::class, 'edit'])->name('edit');
-        Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
+        // Route::get('/', [NilaiController::class, 'index'])->name('index');
+        // Route::get('create', [NilaiController::class, 'create'])->name('create');
+        // Route::post('store', [NilaiController::class, 'store'])->name('store');
+        // Route::get('edit/{nilai}', [NilaiController::class, 'edit'])->name('edit');
+        // Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
+        // Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
+
         Route::get('edit-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'editRaport'])->name('edit_raport');
         Route::post('update-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'updateRaport'])->name('update_raport');
-        Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
+        Route::post('store-mapel/{id_kelas}/{id_tahun_ajar}', [NilaiController::class, 'storeMapel'])->name('store_mapel');
+        Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
         Route::get('export-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'exportRaport'])->name('export_raport');
     });

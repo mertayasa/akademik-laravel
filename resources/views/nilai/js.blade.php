@@ -162,7 +162,6 @@
                 return data
             })
             .then(data => {
-                console.log(data);
                 showToast(data.code, data.message)
             })
             .catch((error) => {

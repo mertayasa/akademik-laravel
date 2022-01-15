@@ -86,6 +86,7 @@
     <script src="{{ asset('datatables/datatables.js') }}"></script>
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css"> --}}
     <script>
+        const baseUrl = "{{ url('/') }}"
         function deleteModel(deleteUrl, tableId, additionalMethod = null) {
             Swal.fire({
                 title: "Warning",
@@ -156,9 +157,12 @@
                 const targetField = element.getAttribute('error-name')
                 const inputElement = document.querySelectorAll(`[name="${targetField}"]`)
                 element.innerHTML = ''
-                if(inputElement[0] != undefined){
-                    inputElement[0].classList.remove('is-invalid')
+                for (let inputEl = 0; inputEl < inputElement.length; inputEl++) {
+                    if(inputElement[inputEl] != undefined){
+                        inputElement[inputEl].classList.remove('is-invalid')
+                    }
                 }
+
             }
         }
 
@@ -166,12 +170,21 @@
             Object.keys(errors).forEach(function(key) {
                 let errorSpan = document.querySelectorAll(`[error-name="${key}"]`)
                 let errorInput = document.querySelectorAll(`[name="${key}"]`)
-                errorInput[0].classList.add('is-invalid')
-                if (errorSpan[0] != undefined) {
-                    errorSpan[0].innerHTML = errors[key][0]
-                }else{
-                    showToast(0, 'Terjadi kesalahan pada sistem')
+                
+                for (let eInput = 0; eInput < errorInput.length; eInput++) {
+                    const selectedErrorInput = errorInput[eInput];
+                    selectedErrorInput.classList.add('is-invalid')
                 }
+
+                for (let eSpan = 0; eSpan < errorSpan.length; eSpan++) {
+                    const selectedErrorSpan = errorSpan[eSpan];
+                    if (selectedErrorSpan != undefined) {
+                        selectedErrorSpan.innerHTML = errors[key][0]
+                    }else{
+                        showToast(0, 'Terjadi kesalahan pada sistem')
+                    }
+                }
+
             })
         }
         

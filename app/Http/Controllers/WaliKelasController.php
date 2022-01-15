@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\TahunAjar;
 use Illuminate\Http\Request;
 use App\DataTables\WaliKelasDataTable;
+use App\Http\Requests\SetWaliKelasReq;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -90,6 +91,32 @@ class WaliKelasController extends Controller
         $tahun_ajar = TahunAjar::pluck('keterangan', 'id');
         $kelas = Kelas::where('status', 'aktif')->pluck('kode', 'id');
         return view('wali_kelas.edit', compact('kelas', 'tahun_ajar', 'user', 'wali_kelas'));
+    }
+
+    public function setWaliKelas(SetWaliKelasReq $request, Kelas $kelas, TahunAjar $tahun_ajar)
+    {
+        try{
+            $wali_kelas = WaliKelas::updateOrCreate([
+                'id_kelas' => $kelas->id,
+                'id_tahun_ajar' => $tahun_ajar->id,
+            ],[
+                'id_kelas' => $kelas->id,
+                'id_tahun_ajar' => $tahun_ajar->id,
+                'id_user' => $request->id_guru
+            ]);
+            $wali_kelas->refresh();
+
+            $data = [
+                'wali_kelas' => $wali_kelas
+            ];
+
+            $wali_kelas_card = view('wali_kelas.form-show', $data)->render();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal memperbarui data wali kelas']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil memperbarui data wali kelas', 'wali_kelas_card' => $wali_kelas_card, 'id_wali' => $wali_kelas->id]);
     }
 
     /**
