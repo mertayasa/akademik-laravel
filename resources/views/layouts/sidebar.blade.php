@@ -97,6 +97,24 @@
                 </li>
             @endif
 
+            @if (Auth::user()->isOrtu())
+                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
+                    <a class="sidebar-link" href="#">
+                        <i class="fas fa-user-graduate" class="align-middle"></i> <span class="align-middle pl-1">Biodata Anak</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
+                    <a class="sidebar-link" href="#">
+                        <i class="fas fa-calendar-week"></i> <span class="align-middle pl-1">Jadwal</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
+                    <a class="sidebar-link" href="#">
+                        <i class="fas fa-star"></i> <span class="align-middle pl-1">Nilai</span>
+                    </a>
+                </li>
+            @endif
+
 
             {{-- <li class="sidebar-header">
                 Multi Level
