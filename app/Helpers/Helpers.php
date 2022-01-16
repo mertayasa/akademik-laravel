@@ -152,6 +152,12 @@ function getSemester($tgl, $id_tahun_ajar)
     }
 }
 
+function getSemesterName($semester)
+{
+    return $semester == 'ganjil' ? '1 (Satu)' : '2 (Dua)';
+}
+
+
 function getPredikatNilai($nilai)
 {
     switch($nilai){

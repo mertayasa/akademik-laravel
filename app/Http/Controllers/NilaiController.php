@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Calculation\Category;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class NilaiController extends Controller
 {
@@ -365,7 +366,18 @@ class NilaiController extends Controller
 
         // Contoh mengambil rata-rata nilai dan predikatnya
         $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, 8);
-        dd($nilai);
-        dd(getPredikatNilai($nilai));
+        // dd($nilai);
+        // dd(getPredikatNilai($nilai));
+
+         $data = [
+            'anggota_kelas' => $anggota_kelas,
+            'semester' => $semester
+        ];
+
+        // return view('nilai.export_raport', compact('anggota_kelas', 'semester'));
+
+        $pdf = PDF::loadview('nilai.export_raport', $data)->setPaper('a4', 'potrait');;
+
+        return $pdf->stream('raport.pdf');
     }
 }
