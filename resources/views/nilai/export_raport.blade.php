@@ -78,23 +78,44 @@
     <p class="sub-title">B. PENGETAHUAN DAN KETERAMPILAN</p>
     <p style="margin-top:-15px;"><b>Kriteria Ketuntasan Minimal Satuan Pendidikan = 65 </b></p>
     <table class="table table-bordered  ">
-        <thead class="text-center table-nilai" style="font-weight: 200">
-            <tr style="align-item: middle;">
-                <td rowspan=" 2" style="align-item: middle;">No</td>
-                <td rowspan="2">Mata Pelajaran</td>
-                <td colspan="3">Pengetahuan</td>
-                <td colspan="3">Keterampilan</td>
-            </tr>
-            <tr>
-                <td>Angka</td>
-                <td>Predikat</td>
-                <td>Deskripsi</td>
-                <td>Angka</td>
-                <td>Predikat</td>
-                <td>Deskripsi</td>
-            </tr>
-        </thead>
-    </table>
+        {{-- <thead class="text-center table-nilai" style="font-weight: 200"> --}}
+        <tr style="text-align:center;">
+            <td rowspan=" 2" style="align-item: middle;"><b> No </b></td>
+            <td rowspan="2"><b> Mata Pelajaran </b></td>
+            <td colspan="3"><b> Pengetahuan </b></td>
+            <td colspan="3"><b> Keterampilan </b></td>
+        </tr>
+        <tr style="text-align:center;">
+            <td><b> Angka </b></td>
+            <td><b> Predikat </b></td>
+            <td><b> Deskripsi </b></td>
+            <td><b> Angka </b></td>
+            <td><b> Predikat </b></td>
+            <td><b> Deskripsi </b></td>
+        </tr>
+        {{-- </thead> --}}
+        <tbody>
+            @php
+                $no = 1;
+            @endphp
+            @foreach ($mapel_of_nilai as $mapel)
+                @if ($mapel->is_lokal == false)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td> {{ $mapel->nama }}</td>
+                        <td>{{ $anggota_kelas->rataNilaiPengetahuan($semester, $mapel->id) }}</td>
+                        <td> {{ getPredikatNilai($anggota_kelas->rataNilaiPengetahuan($semester, $mapel->id)) }}
+                        </td>
+                        <td>{{ $anggota_kelas->getNilaiValue('desk_pengetahuan', $mapel->id, $semester) }}</td>
+                        <td>{{ $anggota_kelas->rataNilaiKeterampilan($semester, $mapel->id) }}</td>
+                        <td> {{ getPredikatNilai($anggota_kelas->rataNilaiKeterampilan($semester, $mapel->id)) }}
+                        </td>
+                        <td>{{ $anggota_kelas->getNilaiValue('desk_keterampilan', $mapel->id, $semester) }}</td>
+                    </tr>
+
+                @endif
+            @endforeach
+        </tbody>
 
 
 </body>

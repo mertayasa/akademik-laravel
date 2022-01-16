@@ -13,6 +13,7 @@ use App\Models\NilaiKesehatan;
 use App\Models\NilaiProporsi;
 use App\Models\NilaiSikap;
 use App\Models\Saran;
+use App\Models\Mapel;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -364,14 +365,19 @@ class NilaiController extends Controller
             'saran',
         );
 
+        $mapel=Mapel::pluck('id');
         // Contoh mengambil rata-rata nilai dan predikatnya
-        $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, 8);
-        // dd($nilai);
+        // $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, $mapel);
+            // dd($nilai);
         // dd(getPredikatNilai($nilai));
+
+         $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
 
          $data = [
             'anggota_kelas' => $anggota_kelas,
-            'semester' => $semester
+            'semester' => $semester,
+             'mapel_of_nilai' => $mapel_of_nilai,
+        //    'nilai' =>$nilai
         ];
 
         // return view('nilai.export_raport', compact('anggota_kelas', 'semester'));
