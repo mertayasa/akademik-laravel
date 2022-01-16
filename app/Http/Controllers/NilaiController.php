@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AnggotaKelasDataTable;
 use App\Models\Nilai;
 use App\Models\Jadwal;
 use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
 use App\DataTables\NilaiDataTable;
 use App\Models\Ekskul;
+use App\Models\Kelas;
 use App\Models\NilaiEkskul;
 use App\Models\NilaiKesehatan;
 use App\Models\NilaiProporsi;
 use App\Models\NilaiSikap;
 use App\Models\Saran;
 use App\Models\Mapel;
+use App\Models\TahunAjar;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +35,6 @@ class NilaiController extends Controller
     {
         $id_anggota_kelas = $request->get('id_anggota_kelas');
         $anggota_kelas = AnggotaKelas::with('siswa')->get()->where('siswa.id_user', Auth::id())->pluck('siswa.nama', 'id');
-        // dd($anggota_kelas);
         $nilai = nilai::all();
 
         $data  =  [
@@ -44,9 +46,22 @@ class NilaiController extends Controller
         return view('nilai.index', $data);
     }
 
+    public function indexGuru()
+    {
+        return view('nilai.index_guru');
+    }
+
+    public function datatableGuru()
+    {
+        $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+        $anggota_kelas = AnggotaKelas::byKelasAndTahun(Kelas::pluck('id')->toArray(), $tahun_ajar_active->id)->get();
+        $custom_action = 'anggota_kelas.datatable_nilai_action';
+        
+        return AnggotaKelasDataTable::set($anggota_kelas, $custom_action);
+    }
+
     public function datatable()
     {
-        // Log::info($approval_status);
         $nilai = Nilai::all();
         return NilaiDataTable::set($nilai);
     }

@@ -26,10 +26,15 @@
                 </li>
             @endif
             
-            @if (Auth::user()->isWali())
+            @if (Auth::user()->isGuru())
                 <li class="sidebar-item {{ isActive('jadwal') }}">
                     <a class="sidebar-link" href="{{ route('jadwal.index.guru') }}">
-                        <i class="fas fa-calendar-week"></i> <span class="align-middle pl-1">Jadwal Mengajar</span>
+                        <i class="fas fa-chalkboard-teacher"></i> <span class="align-middle">Jadwal</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ isActive('nilai') }}">
+                    <a class="sidebar-link" href="{{ route('nilai.index.guru') }}">
+                        <i class="fas fa-star"></i> <span class="align-middle">Nilai</span>
                     </a>
                 </li>
             @endif
@@ -37,7 +42,7 @@
             @if (Auth::user()->isAdmin())
                 <li class="sidebar-item {{ isActive('akademik') }}">
                     <a class="sidebar-link" href="{{ route('akademik.index') }}">
-                        <i class="fas fa-book-reader"></i> <span class="align-middle pl-1">Akademik</span>
+                        <i class="fas fa-book-reader"></i> <span class="align-middle">Akademik</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

@@ -210,6 +210,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
         Route::get('export-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'exportRaport'])->name('export_raport');
+        Route::get('index-guru', [NilaiController::class, 'indexGuru'])->name('index.guru');
+        Route::get('datatable-guru', [NilaiController::class, 'datatableGuru'])->name('datatable.guru');
     });
 
     Route::group(['prefix' => 'nilai_ekskul', 'as' => 'nilai_ekskul.'], function () {

@@ -33,7 +33,13 @@ class JadwalController extends Controller
 
     public function indexGuru()
     {
-        return view('jadwal.index_guru');
+        $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+        $jadwal = Jadwal::with('kelas')->where('status', 'aktif')->get()->sortBy('kelas.id');
+        // $jadwal = Jadwal::with('kelas')->where('id_tahun_ajar', $tahun_ajar_active->id)->where('status', 'aktif')->get()->sortBy('kelas.id');
+        $data = [
+            'groupped_jadwal' => $jadwal->groupBy('kelas.id')
+        ];
+        return view('jadwal.index_guru', $data);
     }
 
     public function datatableGuru()
@@ -77,25 +83,25 @@ class JadwalController extends Controller
             DB::transaction(function() use($data) {
                 Jadwal::create($data);
                 $anggota_kelas = AnggotaKelas::where('id_kelas', $data['id_kelas'])->where('id_tahun_ajar', $data['id_tahun_ajar'])->get();
-                foreach($anggota_kelas as $anggota){
-                    Nilai::updateOrCreate([
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                        'semester' => 'ganjil'
-                    ],[
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                    ]);
+                // foreach($anggota_kelas as $anggota){
+                //     Nilai::updateOrCreate([
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //         'semester' => 'ganjil'
+                //     ],[
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //     ]);
 
-                    Nilai::updateOrCreate([
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                        'semester' => 'genap'
-                    ],[
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                    ]);
-                }
+                //     Nilai::updateOrCreate([
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //         'semester' => 'genap'
+                //     ],[
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //     ]);
+                // }
                 
             }, 5);
         } catch (Exception $e) {
@@ -142,25 +148,25 @@ class JadwalController extends Controller
             $data['kode_hari'] = getDayCode($request->hari);
             DB::transaction(function() use($data, $request, $jadwal) {
                 $anggota_kelas = AnggotaKelas::where('id_kelas', $data['id_kelas'])->where('id_tahun_ajar', $data['id_tahun_ajar'])->get();
-                foreach($anggota_kelas as $anggota){
-                    Nilai::updateOrCreate([
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                        'semester' => 'ganjil'
-                    ],[
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                    ]);
+                // foreach($anggota_kelas as $anggota){
+                //     Nilai::updateOrCreate([
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //         'semester' => 'ganjil'
+                //     ],[
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //     ]);
 
-                    Nilai::updateOrCreate([
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                        'semester' => 'genap'
-                    ],[
-                        'id_anggota_kelas' => $anggota->id,
-                        'id_mapel' => $data['id_mapel'],
-                    ]);
-                }
+                //     Nilai::updateOrCreate([
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //         'semester' => 'genap'
+                //     ],[
+                //         'id_anggota_kelas' => $anggota->id,
+                //         'id_mapel' => $data['id_mapel'],
+                //     ]);
+                // }
 
                 $jadwal->update($request->validated());
                 

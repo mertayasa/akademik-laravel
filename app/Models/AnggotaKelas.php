@@ -23,7 +23,8 @@ class AnggotaKelas extends Model
 
     public function scopeByKelasAndTahun($query, $id_kelas, $id_tahun_ajar)
     {
-        return $query->where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar);
+        $id_kelas = is_array($id_kelas) ? $id_kelas : array($id_kelas);
+        return $query->whereIn('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar);
     }
 
     public function kelas()

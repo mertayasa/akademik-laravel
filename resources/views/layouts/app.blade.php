@@ -13,7 +13,7 @@
 
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-    <title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+    <title>Sistem Informasi Akademik</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
