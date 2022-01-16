@@ -112,11 +112,51 @@
                         </td>
                         <td>{{ $anggota_kelas->getNilaiValue('desk_keterampilan', $mapel->id, $semester) }}</td>
                     </tr>
-
+                @endif
+            @endforeach
+            <tr>
+                <td colspan="8"><b> Muatan Lokal </b></td>
+            </tr>
+            @php
+                $no = 1;
+            @endphp
+            @foreach ($mapel_of_nilai as $mapel)
+                @if ($mapel->is_lokal == true)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td> {{ $mapel->nama }}</td>
+                        <td>{{ $anggota_kelas->rataNilaiPengetahuan($semester, $mapel->id) }}</td>
+                        <td> {{ getPredikatNilai($anggota_kelas->rataNilaiPengetahuan($semester, $mapel->id)) }}
+                        </td>
+                        <td>{{ $anggota_kelas->getNilaiValue('desk_pengetahuan', $mapel->id, $semester) }}</td>
+                        <td>{{ $anggota_kelas->rataNilaiKeterampilan($semester, $mapel->id) }}</td>
+                        <td> {{ getPredikatNilai($anggota_kelas->rataNilaiKeterampilan($semester, $mapel->id)) }}
+                        </td>
+                        <td>{{ $anggota_kelas->getNilaiValue('desk_keterampilan', $mapel->id, $semester) }}</td>
+                    </tr>
                 @endif
             @endforeach
         </tbody>
+    </table>
 
+    <p class="sub-title">C. EKSTRAKURIKULER</p>
+    <table class="table table-bordered">
+        <tr>
+            <td><b> No </b></td>
+            <td><b> Kegiatan Ekstrakulkuler </b></td>
+            <td><b> Keterangan </b></td>
+        </tr>
+        @php
+            $no = 1;
+        @endphp
+        @foreach ($ekskuls as $eks)
+            <tr>
+                <td>{{ $no++ }}</td>
+                <td>{{ $eks->nama }}</td>
+                <td>{{ $anggota_kelas->getNilaiEkskulValue($eks->id, $semester) }}</td>
+            </tr>
+        @endforeach
+    </table>
 
 </body>
 

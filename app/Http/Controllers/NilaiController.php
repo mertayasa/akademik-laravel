@@ -366,6 +366,8 @@ class NilaiController extends Controller
         );
 
         $mapel=Mapel::pluck('id');
+      $ekskuls = Ekskul::all();
+
         // Contoh mengambil rata-rata nilai dan predikatnya
         // $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, $mapel);
             // dd($nilai);
@@ -377,7 +379,7 @@ class NilaiController extends Controller
             'anggota_kelas' => $anggota_kelas,
             'semester' => $semester,
              'mapel_of_nilai' => $mapel_of_nilai,
-        //    'nilai' =>$nilai
+           'ekskuls' =>$ekskuls
         ];
 
         // return view('nilai.export_raport', compact('anggota_kelas', 'semester'));
