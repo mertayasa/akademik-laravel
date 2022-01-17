@@ -27,7 +27,7 @@
     <table class="bio">
         <tr>
             <td>Nama Peserta Didik </td>
-            <td> : </td>
+            <td> :</td>
             <td>{{ $anggota_kelas->siswa->nama }}</td>
             <td style="width:20px;"></td>
             <td>Kelas</td>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>Nomor Induk/NISN </td>
-            <td> : </td>
+            <td> :</td>
             <td>{{ $anggota_kelas->siswa->nis }}</td>
             <td style="width:20px;"></td>
             <td>Semester</td>
@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td>Nama Sekolah </td>
-            <td> : </td>
+            <td> :</td>
             <td>SD N 2 BAHA</td>
             <td style="width:20px;"></td>
             <td>Tahun Pelajaran</td>
@@ -156,6 +156,100 @@
                 <td>{{ $anggota_kelas->getNilaiEkskulValue($eks->id, $semester) }}</td>
             </tr>
         @endforeach
+    </table>
+
+    <p class="sub-title">D. SARAN-SARAN</p>
+    <table class="table table-bordered">
+        <tr>
+            <td><b> {{ $anggota_kelas->getSaranValue($semester) }} </b></td>
+        </tr>
+    </table>
+
+    <p class="sub-title">E. TINGGI DAN BERAT BADAN</p>
+    <table class="table table-bordered">
+        <tr style="text-align: center;">
+            <td rowspan="2"><b> No </b></td>
+            <td rowspan="2"><b> Aspek Yang Dinilai </b></td>
+            <td colspan="2"><b> Semester </b></td>
+        </tr>
+
+        <tr style="text-align: center;">
+            <td><b> 1 (Satu)</b></td>
+            <td><b> 2 (Dua)</b></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Tinggi Badan</td>
+            <td> {{ $anggota_kelas->getNilaiProporsiValue('tinggi', $semester) }} </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Berat Badan</td>
+            <td> {{ $anggota_kelas->getNilaiProporsiValue('berat', $semester) }} </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p class="sub-title">F. KONDISI KESEHATAN</p>
+    <table class="table table-bordered">
+        <tr style="text-align: center;">
+            <td><b> No </b></td>
+            <td><b> Aspek Yang Dinilai </b></td>
+            <td><b> Keterangan </b></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pendengaran</td>
+            <td> {{ $anggota_kelas->getNilaiKesehatanValue('pendengaran', $semester) }} </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Penglihatan</td>
+            <td> {{ $anggota_kelas->getNilaiKesehatanValue('penglihatan', $semester) }} </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Gigi</td>
+            <td> {{ $anggota_kelas->getNilaiKesehatanValue('gigi', $semester) }} </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Lainnya</td>
+            <td> {{ $anggota_kelas->getNilaiKesehatanValue('lain', $semester) }} </td>
+        </tr>
+    </table>
+
+    <p class="sub-title">G. JENIS PRESTASI</p>
+    <table class="table table-bordered">
+        <tr style="text-align: center;">
+            <td><b> No </b></td>
+            <td><b> Jenis Prestasi </b></td>
+            <td><b> Keterangan </b></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td></td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td></td>
+            <td> </td>
+        </tr>
+    </table>
+
+    <p class="sub-title">H. KETIDAKHADIRAN</p>
+    <table class="table table-bordered">
+        <tr>
+            <td>Sakit : </td>
+        </tr>
+        <tr>
+            <td>Ijin : </td>
+        </tr>
+        <tr>
+            <td>Tanpa Keterangan : </td>
+        </tr>
     </table>
 
 </body>
