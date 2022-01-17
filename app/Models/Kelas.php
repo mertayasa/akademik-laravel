@@ -26,6 +26,11 @@ class Kelas extends Model
         return $this->hasMany('App\Models\WaliKelas', 'id_kelas');
     }
 
+    public function getNamaKelasAttribute()
+    {
+        return 'Kelas '.$this->attributes['jenjang'];
+    }
+
     public function getWaliKelas($id_tahun_ajar)
     {
         return $this->wali_kelas()->where('id_kelas', $this->id)->where('id_tahun_ajar', $id_tahun_ajar)->get();

@@ -6,6 +6,8 @@ use App\Models\Prestasi;
 use App\Models\AnggotaKelas;
 use Illuminate\Http\Request;
 use App\DataTables\PrestasiDataTable;
+use App\Models\Kelas;
+use App\Models\TahunAjar;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -18,9 +20,7 @@ class PrestasiController extends Controller
      */
     public function index()
     {
-        $prestasi = Prestasi::all();
-        // dd($prestasi);
-        return view('prestasi.index', compact('prestasi'));
+        return view('prestasi.index');
     }
 
     public function datatable()
@@ -36,10 +36,15 @@ class PrestasiController extends Controller
      */
     public function create()
     {
-        $anggota_kelas = AnggotaKelas::where('status', 'aktif')->pluck('id');
+        $kelas = Kelas::orderBy('jenjang', 'ASC')->get()->pluck('nama_kelas', 'id')->toArray();
+        $tahun_ajar = TahunAjar::orderBy('tahun_mulai')->get()->pluck('durasi_tahun_ajar', 'id')->toArray();
 
-        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
-        return view('prestasi.create', compact('anggota_kelas'));
+        $data = [
+            'kelas' => $kelas,
+            'tahun_ajar' => $tahun_ajar,
+        ];
+
+        return view('prestasi.create', $data);
     }
 
     /**
@@ -79,8 +84,20 @@ class PrestasiController extends Controller
      */
     public function edit(Prestasi $prestasi)
     {
-        $anggota_kelas = AnggotaKelas::with('siswa')->get()->pluck('siswa.nama', 'id');
-        return view('prestasi.edit', compact('anggota_kelas', 'prestasi'));
+        $kelas = Kelas::orderBy('jenjang', 'ASC')->get()->pluck('nama_kelas', 'id')->toArray();
+        $tahun_ajar = TahunAjar::orderBy('tahun_mulai')->get()->pluck('durasi_tahun_ajar', 'id')->toArray();
+
+        $data = [
+            'selected_tahun_ajar' => $prestasi->anggota_kelas->id_tahun_ajar,
+            'selected_kelas' => $prestasi->anggota_kelas->id_kelas,
+            'prestasi' => $prestasi,
+            'kelas' => $kelas,
+            'tahun_ajar' => $tahun_ajar,
+        ];
+
+        // dd($prestasi);
+
+        return view('prestasi.edit', $data);
     }
 
     /**

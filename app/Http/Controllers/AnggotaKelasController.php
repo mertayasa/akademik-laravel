@@ -37,6 +37,18 @@ class AnggotaKelasController extends Controller
         return response(['code' => 1, 'message' => 'Berhasil menambahkan data anggota kelas']);
     }
 
+    public function getByKelasTahun(Kelas $kelas, TahunAjar $tahun_ajar)
+    {
+        try{
+            $anggota_kelas = AnggotaKelas::byKelasAndTahun($kelas->id, $tahun_ajar->id)->get();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mengambil data anggota kelas']);
+        }
+
+        return response(['code' => 1, 'anggota_kelas' => $anggota_kelas]);
+    }
+
     public function destroy(AnggotaKelas $anggota_kelas)
     {
         try {

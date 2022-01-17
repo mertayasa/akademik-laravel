@@ -11,7 +11,15 @@ class PrestasiDataTable
     {
         // 
         return Datatables::of($prestasi)
-
+            ->addColumn('nama_kelas', function ($prestasi){
+                return 'Kelas '.$prestasi->anggota_kelas->kelas->jenjang;
+            })
+            ->editColumn('semester', function ($prestasi){
+                return ucfirst($prestasi->semester);
+            })
+            ->addColumn('tahun_ajar', function ($prestasi){
+                return $prestasi->anggota_kelas->tahun_ajar->tahun_mulai.'-'.$prestasi->anggota_kelas->tahun_ajar->tahun_selesai;
+            })
             ->addColumn('action', function ($prestasi) {
                 $deleteUrl = "'" . route('prestasi.destroy', $prestasi->id) . "', 'PrestasiDataTable'";
                 return

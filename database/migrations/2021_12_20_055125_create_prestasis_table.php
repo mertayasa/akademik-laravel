@@ -17,7 +17,7 @@ class CreatePrestasisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_anggota_kelas');
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
-            $table->string('nama', 100);
+            $table->string('jenis', 255);
             $table->text('keterangan');
             $table->timestamps();
 

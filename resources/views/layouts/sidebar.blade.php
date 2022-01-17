@@ -77,6 +77,12 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ isActive('prestasi') }}">
+                    <a class="sidebar-link" href="{{ route('prestasi.index') }}">
+                        <i class="fas fa-trophy"></i> <span class="align-middle pl-1">Data Prestasi</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{ isActive('mapel') }}">
                     <a class="sidebar-link" href="{{ route('mapel.index') }}">
                         <i class="fas fa-book-open"></i> <span class="align-middle pl-1">Data Mata Pelajaran</span>

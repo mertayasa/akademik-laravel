@@ -16,6 +16,7 @@ use App\Models\NilaiProporsi;
 use App\Models\NilaiSikap;
 use App\Models\Saran;
 use App\Models\Mapel;
+use App\Models\Prestasi;
 use App\Models\TahunAjar;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -238,12 +239,14 @@ class NilaiController extends Controller
         try{
             $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
             $ekskul = Ekskul::all();
+            $prestasi = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', $semester)->get();
     
             $data = [
                 'anggota_kelas' => $anggota_kelas,
                 'semester' => $semester,
                 'ekskul' => $ekskul,
                 'mapel_of_nilai' => $mapel_of_nilai,
+                'prestasi' => $prestasi
             ];
     
             $form_raport = view('nilai.show_raport', $data)->render();
@@ -403,7 +406,8 @@ class NilaiController extends Controller
         );
 
         $mapel=Mapel::pluck('id');
-      $ekskul = Ekskul::all();
+        $ekskul = Ekskul::all();
+        $prestasi = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', $semester)->get();
 
         // Contoh mengambil rata-rata nilai dan predikatnya
         // $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, $mapel);
@@ -415,8 +419,9 @@ class NilaiController extends Controller
          $data = [
             'anggota_kelas' => $anggota_kelas,
             'semester' => $semester,
-             'mapel_of_nilai' => $mapel_of_nilai,
-           'ekskul' =>$ekskul
+            'mapel_of_nilai' => $mapel_of_nilai,
+            'ekskul' => $ekskul,
+            'prestasi' => $prestasi
         ];
 
         // return view('nilai.export_raport', compact('anggota_kelas', 'semester'));

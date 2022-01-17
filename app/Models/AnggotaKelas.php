@@ -32,6 +32,11 @@ class AnggotaKelas extends Model
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
 
+    public function getNamaSiswaAttribute()
+    {
+        return $this->siswa->nama;
+    }
+
     public function tahun_ajar()
     {
         return $this->belongsTo('App\Models\TahunAjar', 'id_tahun_ajar');

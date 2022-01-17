@@ -226,16 +226,24 @@
             <td><b> Jenis Prestasi </b></td>
             <td><b> Keterangan </b></td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td></td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td></td>
-            <td> </td>
-        </tr>
+        @forelse ($prestasi as $prest)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $prestasi->jenis }}</td>
+                <td>{{ $prestasi->keterangan }}</td>
+            </tr>
+        @empty
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+                <td> </td>
+            </tr>
+        @endforelse
     </table>
 
     <p class="sub-title">H. KETIDAKHADIRAN</p>

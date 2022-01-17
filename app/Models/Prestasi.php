@@ -17,7 +17,7 @@ class Prestasi extends Model
     protected $fillable = [
         'id_anggota_kelas',
         'semester',
-        'nama',
+        'jenis',
         'keterangan',	
     ];
 

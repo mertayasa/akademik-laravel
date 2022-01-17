@@ -23,4 +23,9 @@ class TahunAjar extends Model
         'selesai_smt_genap',
         'status',	
     ];
+
+    public function getDurasiTahunAjarAttribute()
+    {
+        return $this->attributes['tahun_mulai'].'-'.$this->attributes['tahun_selesai'];
+    }
 }

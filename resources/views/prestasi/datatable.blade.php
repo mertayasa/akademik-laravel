@@ -4,8 +4,10 @@
         <th style="width: 30px">No</th>
         <th></th>
         <th>Nama Siswa</th>
+        <th>Kelas</th>
+        <th>Tahun Ajar</th>
         <th>Semester</th>
-        <th>Nama Prestasi</th>
+        <th>Jenis Prestasi</th>
         <th>Keterangan</th>
         <th>Aksi</th>
         </tr>
@@ -45,7 +47,14 @@
                 {
                     data: 'anggota_kelas.siswa.nama', 
                     name: 'anggota_kelas.siswa.nama',
-                    // className:"text-center align-middle"
+                },
+                {
+                    data: 'nama_kelas', 
+                    name: 'nama_kelas',
+                },
+                {
+                    data: 'tahun_ajar', 
+                    name: 'tahun_ajar',
                 },
                 {
                     data: 'semester', 
@@ -53,8 +62,8 @@
                     className:"text-center align-middle"
                 },
                 {
-                    data: 'nama', 
-                    name: 'nama',
+                    data: 'jenis', 
+                    name: 'jenis',
                     className:"text-center align-middle"
                 },
                 {
