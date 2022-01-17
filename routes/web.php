@@ -205,6 +205,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
 
         Route::get('edit-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'editRaport'])->name('edit_raport');
+        Route::get('show-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'showRaport'])->name('show_raport');
         Route::post('update-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'updateRaport'])->name('update_raport');
         Route::post('store-mapel/{id_kelas}/{id_tahun_ajar}', [NilaiController::class, 'storeMapel'])->name('store_mapel');
         Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');

@@ -19,7 +19,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary" id="btnStoreMapelNilai">Simpan</button>
+                <button type="button" class="btn btn-primary" id="btnStoreMapelNilai" onclick="storeMapelNilai()">Simpan</button>
             </div>
         </div>
     </div>

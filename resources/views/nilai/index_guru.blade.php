@@ -20,6 +20,8 @@
             </div>
         </div>
     </div>
-
+    <div id="raportContainer" class="d-none"></div>
 </div>
 @endsection
+
+@include('nilai.js')

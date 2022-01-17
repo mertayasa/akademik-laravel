@@ -20,6 +20,8 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                pageLength: 50,
+                lengthMenu: [10, 20, 50, 100, 200, 500],
                 ajax: document.getElementById('{{ $custom_id ?? 'AnggotaKelasDataTable'}}').getAttribute('data-url'),
                 columns: [
                     // {

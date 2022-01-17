@@ -149,7 +149,7 @@
         @php
             $no = 1;
         @endphp
-        @foreach ($ekskuls as $eks)
+        @foreach ($ekskul as $eks)
             <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $eks->nama }}</td>

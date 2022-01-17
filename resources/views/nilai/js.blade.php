@@ -1,9 +1,7 @@
 @push('scripts')
     <script>
-        const btnStoreMapelNilai = document.getElementById('btnStoreMapelNilai')
-        
         // Store Nilai For Mapel
-        btnStoreMapelNilai.addEventListener('click', event => {
+        function storeMapelNilai(){
             clearErrorMessage()
             const formMapelNilai = document.getElementById('formMapelNilai')
             const formData = new FormData(formMapelNilai)
@@ -43,7 +41,7 @@
                 console.log(error);
                 showToast(0, 'Gagal mengubah data mata pelajaran yang dinilai')
             })
-        })
+        }
 
         // Delete mapel from list nilai
         function deleteMapelFromNilai(element){

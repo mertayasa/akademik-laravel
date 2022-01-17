@@ -55,7 +55,7 @@ class NilaiController extends Controller
     {
         $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
         $anggota_kelas = AnggotaKelas::byKelasAndTahun(Kelas::pluck('id')->toArray(), $tahun_ajar_active->id)->get();
-        $custom_action = 'anggota_kelas.datatable_nilai_action';
+        $custom_action = 'anggota_kelas.datatable_nilai_guru_action';
         
         return AnggotaKelasDataTable::set($anggota_kelas, $custom_action);
     }
@@ -233,6 +233,28 @@ class NilaiController extends Controller
         return response(['code' => 1, 'form_raport' => $form_raport]);
     }
 
+    public function showRaport(AnggotaKelas $anggota_kelas, $semester)
+    {
+        try{
+            $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            $ekskul = Ekskul::all();
+    
+            $data = [
+                'anggota_kelas' => $anggota_kelas,
+                'semester' => $semester,
+                'ekskul' => $ekskul,
+                'mapel_of_nilai' => $mapel_of_nilai,
+            ];
+    
+            $form_raport = view('nilai.show_raport', $data)->render();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mengambil data nilai']);
+        }
+
+        return response(['code' => 1, 'form_raport' => $form_raport]);
+    }
+
     public function updateRaport(Request $request, AnggotaKelas $anggota_kelas, $semester)
     {
         try{
@@ -381,7 +403,7 @@ class NilaiController extends Controller
         );
 
         $mapel=Mapel::pluck('id');
-      $ekskuls = Ekskul::all();
+      $ekskul = Ekskul::all();
 
         // Contoh mengambil rata-rata nilai dan predikatnya
         // $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, $mapel);
@@ -394,7 +416,7 @@ class NilaiController extends Controller
             'anggota_kelas' => $anggota_kelas,
             'semester' => $semester,
              'mapel_of_nilai' => $mapel_of_nilai,
-           'ekskuls' =>$ekskuls
+           'ekskul' =>$ekskul
         ];
 
         // return view('nilai.export_raport', compact('anggota_kelas', 'semester'));
