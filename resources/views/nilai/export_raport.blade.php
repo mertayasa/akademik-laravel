@@ -23,7 +23,6 @@
 
 <body style="font-family:Arial, Helvetica, sans-serif">
     <p class="title">RAPOR PESERTA DIDIK DAN PROFLE PESERTA DIDIK</p>
-
     <table class="bio">
         <tr>
             <td>Nama Peserta Didik </td>
