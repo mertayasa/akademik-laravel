@@ -15,10 +15,7 @@
                     @include('layouts.error_message')
                 </div>
                 <div class="card-body">
-                    {{-- <div class=" d-flex justify-content-between"> --}}
-                        @include('jadwal.table')
-                        {{-- @include('jadwal.datatable_guru') --}}
-                    {{-- </div> --}}
+                    @include('jadwal.table')
                 </div>
             </div>
         </div>

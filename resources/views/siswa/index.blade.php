@@ -17,39 +17,7 @@
                 </div>
                 <div class="card-body">
                     <div class=" ">
-                      @include('siswa.datatable')
-
-                        {{-- <div class="bs-example">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a href="#siswa" class="nav-link active" data-toggle="tab">Terverifikasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#jadwal" class="nav-link" data-toggle="tab">Proses Verifikasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#wali" class="nav-link" data-toggle="tab">Ditolak</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="siswa">
-                                    <div class="card-body px-0">
-                                        @include('siswa.datatable')
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="jadwal">
-                                    <div class="card-body px-0">
-                                        @include('wali_kelas.datatable')
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="wali">
-                                    <div class="card-body px-0">
-                                        @include('jadwal.datatable')
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
+                      @include('siswa.datatable', ['datatable_url' => route('siswa.datatable_ortu')])
                     </div>
                 </div>
 

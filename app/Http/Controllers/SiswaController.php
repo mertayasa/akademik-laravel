@@ -9,6 +9,7 @@ use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\DataTables\SiswaDataTable;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class SiswaController extends Controller
@@ -20,8 +21,20 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::all();
-        return view('siswa.index', compact('siswa'));
+        return view('siswa.index');
+    }
+
+    public function indexOrtu()
+    {
+        return view('siswa.index');
+    }
+
+    public function datatableOrtu()
+    {
+        $id_ortu = Auth::id();
+        $siswa = Siswa::where('id_user', $id_ortu)->get();
+
+        return SiswaDataTable::set($siswa, $custom_action = 'siswa.datatable_action_guru');
     }
 
     public function datatable($kelas = null)

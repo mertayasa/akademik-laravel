@@ -17,6 +17,7 @@ use App\Models\NilaiSikap;
 use App\Models\Saran;
 use App\Models\Mapel;
 use App\Models\Prestasi;
+use App\Models\Siswa;
 use App\Models\TahunAjar;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -45,6 +46,40 @@ class NilaiController extends Controller
         ];
 
         return view('nilai.index', $data);
+    }
+
+    public function indexOrtu(Request $request)
+    {
+        $id_ortu = Auth::id();
+        $siswa = Siswa::where('id_user', $id_ortu)->pluck('nama', 'id');
+        $id_siswa = $request->input('id_siswa', null);
+        if(isset($id_siswa)){
+            $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+            $anggota_kelas = AnggotaKelas::where('id_siswa', $id_siswa)->where('id_tahun_ajar', $tahun_ajar_active->id)->first();
+            if($anggota_kelas){
+                $ekskul = Ekskul::all();
+                $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), [$anggota_kelas->id]);
+                $prestasi_ganjil = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', 'ganjil')->get();
+                $prestasi_genap = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', 'genap')->get();
+                
+                $nilai = [
+                    'mapel_of_nilai' => $mapel_of_nilai ?? [],
+                    'ekskul' => $ekskul ?? [],
+                    'prestasi_ganjil' => $prestasi_ganjil ?? [],
+                    'prestasi_genap' => $prestasi_genap ?? [],
+                    'anggota_kelas' => $anggota_kelas,
+                ];
+            }
+
+        }
+
+        $data  =  [
+            'siswa' => $siswa,
+            'id_siswa' => $id_siswa,
+            'nilai' => $nilai ?? null
+        ];
+
+        return view('nilai.index_ortu', $data);
     }
 
     public function indexGuru()

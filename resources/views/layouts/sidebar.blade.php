@@ -109,21 +109,26 @@
             @endif
 
             @if (Auth::user()->isOrtu())
-                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
-                    <a class="sidebar-link" href="#">
+                <li class="sidebar-item {{ isActive('siswa') }}">
+                    <a class="sidebar-link" href="{{ route('siswa.index_ortu') }}">
                         <i class="fas fa-user-graduate" class="align-middle"></i> <span class="align-middle pl-1">Biodata Anak</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
-                    <a class="sidebar-link" href="#">
+                <li class="sidebar-item {{ isActive('jadwal') }}">
+                    <a class="sidebar-link" href="{{ route('jadwal.index.ortu') }}">
                         <i class="fas fa-calendar-week"></i> <span class="align-middle pl-1">Jadwal</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ isActive('tahun_ajar') }}">
-                    <a class="sidebar-link" href="#">
+                <li class="sidebar-item {{ isActive('nilai') }}">
+                    <a class="sidebar-link" href="{{ route('nilai.index.ortu') }}">
                         <i class="fas fa-star"></i> <span class="align-middle pl-1">Nilai</span>
                     </a>
                 </li>
+                {{-- <li class="sidebar-item {{ isActive('history-nilai') }}">
+                    <a class="sidebar-link" href="{{ route('history_nilai.index') }}">
+                        <i class="fas fa-chart-line"></i> <span class="align-middle pl-1">Histori Nilai</span>
+                    </a>
+                </li> --}}
             @endif
 
 

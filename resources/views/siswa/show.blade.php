@@ -15,8 +15,7 @@
                         @include('siswa.form-show')
                         <div class="row mt-3">
                             <div class="col-12">
-                                <a href="{{ route('siswa.index') }}" class="btn btn-danger">Kembali</a>
-                                <button class="btn btn-primary ml-3" type="submit">Simpan</button>
+                                <a href="{{ Auth::user()->isOrtu() ? route('siswa.index_ortu') : route('siswa.index') }}" class="btn btn-danger">Kembali</a>
                             </div>
                         </div>
                 </div>

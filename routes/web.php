@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'siswa', 'as' => 'siswa.'], function () {
         Route::get('/', [SiswaController::class, 'index'])->name('index');
+        Route::get('index-ortu', [SiswaController::class, 'indexOrtu'])->name('index_ortu');
         Route::get('create', [SiswaController::class, 'create'])->name('create');
         Route::post('store', [SiswaController::class, 'store'])->name('store');
         Route::get('show/{siswa}', [SiswaController::class, 'show'])->name('show');
@@ -78,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{siswa}', [SiswaController::class, 'update'])->name('update');
         Route::delete('destroy/{siswa}', [SiswaController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [SiswaController::class, 'datatable'])->name('datatable');
+        Route::get('datatable-ortu', [SiswaController::class, 'datatableOrtu'])->name('datatable_ortu');
     });
 
     Route::group(['prefix' => 'kelas', 'as' => 'kelas.'], function () {
@@ -184,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('datatable/{kelas}/{id_tahun_ajar}', [JadwalController::class, 'datatable'])->name('datatable');
         
         Route::get('index-guru', [JadwalController::class, 'indexGuru'])->name('index.guru');
+        Route::get('index-ortu', [JadwalController::class, 'indexOrtu'])->name('index.ortu');
         Route::get('datatable-guru', [JadwalController::class, 'datatableGuru'])->name('datatable.guru');
     });
 
@@ -198,12 +201,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'nilai', 'as' => 'nilai.'], function () {
-        // Route::get('/', [NilaiController::class, 'index'])->name('index');
         // Route::get('create', [NilaiController::class, 'create'])->name('create');
         // Route::post('store', [NilaiController::class, 'store'])->name('store');
         // Route::get('edit/{nilai}', [NilaiController::class, 'edit'])->name('edit');
         // Route::patch('update/{nilai}', [NilaiController::class, 'update'])->name('update');
         // Route::delete('destroy/{nilai}', [NilaiController::class, 'destroy'])->name('destroy');
+        
+        Route::get('index-ortu', [NilaiController::class, 'indexOrtu'])->name('index.ortu');
+        Route::get('index-guru', [NilaiController::class, 'indexGuru'])->name('index.guru');
 
         Route::get('edit-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'editRaport'])->name('edit_raport');
         Route::get('show-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'showRaport'])->name('show_raport');
@@ -212,8 +217,11 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('destroy/{id_kelas}/{id_tahun_ajar}/{id_mapel}', [NilaiController::class, 'destroyMapel'])->name('destroy_mapel');
         Route::get('datatable', [NilaiController::class, 'datatable'])->name('datatable');
         Route::get('export-raport/{anggota_kelas}/{semester}', [NilaiController::class, 'exportRaport'])->name('export_raport');
-        Route::get('index-guru', [NilaiController::class, 'indexGuru'])->name('index.guru');
         Route::get('datatable-guru', [NilaiController::class, 'datatableGuru'])->name('datatable.guru');
+    });
+
+    Route::group(['prefix' => 'history_nilai', 'as' => 'history_nilai.'], function () {
+        Route::get('/', [NilaiController::class, 'historyNilai'])->name('index');
     });
 
     Route::group(['prefix' => 'nilai_ekskul', 'as' => 'nilai_ekskul.'], function () {

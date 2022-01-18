@@ -13,6 +13,7 @@ use App\DataTables\JadwalDataTable;
 use App\Http\Requests\JadwalReq;
 use App\Models\AnggotaKelas;
 use App\Models\Nilai;
+use App\Models\Siswa;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,12 +35,39 @@ class JadwalController extends Controller
     public function indexGuru()
     {
         $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
-        $jadwal = Jadwal::with('kelas')->where('status', 'aktif')->get()->sortBy('kelas.id');
-        // $jadwal = Jadwal::with('kelas')->where('id_tahun_ajar', $tahun_ajar_active->id)->where('status', 'aktif')->get()->sortBy('kelas.id');
+        $jadwal = Jadwal::with('kelas')->where('status', 'aktif')->where('id_tahun_ajar', $tahun_ajar_active->id)->get()->sortBy('kelas.id');
+        
         $data = [
             'groupped_jadwal' => $jadwal->groupBy('kelas.id')
         ];
+
         return view('jadwal.index_guru', $data);
+    }
+
+    public function indexOrtu(Request $request)
+    {
+        $id_ortu = Auth::id();
+        $siswa = Siswa::where('id_user', $id_ortu)->pluck('nama', 'id');
+        $id_siswa = $request->input('id_siswa', null);
+        
+        if(isset($id_siswa)){
+            $tahun_ajar_active = TahunAjar::where('status', 'aktif')->first();
+            $anggota_kelas = AnggotaKelas::where('id_siswa', $id_siswa)->where('id_tahun_ajar', $tahun_ajar_active->id)->first();
+            if($anggota_kelas){
+                $jadwal = Jadwal::with('kelas')->where('id_kelas', $anggota_kelas->id_kelas)->where('status', 'aktif')->where('id_tahun_ajar', $tahun_ajar_active->id)->get()->sortBy('kelas.id');
+                if(count($jadwal) > 0){
+                    $groupped_jadwal = $jadwal->groupBy('kelas.id');
+                };
+            }
+        }
+
+        $data = [
+            'id_siswa' => $id_siswa,
+            'siswa' => $siswa,
+            'groupped_jadwal' => $groupped_jadwal ?? null,
+        ];
+
+        return view('jadwal.index_ortu', $data);
     }
 
     public function datatableGuru()

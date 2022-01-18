@@ -17,7 +17,7 @@
 <script>
 
     let table
-    let url = "{{ route('siswa.datatable') }}"
+    let url = "{{ $datatable_url ?? route('siswa.datatable') }}"
 
     datatable(url)
     function datatable (url){

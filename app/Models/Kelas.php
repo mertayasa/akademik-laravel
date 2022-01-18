@@ -36,8 +36,12 @@ class Kelas extends Model
         return $this->wali_kelas()->where('id_kelas', $this->id)->where('id_tahun_ajar', $id_tahun_ajar)->get();
     }
 
-    public function getAnggotaKelas($id_tahun_ajar)
+    public function getAnggotaKelas($id_tahun_ajar, $id_siswa = null)
     {
-        return  $this->anggota_kelas()->where('id_kelas',  $this->id)->where('id_tahun_ajar', $id_tahun_ajar)->get();
+        $anggota_kelas = $this->anggota_kelas()->where('id_kelas',  $this->id)->where('id_tahun_ajar', $id_tahun_ajar);
+        if(isset($id_siswa)){
+            return $anggota_kelas->whereIn('id_siswa', $id_siswa)->get();
+        }
+        return  $anggota_kelas->get();
     }
 }
