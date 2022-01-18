@@ -53,6 +53,23 @@
     </div>
 
 
+    <div class="hal-2">
+        <p class="title">PETUNJUK PENGISIAN RAPOR</p>
+        <p>
+        <ol>
+            <li>Rapor Peserta Didik dipergunakan selama peserta didik yang bersangkutan mengikuti seluruh program
+                pembelajaran di Sekolah Dasar tersebut;
+            </li>
+            <li>Identitas sekolah diisi dengan data yang sesuai dengan keberadaan Sekolah Dasar
+            </li>
+            <li>Daftar Peserta Didik diisi oleh daftar peserta didik yang ada salam Rapor Peserta Didik ini;</li>
+        </ol>
+        </p>
+    </div>
+
+
+
+
     <br>
     <p class="title">RAPOR PESERTA DIDIK DAN PROFLE PESERTA DIDIK</p>
     <table class="bio">
