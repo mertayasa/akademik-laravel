@@ -22,6 +22,38 @@
 </head>
 
 <body style="font-family:Arial, Helvetica, sans-serif">
+    <div class="sampul">
+        <center>
+            <img class="img-fluid mt-5" src="{{ asset('admin/img/logo.sd.png') }}" alt="Responsive image" width="170"
+                height="170">
+        </center>
+
+        <div class="sampul-judul mt-3 mb-3">
+            <p>RAPOR <br> PESERTA DIDIK <br> SEKOLAH DASAR <br> (SD) </p>
+        </div>
+
+        <center>
+            <img class="img-fluid" src="{{ asset('admin/img/logo-kab.jpg') }}" alt="Responsive image" width="170"
+                height="170">
+        </center>
+
+        <div class="identitas justify-content-center">
+            <p><b>Nama Peserta Didik </b></p>
+            <div class="nama-siswa justify-item-center"><b>{{ $anggota_kelas->siswa->nama }}</b></div>
+        </div>
+
+        <div class="identitas justify-content-center">
+            <p><b>NISN/NIS </b></p>
+            <div class="nama-siswa justify-item-center"><b>{{ $anggota_kelas->siswa->nis }}</b></div>
+        </div>
+
+        <div class="sampul-judul-bawah">
+            <p>KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN <br> REPUBLIK INDONESIA</p>
+        </div>
+    </div>
+
+
+    <br>
     <p class="title">RAPOR PESERTA DIDIK DAN PROFLE PESERTA DIDIK</p>
     <table class="bio">
         <tr>
