@@ -85,3 +85,10 @@ hr {
 .nip {
     margin-top: -5px;
 }
+
+.identitas-sekolah {
+    font-size: 14px;
+    padding-bottom: 8px;
+    /* letter-spacing: 5px; */
+    margin-bottom: 600px;
+}

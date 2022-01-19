@@ -240,7 +240,62 @@
         </table>
     </div>
 
+    <div class="hal-4 ">
+        <p class="title ">RAPOR <br> PESERTA DIDIK <br> SEKOLAH DASAR <br> (SD) </p>
+        <table class="identitas-sekolah">
+            <tr>
+                <td style="width: 200px">Nama Sekolah</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>NPSN</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>NIS/NSS/NDS</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Alamat Sekolah</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kelurahan/Desa</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kecamatan</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kota/Kabupaten</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Provinsi</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Website</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td> : </td>
+                <td></td>
+            </tr>
 
+        </table>
+    </div>
 
 
     <br>
