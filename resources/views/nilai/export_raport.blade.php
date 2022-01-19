@@ -542,7 +542,7 @@
     </table>
 
     {{-- PINDAH SEKOLAH MASUK --}}
-    <div class="hal-4 ">
+    <div class="hal-8 ">
         <p class="title ">KETERANGAN PINDAH SEKOLAH </p>
 
         <p>Nama Peserta Didik : ..............</p>
@@ -595,7 +595,7 @@
                     </li>
                     <br><br><br>
                     <li>
-                        ..............
+                        <u>..............</u>
                     </li>
                     <li>
                         NIP.
@@ -647,7 +647,7 @@
                     </li>
                     <br><br><br>
                     <li>
-                        ..............
+                        <u>..............</u>
                     </li>
                     <li>
                         NIP.
@@ -699,7 +699,7 @@
                     </li>
                     <br><br><br>
                     <li>
-                        ..............
+                        <u>..............</u>
                     </li>
                     <li>
                         NIP.
@@ -707,6 +707,117 @@
 
                 </td>
             </tr>
+
+        </table>
+    </div>
+
+    {{-- PINDAH SEKOLAH KELUAR --}}
+    <div class="hal-8 ">
+        <p class="title ">KETERANGAN PINDAH SEKOLAH </p>
+
+        <p>Nama Peserta Didik : ..............</p>
+        <table class="table pindah table-bordered">
+            <tr style="text-align: center;">
+                <th style="text-align: center;" colspan="4">MASUK</th>
+            </tr>
+            <tr>
+                <th>Tanggal</th>
+                <th>Kelas yang ditinggalkan</th>
+                <th>Sebab-sebab Keluar atau Atas Permintaan (Tertulis)</th>
+                <th>Tanda Tangan Kepala Sekolah, Stempel Sekolah , dan Tanda Tangan Orang Tua/Wali</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br>
+                    <li>
+                        <u>..............</u>
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Orang Tua/ Wali,
+                    </li>
+                    <br><br>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br>
+                    <li>
+                        <u>..............</u>
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Orang Tua/ Wali,
+                    </li>
+                    <br><br>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br>
+                    <li>
+                        <u>..............</u>
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Orang Tua/ Wali,
+                    </li>
+                    <br><br>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+            </tr>
+
+
 
         </table>
     </div>
