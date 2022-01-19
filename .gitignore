@@ -4,6 +4,8 @@
 /public/css/*.css
 /public/js/*.js
 /storage/*.key
+/public/images/
+!/public/images/default
 /vendor
 .env
 .env.backup
