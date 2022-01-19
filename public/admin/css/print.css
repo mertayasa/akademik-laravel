@@ -92,3 +92,7 @@ hr {
     /* letter-spacing: 5px; */
     margin-bottom: 600px;
 }
+
+.pindah li {
+    list-style: none;
+}

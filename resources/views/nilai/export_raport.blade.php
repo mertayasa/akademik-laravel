@@ -22,6 +22,8 @@
 </head>
 
 <body style="font-family:Arial, Helvetica, sans-serif">
+
+    {{-- SAMPUL --}}
     <div class="sampul">
         <center>
             <img class="img-fluid mt-5" src="{{ asset('admin/img/logo.sd.png') }}" alt="Responsive image" width="170"
@@ -52,7 +54,7 @@
         </div>
     </div>
 
-
+    {{-- PETUNJUK PENGISIAN --}}
     <div class="hal-2">
         <p class="title">PETUNJUK PENGISIAN RAPOR</p>
         <p>
@@ -101,6 +103,8 @@
         </p>
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    {{-- IDENTITAS SEKOLAH --}}
     <div class="hal-3 mt-5">
         <p class="title mt-5">KETERANGAN DIRI PESERTA DIDIK</p>
         <table>
@@ -240,6 +244,7 @@
         </table>
     </div>
 
+    {{-- IDENTITAS SEKOLAH --}}
     <div class="hal-4 ">
         <p class="title ">RAPOR <br> PESERTA DIDIK <br> SEKOLAH DASAR <br> (SD) </p>
         <table class="identitas-sekolah">
@@ -297,7 +302,7 @@
         </table>
     </div>
 
-
+    {{-- NILAI --}}
     <br>
     <p class="title">RAPOR PESERTA DIDIK DAN PROFLE PESERTA DIDIK</p>
     <table class="bio">
@@ -535,6 +540,176 @@
             <td>Tanpa Keterangan : </td>
         </tr>
     </table>
+
+    {{-- PINDAH SEKOLAH MASUK --}}
+    <div class="hal-4 ">
+        <p class="title ">KETERANGAN PINDAH SEKOLAH </p>
+
+        <p>Nama Peserta Didik : ..............</p>
+        <table class="table pindah table-bordered">
+            <tr style="text-align: center;">
+                <th style="width:20px; text-align: center;">No</th>
+                <th style="text-align: center;" colspan="3">MASUK</th>
+            </tr>
+            <tr>
+                <td>
+                    <li style="list-style: none;">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <br><br>
+                    <li>5</li>
+                </td>
+                <td>
+                    <li style="list-style: none;">Nama Siswa</li>
+                    <li>Nomor Induk</li>
+                    <li>Nama Sekolah</li>
+                    <li>Masuk di Sekolah Ini <br> a. Tinggal <br> b. Di Kelas</li>
+                    <li>Tahun Pelajaran</li>
+
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <br> <br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br><br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <li style="list-style: none;">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <br><br>
+                    <li>5</li>
+                </td>
+                <td>
+                    <li style="list-style: none;">Nama Siswa</li>
+                    <li>Nomor Induk</li>
+                    <li>Nama Sekolah</li>
+                    <li>Masuk di Sekolah Ini <br> a. Tinggal <br> b. Di Kelas</li>
+                    <li>Tahun Pelajaran</li>
+
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <br> <br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br><br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <li style="list-style: none;">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <br><br>
+                    <li>5</li>
+                </td>
+                <td>
+                    <li style="list-style: none;">Nama Siswa</li>
+                    <li>Nomor Induk</li>
+                    <li>Nama Sekolah</li>
+                    <li>Masuk di Sekolah Ini <br> a. Tinggal <br> b. Di Kelas</li>
+                    <li>Tahun Pelajaran</li>
+
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                    <br> <br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        ..............
+                    </li>
+                </td>
+                <td>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        Kepala Sekolah,
+                    </li>
+                    <br><br><br>
+                    <li>
+                        ..............
+                    </li>
+                    <li>
+                        NIP.
+                    </li>
+
+                </td>
+            </tr>
+
+        </table>
+    </div>
 
 </body>
 
