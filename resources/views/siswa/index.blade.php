@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-body">
                     <div class=" ">
-                      @include('siswa.datatable', ['datatable_url' => route('siswa.datatable_ortu')])
+                      @include('siswa.datatable', ['datatable_url' => Auth::user()->isOrtu() ? route('siswa.datatable_ortu') : route('siswa.datatable')])
                     </div>
                 </div>
 
