@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Siswa extends Model
 {
@@ -35,6 +36,12 @@ class Siswa extends Model
 
     public function getFoto()
     {
-        return asset('images/foto_profil/'.$this->attributes['foto']);
+        $image_path = 'images/'.$this->attributes['foto'];
+        $isExists = File::exists(public_path($image_path));
+        if ($isExists and $this->attributes['foto'] != '') {
+            return asset($image_path);
+        } else {
+            return asset('images/default/default_profil.png');
+        }
     }
 }

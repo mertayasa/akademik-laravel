@@ -59,8 +59,8 @@
 
 <div class="row mt-3">
     <div class="col-12 col-md-6 pb-3 pb-md-0">
-        {!! Form::label('profilPic', 'Foto', ['class' => 'mb-1']) !!}
-        {!! Form::file('foto', ['class' => 'd-block filepond', 'id' => 'profilPic', 'data-foto' => isset($siswa) ? $siswa->getFoto() : '']) !!}
+        {!! Form::label('filePondUpload', 'Foto', ['class' => 'mb-1']) !!}
+        {!! Form::file('foto', ['class' => 'd-block filepond', 'id' => 'filePondUpload', 'data-foto' => isset($siswa) && $siswa->foto != '' ? $siswa->getFoto() : '']) !!}
     </div>
 </div>
 
@@ -75,31 +75,33 @@
                 FilePondPluginImagePreview
             )
 
-            let options
+            let options = {
+                acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+                maxFileSize: '2MB'
+            }
+
             let imageUrl
 
             const url = window.location
-            if (url.pathname.includes('create')) {
-                options = {
-                    acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-                    maxFileSize: '2MB'
-                }
-            } else {
-                imageUrl = document.getElementById('profilPic').getAttribute('data-foto')
-                options = {
-                    acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
-                    maxFileSize: '500KB',
-                    files: [{
-                        source: imageUrl,
-                        options: {
-                            type: 'remote'
-                        }
-                    }],
+            if (url.pathname.includes('edit')) {
+                imageUrl = document.getElementById('filePondUpload').getAttribute('data-foto')
+                console.log(imageUrl);
+                if(!isNull(imageUrl)){
+                    options = {
+                        acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+                        maxFileSize: '2MB',
+                        files: [{
+                            source: imageUrl,
+                            options: {
+                                type: 'remote'
+                            }
+                        }],
+                    }
                 }
             }
 
             FilePond.create(
-                document.getElementById('profilPic'), options
+                document.getElementById('filePondUpload'), options
             )
         })
     </script>

@@ -16,9 +16,9 @@ class CreatePengumumenTable extends Migration
         Schema::create('pengumuman', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('deskripsi');
-            $table->text('konten');
-            $table->text('lampiran');
+            $table->text('deskripsi')->nullable();
+            $table->text('konten')->nullable();
+            $table->text('lampiran')->nullable();
             $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });

@@ -52,6 +52,7 @@ class UserController extends Controller
         try {
             $user = new User;
             $user->nama = $request->nama;
+            
             if (FacadesRequest::is('*guru*')) {
                 $user->nip = $request->nip;
             } else if (FacadesRequest::is('*ortu*')) {
@@ -59,11 +60,13 @@ class UserController extends Controller
             } else {
                 throw new Exception('Error 500');
             }
+
             $user->alamat = $request->alamat;
             $user->tempat_lahir = $request->tempat_lahir;
             $user->tgl_lahir = $request->tgl_lahir;
             $user->no_tlp = $request->no_tlp;
             $user->pekerjaan = $request->pekerjaan;
+            
             if (FacadesRequest::is('*guru*')) {
                 $user->status_guru = $request->status_guru;
             } else if (FacadesRequest::is('*ortu*')) {
@@ -79,6 +82,16 @@ class UserController extends Controller
             } else {
                 throw new Exception('Error 500');
             }
+
+            if($request['foto']){
+                $base_64_foto = json_decode($request['foto'], true);
+                $upload_image = uploadFile($base_64_foto, 'foto_profil');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $user->foto = $upload_image;
+            }
+
             $user->status = 'aktif';
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -108,6 +121,7 @@ class UserController extends Controller
         try {
             $user = User::find($id);
             $user->nama = $request->nama;
+
             if (FacadesRequest::is('*guru*')) {
                 $user->nip = $request->nip;
             } else if (FacadesRequest::is('*ortu*')) {
@@ -115,11 +129,13 @@ class UserController extends Controller
             } else {
                 throw new Exception('Error 500');
             }
+
             $user->alamat = $request->alamat;
             $user->tempat_lahir = $request->tempat_lahir;
             $user->tgl_lahir = $request->tgl_lahir;
             $user->no_tlp = $request->no_tlp;
             $user->pekerjaan = $request->pekerjaan;
+
             if (FacadesRequest::is('*guru*')) {
                 $user->status_guru = $request->status_guru;
             } else if (FacadesRequest::is('*ortu*')) {
@@ -135,6 +151,16 @@ class UserController extends Controller
             } else {
                 throw new Exception('Error 500');
             }
+
+            if($request['foto']){
+                $base_64_foto = json_decode($request['foto'], true);
+                $upload_image = uploadFile($base_64_foto, 'foto_profil');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $user->foto = $upload_image;
+            }
+            
             $user->status = $request->status;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
@@ -188,7 +214,7 @@ class UserController extends Controller
         }
     }
 
-       public function editProfile(User $user)
+    public function editProfile(User $user)
     {
         return view('profile.edit', compact('user'));
     }
@@ -211,11 +237,6 @@ class UserController extends Controller
             unset($data['level']);
 
             $user->update($data);
-
-            // if($user->level == 2){
-            //     Farmer::updateOrCreate(['id_user' => $user->id], $data);
-            // }
-
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal mengubah profil ' . $user->name);
@@ -223,7 +244,4 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil mengubah profil ' . $user->name);
     }
-
-
-
 }

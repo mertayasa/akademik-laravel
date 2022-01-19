@@ -23,9 +23,15 @@
                                   <p class="mt-3">{{ $data->deskripsi }}</p> 
                                    <p class="">{{ $data->konten }}</p>
                               </div>
+                              @if ($data->lampiran)
+                                <a href="{{ $data->getLampiran() }}" target="_blank" class="btn btn-primary">Lihat Lampiran</a>
+                              @endif
                           </div>
                       </div>
                   </div>
+                  @if(!$loop->last)
+                    <hr>
+                  @endif
               @empty
                   <p class="text-danger">Tidak ada pengumuman</p>
               @endforelse

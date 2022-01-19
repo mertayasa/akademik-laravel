@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\File;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,7 @@ class User extends Authenticatable
         'status',
         'email',	
         'password',
+        'foto',
     ];
 
     /**
@@ -115,5 +117,16 @@ class User extends Authenticatable
     public function kelas()
     {
         return $this->hasManyThrough(Kelas::class, WaliKelas::class, 'id_user', 'id_user');
+    }
+
+    public function getFoto()
+    {
+        $image_path = 'images/'.$this->attributes['foto'];
+        $isExists = File::exists(public_path($image_path));
+        if ($isExists and $this->attributes['foto'] != '') {
+            return asset($image_path);
+        } else {
+            return asset('images/default/default_profil.png');
+        }
     }
 }

@@ -72,7 +72,6 @@ class SiswaController extends Controller
                     return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
                 }
                 $data['foto'] = $upload_image;
-                // dd($data);
             }else{
                 $data['foto'] = 'default/default_profil.png';
             }
@@ -119,7 +118,17 @@ class SiswaController extends Controller
     public function update(Request $request, Siswa $siswa)
     {
         try {
-            $siswa->update($request->all());
+            $data = $request->all();
+            if($request['foto']){
+                $base_64_foto = json_decode($request['foto'], true);
+                $upload_image = uploadFile($base_64_foto, 'foto_profil');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $data['foto'] = $upload_image;
+            }
+
+            $siswa->update($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data siswa Gagal Di Edit');

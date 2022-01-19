@@ -12,9 +12,12 @@ class SiswaDataTable
     static public function set($siswa,$custom_action = null)
     {
         return Datatables::of($siswa)
+            ->editColumn('foto', function ($siswa){
+                return '<img src="'.$siswa->getFoto().'" alt="" width="75px">';
+            })
             ->addColumn('action', function($siswa) use($custom_action) {
                 return view(($custom_action != null ? $custom_action : 'siswa.datatable_action'), compact('siswa'));
             })
-            ->addIndexColumn()->rawColumns(['action'])->make(true);
+            ->addIndexColumn()->rawColumns(['action', 'foto'])->make(true);
     }
 }

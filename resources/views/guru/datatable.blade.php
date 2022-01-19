@@ -3,6 +3,7 @@
         <tr>
         <th style="width: 30px">No</th>
         <th></th>
+        <th>Foto</th>
         <th>Nama</th>
         <th>NIP</th>
         <th>Pekerjaan</th>
@@ -42,6 +43,10 @@
                     name: 'updated_at',
                     visible: false,
                     searchable: false
+                },
+                {
+                    data: 'foto', 
+                    name: 'foto'
                 },
                 {
                     data: 'nama', 

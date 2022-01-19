@@ -49,7 +49,17 @@ class PengumumanController extends Controller
     public function store(Request $request)
     {
         try {
-            Pengumuman::create($request->all());
+            $data = $request->all();
+            if($request['lampiran']){
+                $base_64_lampiran = json_decode($request['lampiran'], true);
+                $upload_image = uploadFile($base_64_lampiran, 'lampiran');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $data['lampiran'] = $upload_image;
+            }
+
+            Pengumuman::create($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Pengumumann Gagal Ditambahkan');
@@ -90,7 +100,17 @@ class PengumumanController extends Controller
     public function update(Request $request, Pengumuman $pengumuman)
     {
         try {
-            $pengumuman->update($request->all());
+            $data = $request->all();
+            if($request['lampiran']){
+                $base_64_lampiran = json_decode($request['lampiran'], true);
+                $upload_image = uploadFile($base_64_lampiran, 'lampiran');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $data['lampiran'] = $upload_image;
+            }
+
+            $pengumuman->update($data);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Pengumuman Gagal Di Edit');
