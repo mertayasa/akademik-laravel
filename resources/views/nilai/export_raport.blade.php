@@ -473,6 +473,7 @@
             </tr>
         </table>
 
+        <br><br>
         <p class="sub-title">F. KONDISI KESEHATAN</p>
         <table class="table table-bordered">
             <tr style="text-align: center;">
