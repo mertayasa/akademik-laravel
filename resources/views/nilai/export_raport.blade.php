@@ -100,9 +100,9 @@
         </ol>
         </p>
     </div>
-
-    <div class="hal-3">
-        <p class="title">KETERANGAN DIRI PESERTA DIDIK</p>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="hal-3 mt-5">
+        <p class="title mt-5">KETERANGAN DIRI PESERTA DIDIK</p>
         <table>
             <tr>
                 <td style="width: 200px">Nama Peserta Didik</td>
@@ -113,6 +113,129 @@
                 <td>NISN / NIS</td>
                 <td> : </td>
                 <td>{{ $anggota_kelas->siswa->nis }}</td>
+            </tr>
+            <tr>
+                <td>Tempat, Tanggal Lahir</td>
+                <td> : </td>
+                <td> {{ $anggota_kelas->siswa->tempat_lahir }}, {{ $anggota_kelas->siswa->tgl_lahir }}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td> : </td>
+                <td>{{ $anggota_kelas->siswa->jenis_kelamin }}</td>
+            </tr>
+            <tr>
+                <td>Agama</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pendidikan Sebelumnya</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Alamat Peserta Didik</td>
+                <td> : </td>
+                <td>{{ $anggota_kelas->siswa->alamat }}</td>
+            </tr>
+            <tr>
+                <td>Nama Orang Tua</td>
+                <td> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ayah</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ibu</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pekerjaan Orang Tua</td>
+                <td> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ayah</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ibu</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Alamat Orang Tua</td>
+                <td> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Jalan</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kelurahan/Desa</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kecamatan</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kabupaten/Kota</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Provinsi</td>
+                <td> : </td>
+                <td>{{ province() }}</td>
+            </tr>
+            <tr>
+                <td>Wali Peserta Didik</td>
+                <td> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Nama</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td> : </td>
+                <td></td>
+            </tr>
+        </table>
+        <table style="border:none; margin-bottom:300px" class="mt-3">
+            <tr style="border:none;">
+                <td style="border:none;">
+                    <div class="foto mr-5"></div>
+                </td>
+                <td style="border:none;" class="ttd">
+                    <div class="ttd ml-5">
+                        Badung, .... <br>
+                        Kepala Sekolah,<br>
+
+                        <br><br><br>
+                        <div class="nip text-left">
+                            <p><u><b>I Made Renata, S.Pd </b></u> <br>NIP. 196802071993071001</p>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
