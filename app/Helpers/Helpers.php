@@ -85,12 +85,9 @@ function uploadFile($base_64_foto, $folder)
             mkdir($folderName, 0755, true);
         }
 
-        // return $folderName;
-
         $safeName = time() . $base_64_foto['name'];
         $inventoriePath = public_path() . '/' . $folderName;
         file_put_contents($inventoriePath . '/' . $safeName, $foto);
-        // return 'fcuk';
     } catch (Exception $e) {
         Log::info($e->getMessage());
         return 0;

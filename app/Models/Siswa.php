@@ -23,12 +23,18 @@ class Siswa extends Model
         'tgl_lahir',
         'jenis_kelamin',
         'id_user',
-        'status',	
+        'status',
+        'foto',	
     ];
 
 
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'id_user');
+    }
+
+    public function getFoto()
+    {
+        return asset('images/foto_profil/'.$this->attributes['foto']);
     }
 }

@@ -15,7 +15,8 @@
         {!! Form::label('announcetitle', 'Email', ['class' => 'mb-1']) !!}
         {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
     </div>
-</div><div class="row mt-3">
+</div>
+<div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('announcetitle', 'Tempat Lahir', ['class' => 'mb-1']) !!}
         {!! Form::text('tempat_lahir', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
@@ -47,11 +48,59 @@
     </div>
 </div>
 
-@if(str_contains(Route::currentRouteName(),'edit')) 
+@if (str_contains(Route::currentRouteName(), 'edit'))
+    <div class="row mt-3">
+        <div class="col-12  pb-3 pb-md-0">
+            {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
+            {!! Form::select('status', ['Aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+        </div>
+    </div>
+@endif
+
 <div class="row mt-3">
-    <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', ['Aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+    <div class="col-12 col-md-6 pb-3 pb-md-0">
+        {!! Form::label('profilPic', 'Foto', ['class' => 'mb-1']) !!}
+        {!! Form::file('foto', ['class' => 'd-block filepond', 'id' => 'profilPic', 'data-foto' => isset($siswa) ? $siswa->getFoto() : '']) !!}
     </div>
 </div>
-@endif
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            FilePond.registerPlugin(
+                FilePondPluginFileEncode,
+                FilePondPluginFileValidateSize,
+                FilePondPluginFileValidateType,
+                FilePondPluginImageExifOrientation,
+                FilePondPluginImagePreview
+            )
+
+            let options
+            let imageUrl
+
+            const url = window.location
+            if (url.pathname.includes('create')) {
+                options = {
+                    acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+                    maxFileSize: '2MB'
+                }
+            } else {
+                imageUrl = document.getElementById('profilPic').getAttribute('data-foto')
+                options = {
+                    acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+                    maxFileSize: '500KB',
+                    files: [{
+                        source: imageUrl,
+                        options: {
+                            type: 'remote'
+                        }
+                    }],
+                }
+            }
+
+            FilePond.create(
+                document.getElementById('profilPic'), options
+            )
+        })
+    </script>
+@endpush
