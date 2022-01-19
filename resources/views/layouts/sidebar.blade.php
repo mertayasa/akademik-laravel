@@ -25,7 +25,7 @@
                     </a>
                 </li>
             @endif
-            
+
             @if (Auth::user()->isGuru())
                 <li class="sidebar-item {{ isActive('jadwal') }}">
                     <a class="sidebar-link" href="{{ route('jadwal.index.guru') }}">
@@ -106,12 +106,19 @@
                         <i class="fas fa-book"></i> <span class="align-middle pl-1">Data Tahun Ajaran</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item {{ isActive('pengumuman') }}">
+                    <a class="sidebar-link" href="{{ route('pengumuman.index') }}">
+                        <i class="fas fa-bullhorn"></i> <span class="align-middle pl-1">Data Pengumuman</span>
+                    </a>
+                </li>
             @endif
 
             @if (Auth::user()->isOrtu())
                 <li class="sidebar-item {{ isActive('siswa') }}">
                     <a class="sidebar-link" href="{{ route('siswa.index_ortu') }}">
-                        <i class="fas fa-user-graduate" class="align-middle"></i> <span class="align-middle pl-1">Biodata Anak</span>
+                        <i class="fas fa-user-graduate" class="align-middle"></i> <span
+                            class="align-middle pl-1">Biodata Anak</span>
                     </a>
                 </li>
                 <li class="sidebar-item {{ isActive('jadwal') }}">
