@@ -175,3 +175,10 @@ function getPredikatNilai($nilai)
         break;
     }
 }
+
+
+function province()
+{
+    return "Bali";
+}
+

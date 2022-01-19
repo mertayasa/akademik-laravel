@@ -3,6 +3,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+table {
+    border-color: black;
+}
+
 .bio {
     font-size: 14px;
     margin-top: 20px;
@@ -68,4 +72,48 @@ hr {
 .identitas {
     text-align: center;
     margin-top: 18px;
+}
+
+.hal-3 {
+    margin-top: 400px;
+}
+
+.foto {
+    border: 1px solid black;
+    width: 120px;
+    height: 160px;
+    margin-left: 180px;
+    margin-top: 10px;
+}
+
+.nip {
+    margin-top: -5px;
+}
+
+.identitas-sekolah {
+    font-size: 14px;
+    padding-bottom: 8px;
+    /* letter-spacing: 5px; */
+    margin-bottom: 600px;
+}
+
+.pindah li {
+    list-style: none;
+}
+
+.hal-8 {
+    /* margin-top: 100px; */
+}
+
+.ttd {
+    align-items: center;
+    /* margin-bottom: 100px; */
+}
+
+.pindah-masuk {
+    margin-top: 100px;
+}
+
+.pindah-keluar {
+    margin-top: 400px;
 }
