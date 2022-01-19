@@ -63,8 +63,58 @@
             <li>Identitas sekolah diisi dengan data yang sesuai dengan keberadaan Sekolah Dasar
             </li>
             <li>Daftar Peserta Didik diisi oleh daftar peserta didik yang ada salam Rapor Peserta Didik ini;</li>
+            <li>Identitas Peserta didik diisi oleh data yang sesuai dengan keberadaan peserta didik;</li>
+            <li>Rapor Peserta Didik harus dilengkapi dengan pas foto berwama (3 x 4) dan pengisiannya dilakukan oleh
+                Guru Kelas; </li>
+            <li>Kompetensi inti 1 (KI-1) untuk sikap spiritual diambil dari KI-1 pada muatan pelajaran pendidikan agama
+                dan budi pekerti dan PPKn;</li>
+            <li>Kompetensi inti 2 (KI-2) untuk sikap sosial diambil dari KI-2 pada muatan pelajaran Pendidikan Agama dan
+                Budi Pekerti dan PPKn; </li>
+            <li>Kompetensi inti 3 dan 4 (KI-3 dan KI-4) diambil dari KI-3 dan KI-4 pada semua muatan pelajaran;</li>
+            <li>Hasil penilaian pengetahuan dan keterampilan dilaporkan dalam bentuk nilai, predikat dan deskripsi
+                pencapaian kompetensi mata pelajaran;</li>
+            <li>Hasil penilaian sikap dilaporkan dalam bentuk predikat dan/atau deskripsi;</li>
+            <li>Predikat yang ditulis dalam Rapor Peserta Didik:<br>
+                A : Sangat Baik <br>
+                B : Balk <br>
+                C : Cukup <br>
+                D : Perlu Bimbingan
+            </li>
+            <li>Deskripsi pengetahuan dan keterampilan ditulis dengan kalimat positif sesuai dengan capaian KD tertinggi
+                atau terendah dari masing-masing muatan pelajaran yang diperoleh peserta didik. Deskripsi berisi
+                pengetahuan dan keterampilan yang sangat baik/dan atau baik yang dikuasai dan penguasaannya belum
+                optimal. Apabila nilai capaian KD muatan pelajaran yang diperoleh dari suatu muatan pelajaran sama,
+                kolom deskripsi ditulis sesuai dengan capaian untuk semua KD; </li>
+            <li>Laporan Ekstrakurikuler diisi dengan kegiatan ekstrakurikuler yang diikuti oleh peserta didik;</li>
+            <li>Saran-saran diisi tentang hal-hal yang perlu mendapatkan perhatian peserta didik, pendidik, dan
+                orangtua/wali terutama untuk hal-hal yang tidak didapatkan dari sekolah;</li>
+            <li>Laporan tinggi dan berat badan peserta didik ditulis berdasarkan hasil pengukuran yang dilakukan
+                pendidik; </li>
+            <li>Laporan kondisi kesehatan fisik diisi dengan deskripsi hasil pemeriksaan yang dilakukan pendidik,
+                bekerjasama dengan tenaga kesehatan atau puskesmas terdekat;</li>
+            <li>Prestasi diisi dengan prestasi peserta didik yang menonjol;</li>
+            <li>Kolom ketidakhadiran ditulis dengan data akumulasi ketidakhadiran peserta didik karena sakit, izin, atau
+                tanpa keterangan selama satu semester;</li>
+            <li>Apabila peserta didik pindah, maka dicatat di dalam kolom keterangan pindah. </li>
+            <li>Kolom pernyataan kenaikan kelas diisi keterangan naik atau tinggal kelas.</li>
         </ol>
         </p>
+    </div>
+
+    <div class="hal-3">
+        <p class="title">KETERANGAN DIRI PESERTA DIDIK</p>
+        <table>
+            <tr>
+                <td style="width: 200px">Nama Peserta Didik</td>
+                <td> : </td>
+                <td>{{ $anggota_kelas->siswa->nama }}</td>
+            </tr>
+            <tr>
+                <td>NISN / NIS</td>
+                <td> : </td>
+                <td>{{ $anggota_kelas->siswa->nis }}</td>
+            </tr>
+        </table>
     </div>
 
 
