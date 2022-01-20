@@ -163,7 +163,9 @@ class UserController extends Controller
             
             $user->status = $request->status;
             $user->email = $request->email;
-            $user->password = bcrypt($request->password);
+            if($request->password){
+                $user->password = bcrypt($request->password);
+            }
 
             $user->save();
         } catch (Exception $e) {
