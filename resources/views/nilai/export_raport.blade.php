@@ -1,10 +1,3 @@
-{{-- {{ $anggota_kelas->siswa->nama }}
-<br>
-
-{{ $anggota_kelas->getNilaiSikapValue('nama', $semester) }}
-{{ $anggota_kelas->getNilaiSikapValue('sosial', $semester) }} --}}
-
-
 <!doctype html>
 <html lang="en">
 
@@ -102,11 +95,11 @@
         </ol>
         </p>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {{-- <br><br><br><br><br><br><br><br><br><br><br><br><br> --}}
 
     {{-- IDENTITAS SISWA --}}
-    <div class="hal-3 mt-5">
-        <p class="title mt-5">KETERANGAN DIRI PESERTA DIDIK</p>
+    <div class="hal-3 ">
+        <p class="title">KETERANGAN DIRI PESERTA DIDIK</p>
         <table>
             <tr>
                 <td style="width: 200px">Nama Peserta Didik</td>
@@ -304,7 +297,7 @@
 
     {{-- NILAI --}}
     <br>
-    <div>
+    <div class="nilai">
         <p class="title">RAPOR PESERTA DIDIK DAN PROFLE PESERTA DIDIK</p>
         <table class="bio">
             <tr>
@@ -348,11 +341,11 @@
                 <td colspan="2" style="text-align: center;"> <b>Deskripsi </b></td>
             </tr>
             <tr>
-                <td style="width:200px;"><b>1. Sikap Spiritual </b></td>
+                <td style="width:200px; height:60px;"><b>1. Sikap Spiritual </b></td>
                 <td>{{ $anggota_kelas->getNilaiSikapValue('spiritual', $semester) }}</td>
             </tr>
             <tr>
-                <td style="width:200px;"><b>2. Sikap Sosial </b></td>
+                <td style="width:200px; height:60px;"><b>2. Sikap Sosial </b></td>
                 <td>{{ $anggota_kelas->getNilaiSikapValue('sosial', $semester) }}</td>
             </tr>
         </table>
@@ -473,7 +466,7 @@
             </tr>
         </table>
 
-        <br><br>
+        <br>
         <p class="sub-title">F. KONDISI KESEHATAN</p>
         <table class="table table-bordered">
             <tr style="text-align: center;">

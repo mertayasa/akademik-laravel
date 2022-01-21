@@ -75,7 +75,8 @@ hr {
 }
 
 .hal-3 {
-    margin-top: 400px;
+    /* margin-top: 400px; */
+    page-break-before: always;
 }
 
 .foto {
@@ -111,9 +112,19 @@ hr {
 }
 
 .pindah-masuk {
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    page-break-before: always;
 }
 
 .pindah-keluar {
-    margin-top: 400px;
+    /* margin-top: 400px; */
+    page-break-before: always;
+}
+
+.hal-2 {
+    page-break-before: always;
+}
+
+.nilai {
+    page-break-before: always;
 }

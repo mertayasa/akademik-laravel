@@ -1,6 +1,6 @@
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('announcetitle', 'Nama Guru', ['class' => 'mb-1']) !!}
+        {!! Form::label('announcetitle', 'Nama Orang Tua', ['class' => 'mb-1']) !!}
         {!! Form::text('nama', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
     </div>
 </div>
@@ -32,7 +32,7 @@
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('description', 'Pekerjaan', ['class' => 'mb-1']) !!}
-        {!! Form::text('pekerjaan', null, ['class' => 'form-control', 'id' => 'description',]) !!}
+        {!! Form::text('pekerjaan', null, ['class' => 'form-control', 'id' => 'description']) !!}
     </div>
 </div>
 
@@ -53,20 +53,20 @@
 <div class="row mt-3">
     <div class="col-12 col-md-6">
         {!! Form::label('doctorPassword', 'Password', ['class' => 'mb-1']) !!}
-        {!! Form::password('password',  ['class' => 'form-control', 'id' => 'doctorPassword']) !!}
+        {!! Form::password('password', ['class' => 'form-control', 'id' => 'doctorPassword']) !!}
     </div>
     <div class="col-12 col-md-6">
         {!! Form::label('doctorConfirmPassword', 'Konfirmasi Password', ['class' => 'mb-1']) !!}
-        {!! Form::password('password_confirmation',  ['class' => 'form-control', 'id' => 'doctorConfirmPassword']) !!}
+        {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'doctorConfirmPassword']) !!}
     </div>
 </div>
 
 
-@if(str_contains(Route::currentRouteName(),'edit')) 
-<div class="row mt-3">
-    <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', ['aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+@if (str_contains(Route::currentRouteName(), 'edit'))
+    <div class="row mt-3">
+        <div class="col-12  pb-3 pb-md-0">
+            {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
+            {!! Form::select('status', ['aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+        </div>
     </div>
-</div>
 @endif
