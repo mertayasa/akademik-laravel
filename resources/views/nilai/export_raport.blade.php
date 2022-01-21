@@ -244,52 +244,57 @@
             <tr>
                 <td style="width: 200px">Nama Sekolah</td>
                 <td> : </td>
-                <td></td>
+                <td> SD NO. 2 BAHA</td>
             </tr>
             <tr>
                 <td>NPSN</td>
                 <td> : </td>
-                <td></td>
+                <td>50101742</td>
             </tr>
             <tr>
                 <td>NIS/NSS/NDS</td>
                 <td> : </td>
-                <td></td>
+                <td>101220403009</td>
             </tr>
             <tr>
                 <td>Alamat Sekolah</td>
                 <td> : </td>
+                <td>Br. Pengabatan</td>
+            </tr>
+            <tr>
                 <td></td>
+                <td> </td>
+                <td>Kode Pos : 80351, Telp. 03618940188</td>
             </tr>
             <tr>
                 <td>Kelurahan/Desa</td>
                 <td> : </td>
-                <td></td>
+                <td>Baha</td>
             </tr>
             <tr>
                 <td>Kecamatan</td>
                 <td> : </td>
-                <td></td>
+                <td>Mengwi</td>
             </tr>
             <tr>
                 <td>Kota/Kabupaten</td>
                 <td> : </td>
-                <td></td>
+                <td>Badung</td>
             </tr>
             <tr>
                 <td>Provinsi</td>
                 <td> : </td>
-                <td></td>
+                <td>Bali</td>
             </tr>
             <tr>
                 <td>Website</td>
                 <td> : </td>
-                <td></td>
+                <td>http://</td>
             </tr>
             <tr>
                 <td>E-mail</td>
                 <td> : </td>
-                <td></td>
+                <td>sd2baha@gmail.com</td>
             </tr>
 
         </table>
