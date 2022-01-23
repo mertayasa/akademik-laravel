@@ -58,12 +58,13 @@ class NilaiController extends Controller
             $anggota_kelas = AnggotaKelas::where('id_siswa', $id_siswa)->where('id_tahun_ajar', $tahun_ajar_active->id)->first();
             if($anggota_kelas){
                 $ekskul = Ekskul::all();
-                $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), [$anggota_kelas->id]);
+                // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), [$anggota_kelas->id]);
+                $mapel_of_jadwal = Jadwal::geetUniqueMapel($tahun_ajar_active->id, $anggota_kelas->id_kelas);
                 $prestasi_ganjil = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', 'ganjil')->get();
                 $prestasi_genap = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', 'genap')->get();
                 
                 $nilai = [
-                    'mapel_of_nilai' => $mapel_of_nilai ?? [],
+                    'mapel_of_jadwal' => $mapel_of_jadwal ?? [],
                     'ekskul' => $ekskul ?? [],
                     'prestasi_ganjil' => $prestasi_ganjil ?? [],
                     'prestasi_genap' => $prestasi_genap ?? [],
@@ -194,11 +195,12 @@ class NilaiController extends Controller
 
     private function renderNilaiMapelTable($id_kelas, $id_tahun_ajar, $anggota_kelas_raw)
     {
-        $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas_raw->pluck('id')->toArray());
+        // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas_raw->pluck('id')->toArray());
+        $mapel_of_jadwal = Jadwal::geetUniqueMapel($id_tahun_ajar, $id_kelas);
         $data = [
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
-            'mapel_of_nilai' => $mapel_of_nilai
+            'mapel_of_jadwal' => $mapel_of_jadwal
         ];
 
         return view('nilai.table_mapel', $data)->render();
@@ -250,14 +252,15 @@ class NilaiController extends Controller
     public function editRaport(AnggotaKelas $anggota_kelas, $semester)
     {
         try{
-            $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            $mapel_of_jadwal = Jadwal::geetUniqueMapel($anggota_kelas->id_tahun_ajar, $anggota_kelas->id_kelas);
             $ekskul = Ekskul::all();
     
             $data = [
                 'anggota_kelas' => $anggota_kelas,
                 'semester' => $semester,
                 'ekskul' => $ekskul,
-                'mapel_of_nilai' => $mapel_of_nilai,
+                'mapel_of_jadwal' => $mapel_of_jadwal,
             ];
     
             $form_raport = view('nilai.edit_raport', $data)->render();
@@ -272,7 +275,8 @@ class NilaiController extends Controller
     public function showRaport(AnggotaKelas $anggota_kelas, $semester)
     {
         try{
-            $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+            $mapel_of_jadwal = Jadwal::geetUniqueMapel($anggota_kelas->id_tahun_ajar, $anggota_kelas->id_kelas);
             $ekskul = Ekskul::all();
             $prestasi = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', $semester)->get();
     
@@ -280,7 +284,7 @@ class NilaiController extends Controller
                 'anggota_kelas' => $anggota_kelas,
                 'semester' => $semester,
                 'ekskul' => $ekskul,
-                'mapel_of_nilai' => $mapel_of_nilai,
+                'mapel_of_jadwal' => $mapel_of_jadwal,
                 'prestasi' => $prestasi
             ];
     
@@ -449,12 +453,13 @@ class NilaiController extends Controller
             // dd($nilai);
         // dd(getPredikatNilai($nilai));
 
-         $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        //  $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        $mapel_of_jadwal = Jadwal::geetUniqueMapel($anggota_kelas->id_tahun_ajar, $anggota_kelas->id_kelas);
 
          $data = [
             'anggota_kelas' => $anggota_kelas,
             'semester' => $semester,
-            'mapel_of_nilai' => $mapel_of_nilai,
+            'mapel_of_jadwal' => $mapel_of_jadwal,
             'ekskul' => $ekskul,
             'prestasi' => $prestasi
         ];

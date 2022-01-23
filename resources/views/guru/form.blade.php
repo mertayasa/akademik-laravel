@@ -111,7 +111,7 @@
             const url = window.location
             if (url.pathname.includes('edit')) {
                 imageUrl = document.getElementById('filePondUpload').getAttribute('data-foto')
-                console.log(imageUrl);
+                // console.log(imageUrl);
                 if(!isNull(imageUrl)){
                     options = {
                         acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],

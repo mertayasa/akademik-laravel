@@ -7,6 +7,7 @@ use App\Models\Akademik;
 use App\Models\Kelas;
 use App\Models\AnggotaKelas;
 use App\Models\Ekskul;
+use App\Models\Jadwal;
 use App\Models\Mapel;
 use App\Models\Nilai;
 use App\Models\TahunAjar;
@@ -52,7 +53,8 @@ class AkademikController extends Controller
         $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-        $mapel_of_nilai = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        $mapel_of_jadwal = Jadwal::geetUniqueMapel($tahun_ajar->id, $id_kelas);
         $ekskul = Ekskul::all();
 
         $data = [
@@ -62,7 +64,7 @@ class AkademikController extends Controller
             'id_kelas' => $id_kelas,
             'id_tahun_ajar' => $id_tahun_ajar,
             'tahun_ajar' => $tahun_ajar,
-            'mapel_of_nilai' => $mapel_of_nilai,
+            'mapel_of_jadwal' => $mapel_of_jadwal,
             'mapel' => Mapel::where('status', 'aktif')->pluck('nama', 'id'),
             'guru' => User::where('level', 'guru')->where('status', 'aktif')->pluck('nama', 'id'),
             'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first(),

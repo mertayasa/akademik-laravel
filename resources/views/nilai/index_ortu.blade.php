@@ -43,7 +43,7 @@
                                             'semester' => 'ganjil',
                                             'prestasi' => $nilai['prestasi_ganjil'],
                                             'ekskul' => $nilai['ekskul'],
-                                            'mapel_of_nilai' => $nilai['mapel_of_nilai'],
+                                            'mapel_of_jadwal' => $nilai['mapel_of_jadwal'],
                                         ])
                                     </div>
                                     <div class="tab-pane fade pt-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -52,7 +52,7 @@
                                             'semester' => 'genap',
                                             'prestasi' => $nilai['prestasi_genap'],
                                             'ekskul' => $nilai['ekskul'],
-                                            'mapel_of_nilai' => $nilai['mapel_of_nilai'],
+                                            'mapel_of_jadwal' => $nilai['mapel_of_jadwal'],
                                         ])
                                     </div>
                                 </div>

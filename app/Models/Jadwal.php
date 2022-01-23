@@ -52,4 +52,14 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Models\Mapel', 'id_mapel');
     }
+
+    static function geetUniqueMapel($id_tahun_ajar, $id_kelas)
+    {
+        $jadwal = self::where('id_tahun_ajar', $id_tahun_ajar)->where('id_kelas', $id_kelas)->get()->unique('id_mapel');
+        $unique_mapel = $jadwal->map(function($jadwal){
+            return $jadwal->mapel;
+        });
+
+        return $unique_mapel;
+    }
 }

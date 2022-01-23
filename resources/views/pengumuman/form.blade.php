@@ -55,7 +55,7 @@
             const url = window.location
             if (url.pathname.includes('edit')) {
                 imageUrl = document.getElementById('filePondUpload').getAttribute('data-lampiran')
-                console.log(imageUrl);
+                // console.log(imageUrl);
                 if(!isNull(imageUrl)){
                     options = {
                         acceptedFileTypes: ['application/pdf'],

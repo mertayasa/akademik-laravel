@@ -108,29 +108,8 @@ class JadwalController extends Controller
         try {
             $data = $request->all();
             $data['kode_hari'] = getDayCode($request->hari);
-            DB::transaction(function() use($data) {
-                Jadwal::create($data);
-                $anggota_kelas = AnggotaKelas::where('id_kelas', $data['id_kelas'])->where('id_tahun_ajar', $data['id_tahun_ajar'])->get();
-                // foreach($anggota_kelas as $anggota){
-                //     Nilai::updateOrCreate([
-                //         'id_anggota_kelas' => $anggota->id,
-                //         'id_mapel' => $data['id_mapel'],
-                //         'semester' => 'ganjil'
-                //     ],[
-                //         'id_anggota_kelas' => $anggota->id,
-                //         'id_mapel' => $data['id_mapel'],
-                //     ]);
-
-                //     Nilai::updateOrCreate([
-                //         'id_anggota_kelas' => $anggota->id,
-                //         'id_mapel' => $data['id_mapel'],
-                //         'semester' => 'genap'
-                //     ],[
-                //         'id_anggota_kelas' => $anggota->id,
-                //         'id_mapel' => $data['id_mapel'],
-                //     ]);
-                // }
-                
+            $jadwal = DB::transaction(function() use($data) {
+                return Jadwal::create($data);
             }, 5);
         } catch (Exception $e) {
             Log::info($e->getMessage());
@@ -141,10 +120,23 @@ class JadwalController extends Controller
         }
 
         if($request->ajax()){
-            return response(['code' => 1, 'message' => 'Berhasil menambahkan data jadwal']);
+            $table_mapel = $this->renderNilaiMapelTable($jadwal->id_kelas, $jadwal->id_tahun_ajar);
+            return response(['code' => 1, 'message' => 'Berhasil menambahkan data jadwal', 'table' => $table_mapel]);
         }
 
         return redirect('jadwal')->with('success', 'Data jadwal Berhasil Ditambahkan');
+    }
+
+    private function renderNilaiMapelTable($id_kelas, $id_tahun_ajar)
+    {
+        $mapel_of_jadwal = Jadwal::geetUniqueMapel($id_tahun_ajar, $id_kelas);
+        $data = [
+            'id_kelas' => $id_kelas,
+            'id_tahun_ajar' => $id_tahun_ajar,
+            'mapel_of_jadwal' => $mapel_of_jadwal
+        ];
+
+        return view('nilai.table_mapel', $data)->render();
     }
 
     /**
@@ -208,7 +200,8 @@ class JadwalController extends Controller
         }
 
         if($request->ajax()){
-            return response(['code' => 1, 'message' => 'Berhasil mengubah data jadwal']);
+            $table_mapel = $this->renderNilaiMapelTable($jadwal->id_kelas, $jadwal->id_tahun_ajar);
+            return response(['code' => 1, 'message' => 'Berhasil mengubah data jadwal', 'table' => $table_mapel]);
         }
 
         return redirect('jadwal')->with('success', 'Data jadwal Berhasil Diubah');

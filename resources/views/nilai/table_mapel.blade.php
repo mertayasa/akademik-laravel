@@ -4,21 +4,21 @@
             <tr>
                 <th>No</th>
                 <th>Mata Pelajaran</th>
-                @if (Auth::user()->isAdmin())
+                {{-- @if (Auth::user()->isAdmin())
                     <th>Aksi</th>
-                @endif
+                @endif --}}
             </tr>
         </thead>
         <tbody>
-            @foreach ($mapel_of_nilai as $mapel)
+            @foreach ($mapel_of_jadwal as $mapel)
                 <tr>
                     <td class="text-center align-middle">{{ $loop->iteration }}</td>
                     <td class="text-center align-middle">{{ $mapel->nama }}</td>
-                    @if (Auth::user()->isAdmin())
+                    {{-- @if (Auth::user()->isAdmin())
                         <td class="text-center align-middle">
                             <button class="btn btn-danger" data-url="{{ route('nilai.destroy_mapel', [$id_kelas, $id_tahun_ajar, $mapel->id]) }}" onclick="deleteMapelFromNilai(this)">Hapus</button>
                         </td>
-                    @endif
+                    @endif --}}
                 </tr>                
             @endforeach
         </tbody>
