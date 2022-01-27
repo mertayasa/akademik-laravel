@@ -10,7 +10,7 @@ use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use App\DataTables\JadwalDataTable;
-use App\Http\Requests\JadwalReq;
+use App\Http\Requests\JadwalRequest;
 use App\Models\AnggotaKelas;
 use App\Models\Nilai;
 use App\Models\Siswa;
@@ -103,7 +103,7 @@ class JadwalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JadwalReq $request)
+    public function store(JadwalRequest $request)
     {
         try {
             $data = $request->all();
@@ -161,7 +161,7 @@ class JadwalController extends Controller
      * @param  \App\Models\Jadwal  $jadwal
      * @return \Illuminate\Http\Response
      */
-    public function update(JadwalReq $request, Jadwal $jadwal)
+    public function update(JadwalRequest $request, Jadwal $jadwal)
     {
         try {
             $data = $request->all();

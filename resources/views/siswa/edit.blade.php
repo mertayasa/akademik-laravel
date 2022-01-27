@@ -12,8 +12,8 @@
                     <h4 class=" mb-0 ">Edit Siswa</h4>
                 </div>
                 <div class="card-body pt-0">
-                    {{-- @include('layouts.flash')
-                        @include('layouts.error_message') --}}
+                    @include('layouts.flash')
+                        @include('layouts.error_message')
                         {!! Form::model($siswa, ['route' => ['siswa.update', $siswa->id], 'method' => 'patch']) !!}
                         @include('siswa.form')
                         <div class="row mt-3">

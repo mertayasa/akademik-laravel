@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 use App\DataTables\MapelDataTable;
+use App\Http\Requests\MapelRequest;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -46,10 +47,10 @@ class MapelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MapelRequest $request)
     {
         try {
-            Mapel::create($request->all());
+            Mapel::create($request->validated());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Ditambahkan');
@@ -87,10 +88,10 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(MapelRequest $request, Mapel $mapel)
     {
         try {
-            $mapel->update($request->all());
+            $mapel->update($request->validated());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data Mata Pelajaran Gagal Di Edit');

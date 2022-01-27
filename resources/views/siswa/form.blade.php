@@ -52,7 +52,7 @@
     <div class="row mt-3">
         <div class="col-12  pb-3 pb-md-0">
             {!! Form::label('status', 'Status', ['class' => 'mb-1']) !!}
-            {!! Form::select('status', ['Aktif' => 'Aktif', 'Nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
+            {!! Form::select('status', ['aktif' => 'Aktif', 'nonaktif' => 'Tidak Aktif'], null, ['class' => 'form-control', 'id' => 'status']) !!}
         </div>
     </div>
 @endif
@@ -61,6 +61,8 @@
     <div class="col-12 col-md-6 pb-3 pb-md-0">
         {!! Form::label('filePondUpload', 'Foto', ['class' => 'mb-1']) !!}
         {!! Form::file('foto', ['class' => 'd-block filepond', 'id' => 'filePondUpload', 'data-foto' => isset($siswa) && $siswa->foto != '' ? $siswa->getFoto() : '']) !!}
+        <span> <i> Format yang didukung : .png .jpg .jpeg </i> </span> <br>
+        <span> <i> Ukuran maksimal : 2MB </i> </span>
     </div>
 </div>
 
@@ -85,7 +87,6 @@
             const url = window.location
             if (url.pathname.includes('edit')) {
                 imageUrl = document.getElementById('filePondUpload').getAttribute('data-foto')
-                // console.log(imageUrl);
                 if(!isNull(imageUrl)){
                     options = {
                         acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
