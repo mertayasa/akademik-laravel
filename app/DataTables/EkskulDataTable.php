@@ -16,7 +16,7 @@ class EkskulDataTable
             })
 
             ->addColumn('action', function ($ekskul) {
-                $deleteUrl = "'" . route('ekskul.destroy', $ekskul->id) . "', 'ekskulDataTable'";
+                $deleteUrl = "'" . route('ekskul.destroy', $ekskul->id) . "', 'EkskulDataTable'";
                 return
                     '<div class="btn-group">' .
                     '<a href="' . route('ekskul.edit', $ekskul->id) . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><b> Edit </b></a>' .
