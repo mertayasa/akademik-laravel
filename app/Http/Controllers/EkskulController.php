@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ekskul;
 use Illuminate\Http\Request;
 use App\DataTables\EkskulDataTable;
+use App\Http\Requests\EkskulRequest;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -46,10 +47,10 @@ class EkskulController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EkskulRequest $request)
     {
         try {
-            Ekskul::create($request->all());
+            Ekskul::create($request->validated());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data ekskuln Gagal Ditambahkan');
@@ -87,10 +88,10 @@ class EkskulController extends Controller
      * @param  \App\Models\Ekskul  $ekskul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ekskul $ekskul)
+    public function update(EkskulRequest $request, Ekskul $ekskul)
     {
         try {
-            $ekskul->update($request->all());
+            $ekskul->update($request->validated());
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Data ekskul Gagal Di Edit');
