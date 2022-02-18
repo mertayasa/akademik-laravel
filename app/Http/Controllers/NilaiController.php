@@ -447,6 +447,7 @@ class NilaiController extends Controller
         $mapel=Mapel::pluck('id');
         $ekskul = Ekskul::all();
         $prestasi = Prestasi::where('id_anggota_kelas', $anggota_kelas->id)->where('semester', $semester)->get();
+	//dd($prestasi);
 
         // Contoh mengambil rata-rata nilai dan predikatnya
         // $nilai = $anggota_kelas->rataNilaiPengetahuan($semester, $mapel);

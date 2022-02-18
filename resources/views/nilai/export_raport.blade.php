@@ -506,8 +506,8 @@
             @forelse ($prestasi as $prest)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $prestasi->jenis }}</td>
-                    <td>{{ $prestasi->keterangan }}</td>
+                    <td>{{ $prest->jenis }}</td>
+                    <td>{{ $prest->keterangan }}</td>
                 </tr>
             @empty
                 <tr>
