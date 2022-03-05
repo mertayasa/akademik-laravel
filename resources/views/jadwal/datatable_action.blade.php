@@ -1,6 +1,7 @@
 @if (Auth::user()->isAdmin())
     @php
         $deleteUrl = "'" . route('jadwal.destroy', $jadwal->id) . "', 'jadwalDataTable'";
+        $deleteUrl = route('jadwal.destroy', $jadwal->id) . "', 'jadwalDataTable";
     @endphp
 
     <div class="btn-group">

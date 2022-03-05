@@ -37,10 +37,10 @@ class SiswaRequest extends FormRequest
         ];
         
         if($this->method() == 'PATCH'){
-            $rules += ['nis' => ['required', 'numeric', 'unique:siswa,nis,'.$this->route('siswa')->id]];
+            $rules += ['nis' => ['required', 'numeric', 'digits_between:10,10', 'unique:siswa,nis,'.$this->route('siswa')->id]];
             $rules += ['status' => ['required', Rule::in(['aktif', 'nonaktif'])]];
         }else{
-            $rules += ['nis' => ['required', 'numeric', 'unique:siswa,nis']];
+            $rules += ['nis' => ['required', 'numeric', 'digits_between:10,10', 'unique:siswa,nis']];
         };
 
         return $rules;
@@ -50,6 +50,7 @@ class SiswaRequest extends FormRequest
     {
         return [
             'tgl_lahir.before' => 'Tanggal lahir tidak boleh lebih dari hari ini',
+            'nis.digits_between' => 'Panjang NIS harus 10 digit angka',
         ];
     }
 }
