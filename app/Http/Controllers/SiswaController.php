@@ -33,7 +33,12 @@ class SiswaController extends Controller
     public function datatableOrtu()
     {
         $id_ortu = Auth::id();
-        $siswa = Siswa::where('id_user', $id_ortu)->get();
+        $siswa = Siswa::where('id_user', $id_ortu);
+        if(Auth::user()->isOrtu()){
+            $siswa->where('status', 'aktif');
+        }
+
+        $siswa->get();
 
         return SiswaDataTable::set($siswa, $custom_action = 'siswa.datatable_action_guru');
     }
