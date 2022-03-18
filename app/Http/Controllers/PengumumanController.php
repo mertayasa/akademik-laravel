@@ -6,6 +6,7 @@ use App\Models\Pengumuman;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\DataTables\PengumumanDataTable;
+use App\Http\Requests\PengumumanRequest;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -19,13 +20,11 @@ class PengumumanController extends Controller
     public function index(Pengumuman $pengumuman)
     {
         $pengumuman = Pengumuman::all();
-        // dd($pengumuman);
         return view('pengumuman.index', compact('pengumuman'));
     }
 
     public function datatable()
     {
-        // Log::info($approval_status);
         $pengumuman = Pengumuman::all();
         return PengumumanDataTable::set($pengumuman);
     }
@@ -46,7 +45,7 @@ class PengumumanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PengumumanRequest $request)
     {
         try {
             $data = $request->all();
@@ -69,17 +68,6 @@ class PengumumanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pengumuman  $pengumuman
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pengumuman $pengumuman)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Pengumuman  $pengumuman
@@ -97,7 +85,7 @@ class PengumumanController extends Controller
      * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pengumuman $pengumuman)
+    public function update(PengumumanRequest $request, Pengumuman $pengumuman)
     {
         try {
             $data = $request->all();

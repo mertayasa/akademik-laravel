@@ -12,8 +12,8 @@
                     <h4 class=" mb-0 ">Edit Pengumuman</h4>
                 </div>
                 <div class="card-body pt-0">
-                    {{-- @include('layouts.flash')
-                        @include('layouts.error_message') --}}
+                    @include('layouts.flash')
+                        @include('layouts.error_message')
                         {!! Form::model($pengumuman, ['route' => ['pengumuman.update', $pengumuman->id], 'method' => 'patch']) !!}
                         @include('pengumuman.form')
                         <div class="row mt-3">

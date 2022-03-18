@@ -4,7 +4,7 @@
         <th style="width: 30px">No</th>
         <th></th>
         <th>Judul</th>
-        <th>Deskripsi</th>
+        <th>Status</th>
         <th>Konten</th>
         <th>Lampiran</th>
         <th>Aksi</th>
@@ -47,8 +47,8 @@
                     name: 'judul'
                 },
                 {
-                    data: 'deskripsi', 
-                    name: 'deskripsi'
+                    data: 'status', 
+                    name: 'status'
                 },
                 {
                     data: 'konten', 
