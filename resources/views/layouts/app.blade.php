@@ -45,7 +45,7 @@
         <div class="main">
             @include('layouts.navbar')
 
-            <main class="content">
+            <main class="content p-2">
                 @yield('content')
             </main>
 

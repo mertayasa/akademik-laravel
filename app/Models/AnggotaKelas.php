@@ -85,10 +85,10 @@ class AnggotaKelas extends Model
     {
         $absensi = $this->absensi->where('tgl_absensi', $tgl)->first();
         if($return_full_status){
-            return isset($absensi) ? $absensi->kehadiran : 'alpa';
+            return isset($absensi) ? $absensi->kehadiran : '-';
         }
 
-        return isset($absensi) ? ucfirst(substr($absensi->kehadiran, 0, 1)) : 'A';
+        return isset($absensi) ? ucfirst(substr($absensi->kehadiran, 0, 1)) : '-';
     }
 
     public function getNilaiValue($type, $id_mapel, $semester)
