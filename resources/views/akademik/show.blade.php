@@ -81,7 +81,11 @@
 
                                         <div id="absensiContainer">
                                             @if ($count_anggota > 0)
-                                                    @include('absensi.table')
+                                                <h4> <b> Semester Ganjil </b></h4>
+                                                @include('absensi.table', ['period' => $period_ganjil])
+                                                <hr>
+                                                <h4> <b>Semester Genap</b> </h4>
+                                                @include('absensi.table', ['period' => $period_genap])
                                             @else
                                                 <i>Kelas ini belum memiliki anggota</i>
                                             @endif

@@ -50,12 +50,14 @@ class AkademikController extends Controller
     {
         $tahun_ajar = TahunAjar::find($id_tahun_ajar);
         $anggota_kelas = AnggotaKelas::byKelasAndTahun($id_kelas, $id_tahun_ajar);
-        $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-        $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-        $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-        // $mapel_of_jadwal = Nilai::getUniqueMapel(Nilai::query(), $anggota_kelas->pluck('id')->toArray());
+        // $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+        // $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+        // $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
         $mapel_of_jadwal = Jadwal::geetUniqueMapel($tahun_ajar->id, $id_kelas);
         $ekskul = Ekskul::all();
+
+        $period_ganjil = Absensi::periodAbsensi($id_kelas, $id_tahun_ajar, 'ganjil');
+        $period_genap = Absensi::periodAbsensi($id_kelas, $id_tahun_ajar, 'genap');
 
         $data = [
             'siswa' => Siswa::pluck('nama', 'id'),
@@ -70,11 +72,14 @@ class AkademikController extends Controller
             'wali_kelas' => WaliKelas::where('id_kelas', $id_kelas)->where('id_tahun_ajar', $id_tahun_ajar)->first(),
             'count_anggota' => $anggota_kelas->count(),
             'anggota_kelas' => $anggota_kelas->get(),
-            'durasi_absensi' => $durasi_absensi,
-            'durasi_absensi_ganjil' => $durasi_absensi_ganjil,
-            'durasi_absensi_genap' => $durasi_absensi_genap
+            // 'durasi_absensi' => $durasi_absensi,
+            // 'durasi_absensi_ganjil' => $durasi_absensi_ganjil,
+            // 'durasi_absensi_genap' => $durasi_absensi_genap,
+            'period_ganjil' => $period_ganjil,
+            'period_genap' => $period_genap,
         ];
 
+        // return view('absensi.table_ganjil', $data);
         return view('akademik.show', $data);
     }
 }
