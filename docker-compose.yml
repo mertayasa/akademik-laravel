@@ -17,7 +17,7 @@ services:
         depends_on:
             - database
         ports:
-            - 8181:8080
+            - ${DOCKER_PORT}:8080
 
     # npm:
     #     image: node:17-alpine

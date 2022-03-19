@@ -190,7 +190,7 @@ function getSemester($tgl, $id_tahun_ajar)
         return 'ganjil';
     }
     else if($tgl >= $tahun_ajar->mulai_smt_genap && $tgl <= $tahun_ajar->selesai_smt_genap){
-        return 'genal';
+        return 'genap';
     }else{
         return false;
     }

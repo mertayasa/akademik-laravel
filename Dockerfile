@@ -8,9 +8,9 @@ RUN apk --no-cache add nginx \
         ca-certificates \
         # openrc \    
         curl \
-        nodejs \
-        npm \
-        openssh \
+        # nodejs \
+        # npm \
+        # openssh \
         supervisor \
         php8 \
         php8-fpm \
