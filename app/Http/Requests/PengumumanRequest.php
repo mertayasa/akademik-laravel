@@ -27,7 +27,7 @@ class PengumumanRequest extends FormRequest
         return [
             'judul' => ['required', 'string', 'min:5', 'max:255'],
             'konten' => ['required', 'string', 'min:5', 'max:2000'],
-            'lampiran' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
+            'lampiran' => ['nullable'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
         ];
     }
