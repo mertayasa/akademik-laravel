@@ -35,6 +35,7 @@ RUN apk --no-cache add nginx \
         php8-pdo \
         php8-pdo_mysql \
         php8-phar \
+        php8-exif \
         php8-redis \
         php8-mysqli \
         php8-session \
@@ -45,8 +46,8 @@ RUN apk --no-cache add nginx \
         php8-xml \
 	php8-intl \
         php8-xmlwriter \
-        php8-zip \
-        php8-zlib --repository http://nl.alpinelinux.org/alpine/edge/testing/ 
+        php8-zip 
+        # php8-zlib --repository http://nl.alpinelinux.org/alpine/edge/testing/ 
 
 RUN ln -s -f /usr/bin/php8 /usr/bin/php
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer 
