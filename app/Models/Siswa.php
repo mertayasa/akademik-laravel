@@ -26,7 +26,10 @@ class Siswa extends Model
         'id_user',
         'status',
         'foto',
-        'agama'
+        'agama',
+        'sikap_spiritual',
+        'sikap_sosial',
+        'saran',
     ];
 
 

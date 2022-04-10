@@ -32,6 +32,10 @@
                         <td>: {{$siswa->jenis_kelamin}}</td>
                     </tr>
                     <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>: {{$siswa->agama}}</td>
+                    </tr>
+                    <tr>
                         <td>Agama</td>
                         <td>: {{$siswa->agama}}</td>
                     </tr>
@@ -46,6 +50,18 @@
                     <tr>
                         <td>Status</td>
                         <td>: {{$siswa->status}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sikap Sosial</td>
+                        <td>: {{$siswa->sikap_sosial ?? '-'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sikap Spiritual</td>
+                        <td>: {{$siswa->sikap_spiritual ?? '-'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Saran</td>
+                        <td>: {{$siswa->saran ?? '-'}}</td>
                     </tr>
         
             </table>

@@ -34,7 +34,11 @@ class SiswaRequest extends FormRequest
             'tgl_lahir' => ['required', 'date', 'before:'.$today],
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'id_user' => ['required', 'exists:users,id'],
-            'agama' => ['required']
+            'agama' => ['required'],
+            'sikap_spiritual' => ['nullable'],
+            'sikap_sosial' => ['nullable'],
+            'saran' => ['nullable'],
+
         ];
         
         if($this->method() == 'PATCH'){
