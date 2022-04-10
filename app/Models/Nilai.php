@@ -35,11 +35,11 @@ class Nilai extends Model
     static function getUniqueMapel($query, $anggota_kelas)
     {
         $nilai_with_mapel = $query->whereIn('id_anggota_kelas', $anggota_kelas)->get()->unique('id_mapel');
-        $mapel_of_nilai = $nilai_with_mapel->map(function($nilai){
+        $unique_mapel_nilai = $nilai_with_mapel->map(function($nilai){
             return $nilai->mapel;
         });
 
-        return $mapel_of_nilai;
+        return $unique_mapel_nilai;
     }
 
     public function anggota_kelas()

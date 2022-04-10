@@ -47,7 +47,7 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         try {
             $user = new User;
@@ -65,7 +65,7 @@ class UserController extends Controller
             $user->tempat_lahir = $request->tempat_lahir;
             $user->tgl_lahir = $request->tgl_lahir;
             $user->no_tlp = $request->no_tlp;
-            $user->pekerjaan = $request->pekerjaan;
+            $user->pekerjaan = $request->pekerjaan ?? '-';
             
             if (FacadesRequest::is('*guru*')) {
                 $user->status_guru = $request->status_guru;
@@ -116,10 +116,9 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request,   $id)
+    public function update(UserRequest $request, User $user)
     {
         try {
-            $user = User::find($id);
             $user->nama = $request->nama;
 
             if (FacadesRequest::is('*guru*')) {
@@ -134,7 +133,7 @@ class UserController extends Controller
             $user->tempat_lahir = $request->tempat_lahir;
             $user->tgl_lahir = $request->tgl_lahir;
             $user->no_tlp = $request->no_tlp;
-            $user->pekerjaan = $request->pekerjaan;
+            $user->pekerjaan = $request->pekerjaan ?? '-';
 
             if (FacadesRequest::is('*guru*')) {
                 $user->status_guru = $request->status_guru;

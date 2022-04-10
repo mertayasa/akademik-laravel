@@ -1,7 +1,7 @@
 <div class="form-container mb-3">
     <h5> <b> Form Nilai Pengetahuan </b></h5>
     <div class="border p-2 p-md-3">
-        @foreach ($mapel_of_nilai as $mapel)
+        @foreach ($mapel_of_jadwal as $mapel)
             @if ($mapel->is_lokal == false)
                 <div class="row mb-3">
                     <div class="col-12 col-md-3 my-auto">
@@ -52,7 +52,7 @@
 <div class="form-container mb-3">
     <h5> <b> Form Nilai Keterampilan </b></h5>
     <div class="border p-2 p-md-3">
-        @foreach ($mapel_of_nilai as $mapel)
+        @foreach ($mapel_of_jadwal as $mapel)
             @if ($mapel->is_lokal == false)
                 <div class="row mb-3">
                     <div class="col-12 col-md-3 my-auto">
@@ -95,7 +95,7 @@
 <div class="form-container mb-3">
     <h5> <b> Form Nilai Pengetahuan (Muatan Lokal) </b></h5>
     <div class="border p-2 p-md-3">
-        @foreach ($mapel_of_nilai as $mapel)
+        @foreach ($mapel_of_jadwal as $mapel)
             @if ($mapel->is_lokal == true)
                 <div class="row mb-3">
                     <div class="col-12 col-md-3 my-auto">
@@ -146,7 +146,7 @@
 <div class="form-container mb-3">
     <h5> <b> Form Nilai Keterampilan (Muatan Lokal) </b></h5>
     <div class="border p-2 p-md-3">
-        @foreach ($mapel_of_nilai as $mapel)
+        @foreach ($mapel_of_jadwal as $mapel)
             @if ($mapel->is_lokal == true)
                 <div class="row mb-3">
                     <div class="col-12 col-md-3 my-auto">

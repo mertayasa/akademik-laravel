@@ -15,6 +15,9 @@ class SiswaDataTable
             ->editColumn('foto', function ($siswa){
                 return '<img src="'.$siswa->getFoto().'" alt="" width="75px">';
             })
+            ->editColumn('status', function ($siswa){
+                return ucfirst($siswa->status);
+            })
             ->addColumn('action', function($siswa) use($custom_action) {
                 return view(($custom_action != null ? $custom_action : 'siswa.datatable_action'), compact('siswa'));
             })

@@ -45,7 +45,7 @@
         <div class="main">
             @include('layouts.navbar')
 
-            <main class="content">
+            <main class="content p-2">
                 @yield('content')
             </main>
 
@@ -130,6 +130,23 @@
                         }
                     })
                 }
+            })
+        }
+
+        function showPassword(id) {
+            var passWordEl = document.getElementById(id);
+            if (passWordEl.type === "password") {
+                passWordEl.type = "text";
+            } else {
+                passWordEl.type = "password";
+            }
+        }
+
+        const numberOnlyInput = document.getElementsByClassName('number-only')
+        for (let index = 0; index < numberOnlyInput.length; index++) {
+            const numberOnly = numberOnlyInput[index];
+            numberOnly.addEventListener('input', function(element){
+                element.target.value = element.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
             })
         }
 

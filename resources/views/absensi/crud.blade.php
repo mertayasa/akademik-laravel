@@ -21,13 +21,13 @@
                 <hr>
                 <div class="col-12 mt-3">
                     <div class="row">
-                        <div class="col-3">
+                        {{-- <div class="col-3">
                             <h6>Tanggal yang sudah diabsen : </h6>
                             <ol class="pl-0" id="dateListContainer">
                                 @include('absensi.date_list')
                             </ol>
-                        </div>
-                        <div class="col-9">
+                        </div> --}}
+                        <div class="col-12">
                             <h6>Absensi Tanggal <span id="absensiDateSpan"> <small>[Pilih Tanggal Absensi]</small>
                                 </span> </h6>
                             <div id="absensiForm">
@@ -125,9 +125,9 @@
                 return data
             })
             .then(data => {
-                dateListContainer.innerHTML = ''
+                // dateListContainer.innerHTML = ''
                 absensiContainer.innerHTML = ''
-                dateListContainer.insertAdjacentHTML('beforeend', data.date_list)
+                // dateListContainer.insertAdjacentHTML('beforeend', data.date_list)
                 absensiContainer.insertAdjacentHTML('beforeend', data.table)
                 absensiContainer.scrollIntoView()
                 return showToast(data.code, data.message)

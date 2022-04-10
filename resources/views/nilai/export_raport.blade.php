@@ -378,7 +378,7 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($mapel_of_nilai as $mapel)
+                @foreach ($mapel_of_jadwal as $mapel)
                     @if ($mapel->is_lokal == false)
                         <tr>
                             <td>{{ $no++ }}</td>
@@ -400,7 +400,7 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($mapel_of_nilai as $mapel)
+                @foreach ($mapel_of_jadwal as $mapel)
                     @if ($mapel->is_lokal == true)
                         <tr>
                             <td>{{ $no++ }}</td>
@@ -511,8 +511,8 @@
             @forelse ($prestasi as $prest)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $prestasi->jenis }}</td>
-                    <td>{{ $prestasi->keterangan }}</td>
+                    <td>{{ $prest->jenis }}</td>
+                    <td>{{ $prest->keterangan }}</td>
                 </tr>
             @empty
                 <tr>

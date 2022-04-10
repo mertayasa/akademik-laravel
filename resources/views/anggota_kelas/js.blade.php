@@ -38,7 +38,7 @@
             return data
         })
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.code == 1){
                 $('#studentModal').modal('hide')
                 $('#AnggotaKelasDataTable').DataTable().ajax.reload();

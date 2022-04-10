@@ -19,6 +19,9 @@ class PengumumanDataTable
                     return '-';
                 }
             })
+            ->editColumn('status', function($pengumuman){
+                return ucfirst($pengumuman->status);
+            })
             ->addColumn('action', function ($pengumuman) {
                 $deleteUrl = "'" . route('pengumuman.destroy', $pengumuman->id) . "', 'PengumumanDataTable'";
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\DataTables\SiswaDataTable;
+use App\Http\Requests\SiswaRequest;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -32,7 +33,12 @@ class SiswaController extends Controller
     public function datatableOrtu()
     {
         $id_ortu = Auth::id();
-        $siswa = Siswa::where('id_user', $id_ortu)->get();
+        $siswa = Siswa::where('id_user', $id_ortu);
+        if(Auth::user()->isOrtu()){
+            $siswa->where('status', 'aktif');
+        }
+
+        $siswa->get();
 
         return SiswaDataTable::set($siswa, $custom_action = 'siswa.datatable_action_guru');
     }
@@ -61,10 +67,10 @@ class SiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SiswaRequest $request)
     {
         try {
-            $data = $request->all();
+            $data = $request->validated();
             if($request['foto']){
                 $base_64_foto = json_decode($request['foto'], true);
                 $upload_image = uploadFile($base_64_foto, 'foto_profil');
@@ -115,10 +121,10 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Siswa $siswa)
+    public function update(SiswaRequest $request, Siswa $siswa)
     {
         try {
-            $data = $request->all();
+            $data = $request->validated();
             if($request['foto']){
                 $base_64_foto = json_decode($request['foto'], true);
                 $upload_image = uploadFile($base_64_foto, 'foto_profil');

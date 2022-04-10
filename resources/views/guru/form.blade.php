@@ -7,7 +7,7 @@
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('announcetitle', 'NIP Guru', ['class' => 'mb-1']) !!}
-        {!! Form::number('nip', null, ['class' => 'form-control', 'id' => 'announcetitle']) !!}
+        {!! Form::text('nip', null, ['class' => 'form-control number-only', 'id' => 'announcetitle']) !!}
     </div>
 </div>
 
@@ -26,21 +26,21 @@
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('description', 'Alamat', ['class' => 'mb-1']) !!}
-        {!! Form::textarea('alamat', null, ['class' => 'form-control', 'id' => 'description', 'style' => 'height:150px']) !!}
+        {!! Form::text('alamat', null, ['class' => 'form-control', 'id' => 'description']) !!}
     </div>
 </div>
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('description', 'No Handphone', ['class' => 'mb-1']) !!}
-        {!! Form::number('no_tlp', null, ['class' => 'form-control', 'id' => 'description']) !!}
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">+62</div>
+            </div>
+            {!! Form::text('no_tlp', null, ['class' => 'form-control number-only', 'id' => 'description']) !!}
+        </div>        
     </div>
 </div>
-<div class="row mt-3">
-    <div class="col-12  pb-3 pb-md-0">
-        {!! Form::label('description', 'Pekerjaan', ['class' => 'mb-1']) !!}
-        {!! Form::text('pekerjaan', null, ['class' => 'form-control', 'id' => 'description']) !!}
-    </div>
-</div>
+
 <div class="row mt-3">
     <div class="col-12  pb-3 pb-md-0">
         {!! Form::label('description', 'Status Guru', ['class' => 'mb-1']) !!}
@@ -63,12 +63,22 @@
 </div>
 <div class="row mt-3">
     <div class="col-12 col-md-6">
-        {!! Form::label('doctorPassword', 'Password', ['class' => 'mb-1']) !!}
-        {!! Form::password('password', ['class' => 'form-control', 'id' => 'doctorPassword']) !!}
+        {!! Form::label('password', 'Password', ['class' => 'mb-1']) !!}
+        <div class="input-group mb-2 mr-sm-2">
+            {!! Form::password('password', ['class' => 'form-control', 'id' => 'password']) !!}
+            <div class="input-group-prepend" style="cursor: pointer" onclick="showPassword('password')">
+              <div class="input-group-text py-2"><i class="fas fa-eye"></i></div>
+            </div>
+        </div>     
     </div>
     <div class="col-12 col-md-6">
-        {!! Form::label('doctorConfirmPassword', 'Konfirmasi Password', ['class' => 'mb-1']) !!}
-        {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'doctorConfirmPassword']) !!}
+        {!! Form::label('confirmPassword', 'Konfirmasi Password', ['class' => 'mb-1']) !!}
+        <div class="input-group mb-2 mr-sm-2">
+            {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'confirmPassword']) !!}
+            <div class="input-group-prepend" style="cursor: pointer" onclick="showPassword('confirmPassword')">
+              <div class="input-group-text py-2"><i class="fas fa-eye"></i></div>
+            </div>
+        </div>     
     </div>
 </div>
 
@@ -111,7 +121,7 @@
             const url = window.location
             if (url.pathname.includes('edit')) {
                 imageUrl = document.getElementById('filePondUpload').getAttribute('data-foto')
-                console.log(imageUrl);
+                // console.log(imageUrl);
                 if(!isNull(imageUrl)){
                     options = {
                         acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],

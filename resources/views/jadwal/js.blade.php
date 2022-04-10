@@ -18,6 +18,12 @@
             clearErrorMessage()
         })
 
+        function refresMapelNilaiList(table){
+            const mapelListTable = document.getElementById('mapelListTable')
+            mapelListTable.innerHTML = ''
+            mapelListTable.insertAdjacentHTML('beforeend', table)
+        }
+
         function editJadwal(element){
             updateUrl = element.getAttribute('data-url')
             const jadwal = JSON.parse(element.getAttribute('data-jadwal'))
@@ -66,8 +72,9 @@
                 return data
             })
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.code == 1) {
+                    refresMapelNilaiList(data.table)
                     $('#jadwalModal').modal('hide')
                     $('#jadwalDataTable').DataTable().ajax.reload();
                 }
@@ -104,7 +111,9 @@
                 return data
             })
             .then(data => {
+                // console.log(data);
                 if (data.code == 1) {
+                    refresMapelNilaiList(data.table)
                     $('#jadwalModal').modal('hide')
                     $('#jadwalDataTable').DataTable().ajax.reload();
                 }

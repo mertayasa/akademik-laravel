@@ -45,11 +45,14 @@
                         <i class="fas fa-book-reader"></i> <span class="align-middle">Akademik</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a data-target="#ui" data-toggle="collapse" class="sidebar-link collapsed">
+                @php
+                    $user_active = isActive(['guru', 'ortu']);
+                @endphp
+                <li class="sidebar-item {{ $user_active }}">
+                    <a data-target="#ui" data-toggle="collapse" class="sidebar-link {{ $user_active == 'active' ? '' : 'collapsed' }}">
                         <i class="fas fa-users"></i> <span class="align-middle"> Data User</span>
                     </a>
-                    <ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                    <ul id="ui" class="sidebar-dropdown list-unstyled {{ $user_active == 'active' ? 'show' : 'collapse' }} " data-parent="#sidebar">
                         <li class="sidebar-item {{ isActive('guru') }}">
                             <a class="sidebar-link" href="{{ route('guru.index') }}"> <span
                                     class="align-middle">Data

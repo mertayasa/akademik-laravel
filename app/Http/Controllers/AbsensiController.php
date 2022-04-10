@@ -71,93 +71,37 @@ class AbsensiController extends Controller
             }, 5);
 
             $anggota_kelas = AnggotaKelas::where('id_kelas', $request->id_kelas)->where('id_tahun_ajar', $request->id_tahun_ajar);
-            $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-            $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-            $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
-            
+            // $durasi_absensi = Absensi::absensiAnggota($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+            // $durasi_absensi_ganjil = Absensi::absensiAnggotaGanjil($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+            // $durasi_absensi_genap = Absensi::absensiAnggotaGenap($anggota_kelas->pluck('id')->toArray())->select('tgl_absensi')->distinct()->pluck('tgl_absensi');
+            $period_ganjil = Absensi::periodAbsensi($request->id_kelas, $request->id_tahun_ajar, 'ganjil');
+            $period_genap = Absensi::periodAbsensi($request->id_kelas, $request->id_tahun_ajar, 'genap');
+
             $data = [
                 'anggota_kelas' => $anggota_kelas->get(),
-                'durasi_absensi' => $durasi_absensi,
-                'durasi_absensi_ganjil' => $durasi_absensi_ganjil,
-                'durasi_absensi_genap' => $durasi_absensi_genap,
+                // 'durasi_absensi' => $durasi_absensi,
+                // 'durasi_absensi_ganjil' => $durasi_absensi_ganjil,
+                // 'durasi_absensi_genap' => $durasi_absensi_genap,
                 'id_kelas' => $request->id_kelas,
                 'id_tahun_ajar' => $request->id_tahun_ajar,
             ];
 
-            $table = view('absensi.table', $data)->render();
-            $date_list = view('absensi.date_list', $data)->render();
+            $table_ganjil = view('absensi.table', $data += ['period' => $period_ganjil])->render();
+            unset($data['period']);
+            $table_genap = view('absensi.table', $data += ['period' => $period_genap])->render();
+            $smt_ganjil_text = '<h4> <b> Semester Ganjil </b></h4>';
+            $hr = '<hr>';
+            $smt_genap_text = '<h4> <b>Semester Genap</b> </h4>';
+
+            $table = $smt_ganjil_text.$table_ganjil.$hr.$smt_genap_text.$table_genap;
+
+            // $date_list = view('absensi.date_list', $data)->render();
 
         }catch(Exception $e){
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal menyimpan data absensi']);
         }
 
-        return response(['code' => 1, 'message' => 'Berhasil menyimpan data absensi', 'table' => $table, 'date_list' => $date_list]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Absensi $absensi)
-    {
-        //
+        return response(['code' => 1, 'message' => 'Berhasil menyimpan data absensi', 'table' => $table]);
     }
 }
