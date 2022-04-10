@@ -1,8 +1,12 @@
 <div class="card-detail"> 
     <table class="table table-borderless">
             <tr>
-                <td style="width: 150px">Nama Orang Tua</td>
+                <td style="width: 150px">Nama Ayah</td>
                 <td>: {{$user->nama}}</td>
+            </tr>
+            <tr>
+                <td style="width: 150px">Nama Ibu</td>
+                <td>: {{$user->nama_ibu}}</td>
             </tr>
             <tr>
                 <td>No Handphone</td>
@@ -11,6 +15,10 @@
             <tr>
                 <td>Pekerjaan</td>
                 <td>: {{$user->pekerjaan}}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan Ibu</td>
+                <td>: {{$user->pekerjaan_ibu}}</td>
             </tr>
             <tr>
                 <td>Email</td>

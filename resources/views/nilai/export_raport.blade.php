@@ -124,7 +124,7 @@
             <tr>
                 <td>Agama</td>
                 <td> : </td>
-                <td>Hindu</td>
+                <td>{{ $anggota_kelas->siswa->agama}}</td>
             </tr>
             <tr>
                 <td>Pendidikan Sebelumnya</td>
@@ -138,18 +138,18 @@
             </tr>
             <tr>
                 <td>Nama Orang Tua</td>
-                <td> </td>
+                <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Ayah</td>
                 <td> : </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->user->nama ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Ibu</td>
                 <td> : </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->user->nama_ibu ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Pekerjaan Orang Tua</td>
@@ -159,22 +159,22 @@
             <tr>
                 <td>Ayah</td>
                 <td> : </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->user->pekerjaan ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Ibu</td>
                 <td> : </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->user->pekerjaan_ibu ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Alamat Orang Tua</td>
                 <td> </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->user->alamat ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Jalan</td>
                 <td> : </td>
-                <td>{{ $anggota_kelas->siswa->alamat }}</td>
+                <td>{{ $anggota_kelas->siswa->alamat ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Kelurahan/Desa</td>
@@ -204,17 +204,17 @@
             <tr>
                 <td>Nama</td>
                 <td> : </td>
-                <td>-</td>
+                <td> {{ $anggota_kelas->siswa->user->nama ?? '-' }} </td>
             </tr>
             <tr>
                 <td>Pekerjaan</td>
                 <td> : </td>
-                <td>-</td>
+                <td> {{ $anggota_kelas->siswa->user->pekerjaan ?? '-' }} </td>
             </tr>
             <tr>
                 <td>Alamat</td>
                 <td> : </td>
-                <td>-</td>
+                <td> {{ $anggota_kelas->siswa->user->alamat ?? '-' }} </td>
             </tr>
         </table>
         <table style="border:none; margin-bottom:300px" class="mt-3">

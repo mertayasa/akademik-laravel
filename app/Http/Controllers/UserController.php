@@ -71,6 +71,8 @@ class UserController extends Controller
                 $user->status_guru = $request->status_guru;
             } else if (FacadesRequest::is('*ortu*')) {
                 $user->status_guru = 'bukan_guru';
+                $user->nama_ibu = $request->nama_ibu;
+                $user->pekerjaan_ibu = $request->pekerjaan_ibu;
             } else {
                 throw new Exception('Error 500');
             }
@@ -139,6 +141,8 @@ class UserController extends Controller
                 $user->status_guru = $request->status_guru;
             } else if (FacadesRequest::is('*ortu*')) {
                 $user->status_guru = 'bukan_guru';
+                $user->nama_ibu = $request->nama_ibu;
+                $user->pekerjaan_ibu = $request->pekerjaan_ibu;
             } else {
                 throw new Exception('Error 500');
             }

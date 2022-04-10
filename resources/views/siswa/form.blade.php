@@ -80,6 +80,13 @@
 @endif
 
 <div class="row mt-3">
+    <div class="col-12  pb-3 pb-md-0">
+        {!! Form::label('agama', 'Agama', ['class' => 'mb-1']) !!}
+        {!! Form::select('agama', ['Hindu' => 'Hindu', 'Islam' => 'Islam', 'Katolik' => 'Katolik', 'Protestan' => 'Protestan', 'Budha' => 'Budha', 'Khonghucu' => 'Khonghucu'], null, ['class' => 'form-control', 'id' => 'agama']) !!}
+    </div>
+</div>
+
+<div class="row mt-3">
     <div class="col-12 col-md-6 pb-3 pb-md-0">
         {!! Form::label('filePondUpload', 'Foto', ['class' => 'mb-1']) !!}
         {!! Form::file('foto', ['class' => 'd-block filepond', 'id' => 'filePondUpload', 'data-foto' => isset($siswa) && $siswa->foto != '' ? $siswa->getFoto() : '']) !!}

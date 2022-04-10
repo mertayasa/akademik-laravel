@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
         $rules = [
             'nama' => ['required', 'max:50', 'min:5'],
             'alamat' => ['required', 'max:100'],
-            'tempat_lahir' => ['required', 'max:50'],
+            'tempat_lahir' => ['required', 'max:100'],
             'tgl_lahir' => ['required', 'date', 'before:'.$today],
             'no_tlp' => ['required', 'string', 'max:13'],
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
@@ -61,6 +61,8 @@ class UserRequest extends FormRequest
     
             if(str_contains($referer, 'ortu')){
                 $rules += ['pekerjaan' => ['required', 'max:50', 'min:5']];
+                $rules += ['nama_ibu' => ['nullable']];
+                $rules += ['pekerjaan_ibu' => ['nullable']];
             }
         }else{
             abort(403);

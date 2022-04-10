@@ -25,7 +25,8 @@ class Siswa extends Model
         'jenis_kelamin',
         'id_user',
         'status',
-        'foto',	
+        'foto',
+        'agama'
     ];
 
 

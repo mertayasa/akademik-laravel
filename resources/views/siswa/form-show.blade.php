@@ -32,6 +32,10 @@
                         <td>: {{$siswa->jenis_kelamin}}</td>
                     </tr>
                     <tr>
+                        <td>Agama</td>
+                        <td>: {{$siswa->agama}}</td>
+                    </tr>
+                    <tr>
                         <td>Email</td>
                         <td>: {{$siswa->email}}</td>
                     </tr>
