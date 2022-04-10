@@ -48,6 +48,28 @@
     </div>
 </div>
 
+<div class="row mt-3">
+    <div class="col-12  pb-3 pb-md-0">
+        {!! Form::label('namaMapel', 'Sikap Spiritual', ['class' => 'mb-1 d-none d-md-block']) !!}
+        {!! Form::textarea('sikap_spiritual', null, ['class' => 'form-control', 'id' => 'description', 'style' => 'height:100px']) !!}
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12  pb-3 pb-md-0">
+        {!! Form::label('namaMapel', 'Sikap Sosial', ['class' => 'mb-1 d-none d-md-block']) !!}
+        {!! Form::textarea('sikap_sosial', null, ['class' => 'form-control', 'id' => 'description', 'style' => 'height:100px']) !!}
+    </div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-12  pb-3 pb-md-0">
+        {!! Form::label('namaMapel', 'Saran Untuk Siswa', ['class' => 'mb-1 d-none d-md-block']) !!}
+        {!! Form::textarea('saran', null, ['class' => 'form-control', 'id' => 'description', 'style' => 'height:100px']) !!}
+    </div>
+</div>
+
+
 @if (str_contains(Route::currentRouteName(), 'edit'))
     <div class="row mt-3">
         <div class="col-12  pb-3 pb-md-0">
@@ -87,7 +109,7 @@
             const url = window.location
             if (url.pathname.includes('edit')) {
                 imageUrl = document.getElementById('filePondUpload').getAttribute('data-foto')
-                if(!isNull(imageUrl)){
+                if (!isNull(imageUrl)) {
                     options = {
                         acceptedFileTypes: ['image/png', 'image/jpg', 'image/jpeg'],
                         maxFileSize: '2MB',

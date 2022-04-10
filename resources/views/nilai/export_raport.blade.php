@@ -124,12 +124,12 @@
             <tr>
                 <td>Agama</td>
                 <td> : </td>
-                <td></td>
+                <td>Hindu</td>
             </tr>
             <tr>
                 <td>Pendidikan Sebelumnya</td>
                 <td> : </td>
-                <td></td>
+                <td>Taman Kanak-Kanak (TK)</td>
             </tr>
             <tr>
                 <td>Alamat Peserta Didik</td>
@@ -174,22 +174,22 @@
             <tr>
                 <td>Jalan</td>
                 <td> : </td>
-                <td></td>
+                <td>{{ $anggota_kelas->siswa->alamat }}</td>
             </tr>
             <tr>
                 <td>Kelurahan/Desa</td>
                 <td> : </td>
-                <td></td>
+                <td>Baha</td>
             </tr>
             <tr>
                 <td>Kecamatan</td>
                 <td> : </td>
-                <td></td>
+                <td>Mengwi</td>
             </tr>
             <tr>
                 <td>Kabupaten/Kota</td>
                 <td> : </td>
-                <td></td>
+                <td>Badung</td>
             </tr>
             <tr>
                 <td>Provinsi</td>
@@ -204,17 +204,17 @@
             <tr>
                 <td>Nama</td>
                 <td> : </td>
-                <td></td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Pekerjaan</td>
                 <td> : </td>
-                <td></td>
+                <td>-</td>
             </tr>
             <tr>
                 <td>Alamat</td>
                 <td> : </td>
-                <td></td>
+                <td>-</td>
             </tr>
         </table>
         <table style="border:none; margin-bottom:300px" class="mt-3">
